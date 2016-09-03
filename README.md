@@ -7,15 +7,15 @@ project for lianyungang water conservation management
 * url:/user/login
 * HTTP 1.1/POST
 * 参数名称	    取值	    说明	    required
-          userName	    String	用户名	TRUE
-          password	    String	密码	    TRUE
+        userName	    String	用户名	TRUE
+        password	    String	密码	    TRUE
 
 #### response:
         {
-        	code: 200,						//业务码，200成功
-        	data: {
-        		projectCategories: [			//工程种类
-        					{
+	code: 200,						//业务码，200成功
+	data: {
+		projectCategories: [			//工程种类
+					{
 						id: 1,
 						createTime: "2016-08-15 10:37:12",
 						updateTime: "2016-08-15 10:37:11",
