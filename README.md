@@ -1,5 +1,5 @@
 # wcs
-project for lianyungang water conservation management
+REST api for lianyungang water conservation management
 
 ## api 接口说明:
 ### 1.用户登录
@@ -11,7 +11,7 @@ project for lianyungang water conservation management
 * password	    String	密码	    TRUE
 
 #### response:
-        {
+{
 	code: 200,						//业务码，200成功
 	data: {
 		projectCategories: [			//工程种类
