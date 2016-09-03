@@ -1,16 +1,16 @@
 # wcs
 project for lianyungang water conservation management
 
-# api 接口说明:
-# 1.用户登录
-# request:
-url:/user/login
-HTTP 1.1/POST
-参数名称	    取值	    说明	    required
-userName	String	用户名	TRUE
-password	String	密码	    TRUE
+## api 接口说明:
+### 1.用户登录
+#### request:
+* url:/user/login
+* HTTP 1.1/POST
+* 参数名称	    取值	    说明	    required
+  userName	    String	用户名	TRUE</br>
+  password	    String	密码	    TRUE</br>
 
-# response:
+#### response:
 {
 	code: 200,						//业务码，200成功
 	data: {
@@ -39,7 +39,8 @@ password	String	密码	    TRUE
 								isDelete: 0,
 								name: "nankang",	//县名称
 								isActive: 1,
-								location: null	//地图信息									},
+								location: null	//地图信息
+								},
 						roles: [			//用户的角色信息
 							{
 								id: 1,
@@ -57,4 +58,4 @@ password	String	密码	    TRUE
 					}
 				},
 	error: null				//错误信息
-}
+}     
