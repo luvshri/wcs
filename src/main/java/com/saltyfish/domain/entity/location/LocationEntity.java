@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 @Table(name = "location", schema = "", catalog = "exciting")
 public class LocationEntity extends BaseBean {
     private static final Long serialVersionUID = -2389744690840525370L;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "decimal(13,8)")
     private BigDecimal longitude;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "decimal(13,8)")
     private BigDecimal latitude;
 
     public static Long getSerialVersionUID() {
