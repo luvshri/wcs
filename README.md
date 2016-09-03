@@ -11,7 +11,7 @@ REST api for lianyungang water conservation management
 * password	    String	密码	    TRUE
 
 #### response:
-{
+        {
 	code: 200,						//业务码，200成功
 	data: {
 		projectCategories: [			//工程种类
