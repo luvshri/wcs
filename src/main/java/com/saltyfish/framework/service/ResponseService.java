@@ -93,7 +93,7 @@ public class ResponseService {
         response.setCode(HttpStatus.OK.value());
         Map<String, Object> msg = new HashMap<>();
         msg.put("details", "成功");
-        response.setError(msg);
+        response.setData(msg);
         return response;
     }
 }

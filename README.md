@@ -244,4 +244,28 @@ size	Integer	每页数量	TRUE<br>
         	error: null
         }
 
+### 4.新增公告
+#### description
+管理员以上角色可以管理县内公告,超级管理员角色可以管理县内公告和网站公告。新增公告需要输入标题及内容,请求还要带上用户信息
+
+#### request:
+* url:/notification/addNotifications
+* HTTP 1.1/POST
+* 参数: application/x-www-form-urlencoded<br>
+参数名称	取值	说明	required<br>
+userId	Integer	用户id	TRUE<br>
+token	String	登录后分配的token	TRUE<br>
+title	String	标题	TRUE<br>
+content	String	内容	TRUE<br>
+category	Integer	1 网站公告，2 县内公告	FALSE，DEFAULT 2<br>
+timeStamp	Long	客户端时间戳	TRUE<br>
+
+#### response:
+        {
+        	code: 200,
+        	data: {
+        		details: "成功"
+        		},
+        	error: null
+        }
 
