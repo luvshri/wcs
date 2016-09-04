@@ -102,6 +102,37 @@ public class NotificationController {
     }
 
     /**
+     * 删除公告,isDelete设为1
+     *
+     * @param userId
+     * @param token
+     * @param notificationId
+     * @param timeStamp
+     * @return
+     */
+    @RequestMapping("/deleteNotification")
+    public Response deleteNotification(@RequestParam("userId") Integer userId,
+                                       @RequestParam("token") String token,
+                                       @RequestParam("notificationId") Integer notificationId,
+                                       @RequestParam("timeStamp") Long timeStamp) {
+        Response response = new Response();
+        try {
+            if (!userService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkModifyNotificationAccess(notificationId, userId)) {
+                return responseService.noAccess(response);
+            } else {
+                notificationService.deleteNotification(notificationId, userId, timeStamp);
+                return responseService.success(response);
+
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+
+    /**
      * 查看首页的公告
      *
      * @param page 页码
@@ -157,4 +188,5 @@ public class NotificationController {
             return responseService.serverError(response);
         }
     }
+
 }

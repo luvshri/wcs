@@ -249,7 +249,7 @@ size	Integer	每页数量	TRUE<br>
 管理员以上角色可以管理县内公告,超级管理员角色可以管理县内公告和网站公告。新增公告需要输入标题及内容,请求还要带上用户信息
 
 #### request:
-* url:/notification/addNotifications
+* url:/notification/addNotification
 * HTTP 1.1/POST
 * 参数: application/x-www-form-urlencoded<br>
 |参数名称|------|取值|-------|说明|-------------------|required|<br>
@@ -274,7 +274,7 @@ size	Integer	每页数量	TRUE<br>
 修改公告与新增公告类似,新增参数notificationId,没有category
 
 #### request:
-* url:/notification/updateNotifications
+* url:/notification/updateNotification
 * HTTP 1.1/POST
 * 参数: application/x-www-form-urlencoded<br>
 |参数名称|------|取值|-------|说明|-------------------|required|<br>
@@ -294,3 +294,26 @@ size	Integer	每页数量	TRUE<br>
         	error: null
         }
 
+### 6.删除公告
+#### description
+删除公告,需要用户id和公告id
+
+#### request:
+* url:/notification/deleteNotification
+* HTTP 1.1/POST
+* 参数: application/x-www-form-urlencoded<br>
+|参数名称|------|取值|-------|说明|-------------------|required|<br>
+|userId|-------|Integer|---|用户id|-----------------|TRUE|<br>
+|token|--------|String|----|登录后分配的token|-------|TRUE|<br>
+|notificationId|-----|Integer|---|当前要删除的公告id|---|TRUE|<br>
+|timeStamp|----|Long|------|客户端时间戳|------------|TRUE|<br>
+
+#### response:
+        {
+        	code: 200,
+        	data: {
+        		details: "成功"
+        		},
+        	error: null
+        }
+        

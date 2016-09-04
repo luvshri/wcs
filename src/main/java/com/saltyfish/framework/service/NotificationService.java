@@ -105,4 +105,20 @@ public class NotificationService {
     public NotificationEntity findById(Integer notificationId) {
         return notificationRepository.findById(notificationId);
     }
+
+    /**
+     * 删除公告
+     *
+     * @param notificationId
+     * @param userId
+     * @param timeStamp
+     */
+    public void deleteNotification(Integer notificationId, Integer userId, Long timeStamp) {
+        UserEntity userEntity = userRepository.findById(userId);
+        NotificationEntity notification = notificationRepository.findById(notificationId);
+        notification.setIsDelete(1);
+        notification.setUpdateTime(new Timestamp(timeStamp));
+        notification.setUser(userEntity);
+        notificationRepository.save(notification);
+    }
 }
