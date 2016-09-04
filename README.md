@@ -253,7 +253,7 @@ size	Integer	每页数量	TRUE<br>
 * HTTP 1.1/POST
 * 参数: application/x-www-form-urlencoded<br>
 |参数名称|------|取值|-------|说明|-------------------|required|<br>
-|userId|-------|Integer|---|用户id|-----------------|TRUE<br>|
+|userId|-------|Integer|---|用户id|-----------------|TRUE|<br>|
 |token|--------|String|----|登录后分配的token|-------|TRUE|<br>
 |title|--------|String|----|标题|-------------------|TRUE|<br>
 |content|------|String|----|内容|-------------------|TRUE|<br>
