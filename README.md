@@ -252,13 +252,13 @@ size	Integer	每页数量	TRUE<br>
 * url:/notification/addNotifications
 * HTTP 1.1/POST
 * 参数: application/x-www-form-urlencoded<br>
-参数名称	取值	说明	required<br>
-userId	Integer	用户id	TRUE<br>
-token	String	登录后分配的token	TRUE<br>
-title	String	标题	TRUE<br>
-content	String	内容	TRUE<br>
-category	Integer	1 网站公告，2 县内公告	FALSE，DEFAULT 2<br>
-timeStamp	Long	客户端时间戳	TRUE<br>
+|参数名称|------|取值|-------|说明|-------------------|required|<br>
+|userId|-------|Integer|---|用户id|-----------------|TRUE<br>|
+|token|--------|String|----|登录后分配的token|-------|TRUE|<br>
+|title|--------|String|----|标题|-------------------|TRUE|<br>
+|content|------|String|----|内容|-------------------|TRUE|<br>
+|category|-----|Integer|---|1 网站公告，2 县内公告|---|FALSE，DEFAULT 2|<br>
+|timeStamp|----|Long|------|客户端时间戳|------------|TRUE|<br>
 
 #### response:
         {
