@@ -1,6 +1,10 @@
 # wcs
 REST api for lianyungang water conservation management
 
+## 使用框架
+Spring Boot + Hibernate JPA + Mysql + MongoDB<br>
+使用联表查询,实体内设置外键关联<br>
+
 ## api 接口说明:
 ### 1.用户登录
 #### request:
