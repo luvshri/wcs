@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.13)
 # Database: exciting
-# Generation Time: 2016-09-03 16:33:59 +0000
+# Generation Time: 2016-09-04 12:48:10 +0000
 # ************************************************************
 
 
@@ -377,11 +377,17 @@ CREATE TABLE `group` (
   `name` varchar(255) NOT NULL,
   `location_id` int(11) DEFAULT NULL,
   `village_id` int(11) NOT NULL,
+  `county_id` int(11) NOT NULL,
+  `town_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_fyv8x469enc9r1xioqrjh42oo` (`village_id`),
   KEY `FK_hq9697mb1c858ldr18m9m56mh` (`location_id`),
+  KEY `FK_k2co1luo4wqd4n8lrc0iqo1xw` (`county_id`),
+  KEY `FK_2x2dtya37gti9erqbme4p5mcb` (`town_id`),
+  CONSTRAINT `FK_2x2dtya37gti9erqbme4p5mcb` FOREIGN KEY (`town_id`) REFERENCES `town` (`id`),
   CONSTRAINT `FK_fyv8x469enc9r1xioqrjh42oo` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`),
-  CONSTRAINT `FK_hq9697mb1c858ldr18m9m56mh` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+  CONSTRAINT `FK_hq9697mb1c858ldr18m9m56mh` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `FK_k2co1luo4wqd4n8lrc0iqo1xw` FOREIGN KEY (`county_id`) REFERENCES `county` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -455,22 +461,6 @@ CREATE TABLE `location` (
 
 
 
-# Dump of table manage_category
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `manage_category`;
-
-CREATE TABLE `manage_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `create_time` datetime NOT NULL,
-  `is_delete` int(1) NOT NULL DEFAULT '0',
-  `update_time` datetime NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 # Dump of table manager
 # ------------------------------------------------------------
 
@@ -518,7 +508,9 @@ INSERT INTO `notification` (`id`, `create_time`, `is_delete`, `update_time`, `ca
 VALUES
 	(1,'2016-08-15 18:37:11',0,'2016-09-03 01:01:15',2,'哦是吗','夜深啦',1,1),
 	(2,'2016-08-15 18:37:11',0,'2016-08-15 18:37:11',1,'网站公告','啊呀',NULL,1),
-	(3,'1970-01-18 09:07:14',0,'2016-09-03 01:01:15',1,'红红火火恍恍惚惚哈哈哈','收工啦',NULL,1);
+	(3,'1970-01-18 09:07:14',0,'2016-09-03 01:01:15',1,'红红火火恍恍惚惚哈哈哈','收工啦',NULL,1),
+	(4,'1970-01-18 09:07:14',0,'1970-01-18 09:07:14',1,'在做梦一样','开学了',NULL,1),
+	(5,'1970-01-18 09:07:14',1,'2016-09-03 01:01:15',1,'在做梦一样','开学了',NULL,1);
 
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -747,7 +739,8 @@ LOCK TABLES `role` WRITE;
 INSERT INTO `role` (`id`, `create_time`, `is_delete`, `update_time`, `is_active`, `name`)
 VALUES
 	(1,'2016-08-15 18:37:11',0,'2016-08-15 18:37:11',1,'admin'),
-	(2,'2016-08-15 18:37:11',0,'2016-08-15 18:37:11',1,'guest');
+	(2,'2016-08-15 18:37:11',0,'2016-08-15 18:37:11',1,'guest'),
+	(3,'2016-08-15 18:37:11',0,'2016-08-15 18:37:11',1,'superAdmin');
 
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -870,7 +863,7 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`id`, `create_time`, `is_delete`, `update_time`, `email`, `is_active`, `name`, `password`, `phone`, `real_name`, `salt`, `token`, `county_id`)
 VALUES
-	(1,'2016-08-15 18:37:11',0,'2016-09-03 20:50:51',NULL,1,'weck','AJakUTAHq+04GQOEqBCR/Zz8sFAQyX1u1iL4GRBE5qd4YFEc+A7dB9hUuWpZHm/l3vjicEVb4s5zJd9EjmPDRxM=',NULL,'weck','ADftHJvI/VIGgUIlTER7SqAvDvCazQopk2oELqgj0Ao=','34afe03e8afe4932b384a4a1c07fd4c4',1);
+	(1,'2016-08-15 18:37:11',0,'2016-09-04 14:03:25',NULL,1,'weck','AJakUTAHq+04GQOEqBCR/Zz8sFAQyX1u1iL4GRBE5qd4YFEc+A7dB9hUuWpZHm/l3vjicEVb4s5zJd9EjmPDRxM=',NULL,'weck','ADftHJvI/VIGgUIlTER7SqAvDvCazQopk2oELqgj0Ao=','d1421ca624fe49eaaa7d155aa6c56361',1);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -896,7 +889,8 @@ LOCK TABLES `user_roles` WRITE;
 INSERT INTO `user_roles` (`user`, `roles`)
 VALUES
 	(1,1),
-	(1,2);
+	(1,2),
+	(1,3);
 
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -916,11 +910,14 @@ CREATE TABLE `village` (
   `name` varchar(255) NOT NULL,
   `location_id` int(11) DEFAULT NULL,
   `town_id` int(11) NOT NULL,
+  `county_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_7ys24ftdgyvr974qxtqhf1rd7` (`town_id`),
   KEY `FK_slhsmscg2jlna2dqo69wp1kej` (`location_id`),
+  KEY `FK_u4ot3j9i9os4tagjmjmfudfh` (`county_id`),
   CONSTRAINT `FK_7ys24ftdgyvr974qxtqhf1rd7` FOREIGN KEY (`town_id`) REFERENCES `town` (`id`),
-  CONSTRAINT `FK_slhsmscg2jlna2dqo69wp1kej` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+  CONSTRAINT `FK_slhsmscg2jlna2dqo69wp1kej` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `FK_u4ot3j9i9os4tagjmjmfudfh` FOREIGN KEY (`county_id`) REFERENCES `county` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -942,7 +939,6 @@ CREATE TABLE `water_conservation` (
   `county_id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
-  `manage_category_id` int(11) DEFAULT NULL,
   `manager_id` int(11) DEFAULT NULL,
   `project_category_id` int(11) NOT NULL,
   `project_detail_mark_id` int(11) DEFAULT NULL,
@@ -950,15 +946,15 @@ CREATE TABLE `water_conservation` (
   `property_owner_id` int(11) DEFAULT NULL,
   `town_id` int(11) NOT NULL,
   `village_id` int(11) NOT NULL,
+  `manage_model` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_8ija4wnnyojw5pedcclo6qj01` (`project_mark_id`),
   KEY `FK_dr3s5s3dgc53psynv4phv99d0` (`construct_id`),
   KEY `FK_8asascecvic8ro4iog12i5tuv` (`county_id`),
   KEY `FK_f4skyo096pwlq2cwows0sv3ox` (`group_id`),
-  KEY `FK_itjticfy5i7flwnha33bs1elv` (`manage_category_id`),
   KEY `FK_t6c6n35e9730mftugeong0535` (`manager_id`),
   KEY `FK_r7ht8bnk54j09t7c1aksya252` (`project_category_id`),
   KEY `FK_7wj5ypon2qa4l5s6mm5d76fdt` (`project_detail_mark_id`),
-  KEY `FK_8ija4wnnyojw5pedcclo6qj01` (`project_mark_id`),
   KEY `FK_2awr9eld0cd8llw1gn74t3im7` (`property_owner_id`),
   KEY `FK_2lfk86onnxtr01wypi82x1rx2` (`town_id`),
   KEY `FK_loiaql631ustvbyak2svah5ji` (`village_id`),
@@ -971,7 +967,6 @@ CREATE TABLE `water_conservation` (
   CONSTRAINT `FK_dr3s5s3dgc53psynv4phv99d0` FOREIGN KEY (`construct_id`) REFERENCES `construct` (`id`),
   CONSTRAINT `FK_f4skyo096pwlq2cwows0sv3ox` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
   CONSTRAINT `FK_ghhn2efvoclpm76uxinjf3iio` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `FK_itjticfy5i7flwnha33bs1elv` FOREIGN KEY (`manage_category_id`) REFERENCES `manage_category` (`id`),
   CONSTRAINT `FK_loiaql631ustvbyak2svah5ji` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`),
   CONSTRAINT `FK_r7ht8bnk54j09t7c1aksya252` FOREIGN KEY (`project_category_id`) REFERENCES `project_category` (`id`),
   CONSTRAINT `FK_t6c6n35e9730mftugeong0535` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`)

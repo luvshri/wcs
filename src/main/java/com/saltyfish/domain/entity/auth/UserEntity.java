@@ -2,6 +2,7 @@ package com.saltyfish.domain.entity.auth;
 
 import com.saltyfish.domain.entity.base.BaseBean;
 import com.saltyfish.domain.entity.unit.CountyEntity;
+import com.saltyfish.domain.entity.unit.TownEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,22 +22,36 @@ public class UserEntity extends BaseBean {
     private String password;        //密码
     @Column(nullable = false)
     private String salt;        //加密的盐
-
     private String token;
+
     /*一个县对应多个用户,获取用户信息的时候也要获取县的信息,如果县的信息为空,用户也不应该为空,比如超级管理员*/
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
     private CountyEntity county;
+
     /*一个用户对应多个角色,一个角色有多个用户,删除用户信息不能删除角色信息*/
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private List<RoleEntity> roles;
+
+    @ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
+    @JoinColumn(name = "town_id",referencedColumnName = "id")
+    private List<TownEntity> towns;
+
     private String phone;           //电话
     @Column(columnDefinition = "int(1) default 1", nullable = false)
     private Integer isActive;       //是否启用
     private String email;           //邮箱
     @Column(nullable = false)
     private String realName;        //真实姓名
+
+    public List<TownEntity> getTowns() {
+        return towns;
+    }
+
+    public void setTowns(List<TownEntity> towns) {
+        this.towns = towns;
+    }
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
