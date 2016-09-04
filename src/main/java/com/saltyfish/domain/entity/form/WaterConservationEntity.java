@@ -1,7 +1,6 @@
 package com.saltyfish.domain.entity.form;
 
 import com.saltyfish.domain.entity.base.BaseBean;
-import com.saltyfish.domain.entity.form.category.ManageCategoryEntity;
 import com.saltyfish.domain.entity.form.category.ProjectCategoryEntity;
 import com.saltyfish.domain.entity.form.construct.ConstructEntity;
 import com.saltyfish.domain.entity.form.human.ManagerEntity;
@@ -27,60 +26,93 @@ import javax.persistence.*;
 public class WaterConservationEntity extends BaseBean {
     private static final Long serialVersionUID = -1439134197984525370L;
 
-    @NotEmpty
+    @Column(nullable = false)
     private String code;            //编码
-    @NotEmpty
+    @Column(nullable = false)
     private String name;            //名称
 
     private String remark;              //备注
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = true)
+    private String manageModel;     //管理模式
+
+    /*县*/
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
     private CountyEntity county;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = true)
+    /*乡镇*/
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "town_id", referencedColumnName = "id", nullable = false)
     private TownEntity town;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = true)
+    /*组*/
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id", referencedColumnName = "id")
     private GroupEntity group;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = true)
+    /*村*/
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "village_id", referencedColumnName = "id", nullable = false)
     private VillageEntity village;
 
+    /*经纬度*/
     @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private LocationEntity location;
 
+    /*产权*/
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "property_owner_id", referencedColumnName = "id")
     private PropertyOwnerEntity propertyOwner;
 
+    /*管理*/
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private ManagerEntity manager;
 
+    /*建设维修*/
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "construct_id", referencedColumnName = "id")
     private ConstructEntity construct;
 
+    /*种类*/
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "project_category_id", referencedColumnName = "id", nullable = false)
     private ProjectCategoryEntity projectCategory;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "manage_category_id", referencedColumnName = "id")
-    private ManageCategoryEntity manageCategory;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    /*工程标记*/
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "project_mark_id", referencedColumnName = "id", nullable = false)
     private ProjectMarkEntity projectMark;
 
+    /*工程明细标记*/
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "project_detail_mark_id", referencedColumnName = "id")
     private ProjectDetailMarkEntity projectDetailMark;
+
+    public String getManageModel() {
+        return manageModel;
+    }
+
+    public void setManageModel(String manageModel) {
+        this.manageModel = manageModel;
+    }
+
+    public ProjectMarkEntity getProjectMark() {
+        return projectMark;
+    }
+
+    public void setProjectMark(ProjectMarkEntity projectMark) {
+        this.projectMark = projectMark;
+    }
+
+    public ProjectDetailMarkEntity getProjectDetailMark() {
+        return projectDetailMark;
+    }
+
+    public void setProjectDetailMark(ProjectDetailMarkEntity projectDetailMark) {
+        this.projectDetailMark = projectDetailMark;
+    }
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
@@ -156,14 +188,6 @@ public class WaterConservationEntity extends BaseBean {
 
     public void setProjectCategory(ProjectCategoryEntity projectCategory) {
         this.projectCategory = projectCategory;
-    }
-
-    public ManageCategoryEntity getManageCategory() {
-        return manageCategory;
-    }
-
-    public void setManageCategory(ManageCategoryEntity manageCategory) {
-        this.manageCategory = manageCategory;
     }
 
     public String getCode() {

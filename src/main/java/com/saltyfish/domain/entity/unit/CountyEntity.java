@@ -31,4 +31,5 @@ public class CountyEntity extends Unit {
     public void setLocation(LocationEntity location) {
         this.location = location;
     }
+
 }

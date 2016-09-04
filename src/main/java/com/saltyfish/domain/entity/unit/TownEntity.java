@@ -26,4 +26,20 @@ public class TownEntity extends Unit {
     public static Long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+    public CountyEntity getCounty() {
+        return county;
+    }
+
+    public void setCounty(CountyEntity county) {
+        this.county = county;
+    }
+
+    public LocationEntity getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationEntity location) {
+        this.location = location;
+    }
 }

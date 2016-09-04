@@ -19,11 +19,39 @@ public class VillageEntity extends Unit {
     @JoinColumn(name = "town_id", referencedColumnName = "id", nullable = false)
     private TownEntity town;
 
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
+    private CountyEntity county;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private LocationEntity location;
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public TownEntity getTown() {
+        return town;
+    }
+
+    public void setTown(TownEntity town) {
+        this.town = town;
+    }
+
+    public CountyEntity getCounty() {
+        return county;
+    }
+
+    public void setCounty(CountyEntity county) {
+        this.county = county;
+    }
+
+    public LocationEntity getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationEntity location) {
+        this.location = location;
     }
 }
