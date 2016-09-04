@@ -7,10 +7,13 @@ Spring Boot + Hibernate JPA + Mysql + MongoDB<br>
 
 ## api 接口说明:
 ### 1.用户登录
+#### description
+用户输入用户名和密码进行登录,返回信息包含所有的工程种类信息,用户信息(包含当前县信息和登录token,以后每次请求需要带上作为参数)<br>
+
 #### request:
 * url:/user/login
 * HTTP 1.1/POST
-* 参数:application/x-www-form-urlencoded
+* 参数:application/x-www-form-urlencoded<br>
  参数名称	    取值	    说明	    required<br>
  userName	String	用户名	TRUE<br>
  password	String	密码	    TRUE<br>
@@ -66,6 +69,8 @@ Spring Boot + Hibernate JPA + Mysql + MongoDB<br>
 }
 
 ### 2.获取首页公告
+#### description
+打开网站首页需要获取首页的公告信息,此时用户未登录
 
 #### request:
 * url:/notification/indexNotifications
