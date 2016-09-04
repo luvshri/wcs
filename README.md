@@ -269,3 +269,28 @@ size	Integer	每页数量	TRUE<br>
         	error: null
         }
 
+### 5.修改公告
+#### description
+修改公告与新增公告类似,新增参数notificationId,没有category
+
+#### request:
+* url:/notification/updateNotifications
+* HTTP 1.1/POST
+* 参数: application/x-www-form-urlencoded<br>
+|参数名称|------|取值|-------|说明|-------------------|required|<br>
+|userId|-------|Integer|---|用户id|-----------------|TRUE|<br>
+|token|--------|String|----|登录后分配的token|-------|TRUE|<br>
+|title|--------|String|----|标题|-------------------|TRUE|<br>
+|content|------|String|----|内容|-------------------|TRUE|<br>
+|notificationId|-----|Integer|---|当前修改公告的id|---|TRUE|<br>
+|timeStamp|----|Long|------|客户端时间戳|------------|TRUE|<br>
+
+#### response:
+        {
+        	code: 200,
+        	data: {
+        		details: "成功"
+        		},
+        	error: null
+        }
+
