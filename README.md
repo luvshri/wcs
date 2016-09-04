@@ -10,9 +10,10 @@ Spring Boot + Hibernate JPA + Mysql + MongoDB<br>
 #### request:
 * url:/user/login
 * HTTP 1.1/POST
-* 参数名称	    取值	    说明	    required
-* userName	    String	用户名	TRUE
-* password	    String	密码	    TRUE
+* 参数:application/x-www-form-urlencoded
+ 参数名称	    取值	    说明	    required<br>
+ userName	String	用户名	TRUE<br>
+ password	String	密码	    TRUE<br>
 
 #### response:
         {
@@ -63,3 +64,86 @@ Spring Boot + Hibernate JPA + Mysql + MongoDB<br>
 				},
 	error: null				//错误信息
 }
+
+### 2.获取首页公告
+
+#### request:
+* url:/notification/indexNotifications
+* HTTP 1.1/GET
+* 参数:application/x-www-form-urlencoded
+参数名称	取值	    说明	    required<br>
+page	Integer	页码	    TRUE<br>
+size	Integer	每页数量	TRUE<br>
+
+#### response:
+        {
+        	code: 200,
+        	data: {
+        		notifications: {		//拉取的分页信息
+        			content: [		//页面内容
+        				{
+        					id: 3,
+        					createTime: "1970-01-18 01:07:14",	//创建时间
+        					updateTime: "2016-09-02 17:01:15",	//更新时间
+        					isDelete: 0,
+        					title: "收工啦",		//标题
+        					county: null,		//当前县信息,网站公告没有
+        					content: "红红火火恍恍惚惚哈哈哈",		//内容
+        					category: 1,	//公告种类，1位网站公告，2为县级公告
+        					user: {		//作者信息
+        						id: 1,
+        						createTime: "2016-08-15 10:37:11",
+        						updateTime: "2016-09-03 14:39:15",
+        						isDelete: 0,
+        						name: "weck",		//用户名
+        						password: "",
+        						salt: “",
+        						token: "",
+        						county: {
+        								id: 1,
+        								createTime: "",
+        								updateTime: "",
+        								isDelete: 0,
+        								name: "nankang",
+        								isActive: 1,
+        								location: null
+        							},
+        						roles: [
+        							{
+        								id: 1,
+        								createTime: "",
+        								updateTime: "",
+        								isDelete: 0,
+        								name: "admin",
+        								isActive: 1
+        							},…
+        							],
+        						phone: null,
+        						isActive: 1,
+        						email: null,
+        						realName: "weck"		//真实姓名
+        					}
+        				},…
+        				],
+        			last: true,		//是否最后一页
+        			totalPages: 1,		//总页数
+        			totalElements: 2,		//总记录数
+        			size: 2,			//每页数量
+        			number: 0,			//当前页码－1
+        			sort: [				//排序情况
+        				{
+        				direction: "DESC",
+        				property: "updateTime",
+        				ignoreCase: false,
+        				nullHandling: "NATIVE",
+        				ascending: false
+        				}
+        				],
+        			first: true,			//是否第一页
+        			numberOfElements: 2		//当前页面条数
+        		}
+        	},
+        	error: null
+        }
+
+
