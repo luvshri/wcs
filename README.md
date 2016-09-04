@@ -70,7 +70,7 @@ Spring Boot + Hibernate JPA + Mysql + MongoDB<br>
 #### request:
 * url:/notification/indexNotifications
 * HTTP 1.1/GET
-* 参数:application/x-www-form-urlencoded
+* 参数:application/x-www-form-urlencoded<br>
 参数名称	取值	    说明	    required<br>
 page	Integer	页码	    TRUE<br>
 size	Integer	每页数量	TRUE<br>
