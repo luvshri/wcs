@@ -15,7 +15,7 @@ import java.sql.Timestamp;
  */
 
 @Entity
-@Table(name = "turbine", schema = "", catalog = "exciting")
+@Table(name = "turbine", catalog = "exciting")
 public class TurbineEntity extends SuperBean {
     private static final Long serialVersionUID = -975132493522824424L;
     @NotEmpty

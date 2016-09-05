@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * 沟渠
  */
 @Entity
-@Table(name = "canal", schema = "", catalog = "exciting")
+@Table(name = "canal", catalog = "exciting")
 public class CanalEntity extends SuperBean {
     private static final Long serialVersionUID = -5847937472510125424L;
     @NotEmpty

@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by weck on 16/8/31.
+ * <p>
+ * 组仓库
  */
 @Repository
 public interface GroupRepository extends JpaRepository<GroupEntity, Integer> {

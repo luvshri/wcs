@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by weck on 16/9/2.
  */
 @Entity
-@Table(name = "project_mark", schema = "", catalog = "exciting")
+@Table(name = "project_mark", catalog = "exciting")
 public class ProjectMarkEntity extends SuperBean {
     private static final Long serialVersionUID = -3094094589759825424L;
 

@@ -12,7 +12,7 @@ import javax.persistence.*;
  * 通知
  */
 @Entity
-@Table(name = "notification", schema = "", catalog = "exciting")
+@Table(name = "notification", catalog = "exciting")
 public class NotificationEntity extends BaseBean {
     private static final Long serialVersionUID = -5924582025423825370L;
     @Column(nullable = false)

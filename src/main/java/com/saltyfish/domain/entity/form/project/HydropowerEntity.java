@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 水电站
  */
 @Entity
-@Table(name = "hydropower", schema = "", catalog = "exciting")
+@Table(name = "hydropower", catalog = "exciting")
 public class HydropowerEntity extends SuperBean {
     private static final Long serialVersionUID = -4945280285272950802L;
     //受益面积

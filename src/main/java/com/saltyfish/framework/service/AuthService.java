@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by weck on 16/9/3.
+ * <p>
+ * 权限检测
  */
 @Service
 public class AuthService {
@@ -28,7 +30,7 @@ public class AuthService {
      *
      * @param notificationId 公告id
      * @param userId         用户id
-     * @return
+     * @return bool
      */
     public Boolean checkModifyNotificationAccess(Integer notificationId, Integer userId) {
         NotificationEntity notificationEntity = notificationRepository.findById(notificationId);
@@ -43,7 +45,7 @@ public class AuthService {
      *
      * @param userId 用户id
      * @param townId 乡镇id
-     * @return
+     * @return bool
      */
     public Boolean checkUserTownAccess(Integer userId, Integer townId) {
         UserEntity userEntity = userRepository.findById(userId);

@@ -21,7 +21,7 @@ import javax.persistence.*;
  * 水利设施
  */
 @Entity
-@Table(name = "water_conservation", schema = "", catalog = "exciting")
+@Table(name = "water_conservation", catalog = "exciting")
 public class WaterConservationEntity extends BaseBean {
     private static final Long serialVersionUID = -1439134197984525370L;
 

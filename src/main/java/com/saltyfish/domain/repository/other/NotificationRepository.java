@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Created by weck on 16/8/31.
+ * <p>
+ * 公告仓库
  */
 @Repository
 public interface NotificationRepository extends JpaRepository<NotificationEntity, Integer> {

@@ -21,6 +21,8 @@ import java.util.List;
 
 /**
  * Created by weck on 16/9/4.
+ * <p>
+ * 行政单位操作
  */
 @Service
 public class UnitService {
@@ -44,7 +46,7 @@ public class UnitService {
      * 根据用户id获取当前县信息
      *
      * @param userId 用户id
-     * @return
+     * @return 县对象
      */
     public CountyEntity getCountyByUserId(Integer userId) {
         return userRepository.findById(userId).getCounty();
@@ -54,7 +56,7 @@ public class UnitService {
      * 根据用户id获取权限范围内的乡镇信息
      *
      * @param userId 用户id
-     * @return
+     * @return 乡镇列表
      */
     public List<TownEntity> getAccessedTowns(Integer userId) {
         UserEntity user = userRepository.findById(userId);
@@ -122,7 +124,7 @@ public class UnitService {
     /**
      * 获取县的列表
      *
-     * @return
+     * @return 县列表
      */
     public List<CountyEntity> getCounties() {
         return countyRepository.findByIsDelete(0);
@@ -132,7 +134,7 @@ public class UnitService {
      * 根据乡镇获取村list
      *
      * @param townId 乡镇id
-     * @return
+     * @return 村庄列表
      */
     public List<VillageEntity> getVillagesByTown(Integer townId) {
         return villageRepository.findByTownId(townId);
@@ -142,7 +144,7 @@ public class UnitService {
      * 根据id获取村庄
      *
      * @param villageId 村庄id
-     * @return
+     * @return 村庄对象
      */
     public VillageEntity getVillageById(Integer villageId) {
         return villageRepository.findById(villageId);
@@ -152,7 +154,7 @@ public class UnitService {
      * 根据村庄获取组list
      *
      * @param villageId 村庄id
-     * @return
+     * @return 组列表
      */
     public List<GroupEntity> getGroupsByVillage(Integer villageId) {
         return groupRepository.findByVillageId(villageId);

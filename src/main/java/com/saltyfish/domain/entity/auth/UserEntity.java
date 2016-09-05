@@ -13,7 +13,7 @@ import java.util.List;
  * 用户账号
  */
 @Entity
-@Table(name = "user", schema = "", catalog = "exciting")
+@Table(name = "user", catalog = "exciting")
 public class UserEntity extends BaseBean {
     private static final Long serialVersionUID = -6128783497515830424L;
     @Column(unique = true, nullable = false)

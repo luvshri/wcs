@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by weck on 16/9/2.
+ * <p>
+ * 测试controller
  */
 @RestController
 @RequestMapping("/")

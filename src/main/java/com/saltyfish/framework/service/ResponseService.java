@@ -9,6 +9,8 @@ import java.util.Map;
 
 /**
  * Created by weck on 16/9/3.
+ * <p>
+ * 返回service
  */
 @Service
 public class ResponseService {
@@ -16,8 +18,8 @@ public class ResponseService {
     /**
      * 未登录返回
      *
-     * @param response
-     * @return
+     * @param response 返回对象
+     * @return response
      */
     public Response notLogin(Response response) {
         response.setCode(HttpStatus.UNAUTHORIZED.value());
@@ -30,8 +32,8 @@ public class ResponseService {
     /**
      * 服务器错误
      *
-     * @param response
-     * @return
+     * @param response 返回对象
+     * @return response
      */
     public Response serverError(Response response) {
         Map<String, Object> msg = new HashMap<>();
@@ -44,8 +46,8 @@ public class ResponseService {
     /**
      * 没有权限
      *
-     * @param response
-     * @return
+     * @param response 返回对象
+     * @return response
      */
     public Response noAccess(Response response) {
         response.setCode(HttpStatus.FORBIDDEN.value());
@@ -58,8 +60,8 @@ public class ResponseService {
     /**
      * 用户名不存在
      *
-     * @param response
-     * @return
+     * @param response 返回对象
+     * @return response
      */
     public Response notFound(Response response) {
         response.setCode(HttpStatus.NOT_FOUND.value());
@@ -72,8 +74,8 @@ public class ResponseService {
     /**
      * 密码不正确
      *
-     * @param response
-     * @return
+     * @param response 返回对象
+     * @return response
      */
     public Response inCorrectPassword(Response response) {
         response.setCode(HttpStatus.NOT_ACCEPTABLE.value());
@@ -86,8 +88,8 @@ public class ResponseService {
     /**
      * 成功
      *
-     * @param response
-     * @return
+     * @param response 返回对象
+     * @return response
      */
     public Response success(Response response) {
         response.setCode(HttpStatus.OK.value());
@@ -97,6 +99,13 @@ public class ResponseService {
         return response;
     }
 
+
+    /**
+     * 错误路径
+     *
+     * @param response 返回对象
+     * @return response
+     */
     public Response errorPath(Response response) {
         response.setCode(HttpStatus.NOT_FOUND.value());
         Map<String, Object> msg = new HashMap<>();

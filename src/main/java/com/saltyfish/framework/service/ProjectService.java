@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by weck on 16/9/3.
+ * <p>
+ * 工程操作
  */
 @Service
 public class ProjectService {
@@ -18,7 +20,7 @@ public class ProjectService {
     /**
      * 查找所有工程种类
      *
-     * @return
+     * @return 工程种类list
      */
     public List<ProjectCategoryEntity> findAll() {
         return (List<ProjectCategoryEntity>) projectCategoryRepository.findAll();

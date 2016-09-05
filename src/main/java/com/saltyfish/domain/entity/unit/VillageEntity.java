@@ -10,7 +10,7 @@ import javax.persistence.*;
  * 村
  */
 @Entity
-@Table(name = "village", schema = "", catalog = "exciting")
+@Table(name = "village", catalog = "exciting")
 public class VillageEntity extends Unit {
     private static final Long serialVersionUID = -1283787394589098432L;
 

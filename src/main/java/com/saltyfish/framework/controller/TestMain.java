@@ -4,6 +4,8 @@ import com.saltyfish.common.utils.PasswordEncode;
 
 /**
  * Created by weck on 16/9/2.
+ * <p>
+ * 测试主类
  */
 public class TestMain {
     public static void main(String args[]) {

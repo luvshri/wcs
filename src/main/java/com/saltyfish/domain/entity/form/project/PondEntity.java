@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * 水塘
  */
 @Entity
-@Table(name = "pond", schema = "", catalog = "exciting")
+@Table(name = "pond", catalog = "exciting")
 public class PondEntity extends SuperBean {
     private static final Long serialVersionUID = -193848050958205434L;
     private String features;        //主要功能

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 水厂
  */
 @Entity
-@Table(name = "waterworks", schema = "", catalog = "exciting")
+@Table(name = "waterworks", catalog = "exciting")
 public class WaterWorksEntity extends SuperBean {
     private static final Long serialVersionUID = 129845788980745834L;
     private BigDecimal provideAmount;        //供水能力

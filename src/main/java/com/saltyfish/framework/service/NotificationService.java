@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 
 /**
  * Created by weck on 16/9/2.
+ * <p>
+ * 公告操作
  */
 @Service
 public class NotificationService {
@@ -28,7 +30,7 @@ public class NotificationService {
      *
      * @param page 页码
      * @param size 每页数量
-     * @return
+     * @return 公告page
      */
     public Page<NotificationEntity> getIndexNotifications(Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
@@ -39,13 +41,12 @@ public class NotificationService {
     /**
      * 分页查询县公告
      *
-     * @param page
-     * @param size
-     * @param userId
-     * @param token
-     * @return
+     * @param page   页码
+     * @param size   每页数量
+     * @param userId 用户id
+     * @return 公告page
      */
-    public Page<NotificationEntity> getCountyNotifications(Integer page, Integer size, Integer userId, String token) {
+    public Page<NotificationEntity> getCountyNotifications(Integer page, Integer size, Integer userId) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
         return notificationRepository.findByCountyIdAndIsDeleteAndCategory(
@@ -80,11 +81,11 @@ public class NotificationService {
     /**
      * 更新公告
      *
-     * @param id
-     * @param content
-     * @param timeStamp
-     * @param title
-     * @param userId
+     * @param id        公告id
+     * @param content   内容
+     * @param timeStamp 时间戳
+     * @param title     标题
+     * @param userId    用户id
      */
     public void updateNotification(Integer id, String content, Long timeStamp, String title, Integer userId) {
         UserEntity userEntity = userRepository.findById(userId);
@@ -96,22 +97,13 @@ public class NotificationService {
         notificationRepository.save(notification);
     }
 
-    /**
-     * 根据id查询公告
-     *
-     * @param notificationId
-     * @return
-     */
-    public NotificationEntity findById(Integer notificationId) {
-        return notificationRepository.findById(notificationId);
-    }
 
     /**
      * 删除公告
      *
-     * @param notificationId
-     * @param userId
-     * @param timeStamp
+     * @param notificationId 公告id
+     * @param userId         用户id
+     * @param timeStamp      时间戳
      */
     public void deleteNotification(Integer notificationId, Integer userId, Long timeStamp) {
         UserEntity userEntity = userRepository.findById(userId);

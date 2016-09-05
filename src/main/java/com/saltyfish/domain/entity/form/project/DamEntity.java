@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "dam", schema = "", catalog = "exciting")
+@Table(name = "dam", catalog = "exciting")
 public class DamEntity extends SuperBean {
     private static final Long serialVersionUID = -2342987549323245464L;
     private Integer isRegistered;       //是否注册等级

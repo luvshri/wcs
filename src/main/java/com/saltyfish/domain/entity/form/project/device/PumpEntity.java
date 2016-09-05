@@ -14,7 +14,7 @@ import java.sql.Timestamp;
  * 水泵
  */
 @Entity
-@Table(name = "pump", schema = "", catalog = "exciting")
+@Table(name = "pump", catalog = "exciting")
 public class PumpEntity extends SuperBean {
     private static final Long serialVersionUID = 975489279582824424L;
     @NotEmpty

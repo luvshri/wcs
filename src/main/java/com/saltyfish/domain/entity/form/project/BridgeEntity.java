@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "bridge", schema = "", catalog = "exciting")
+@Table(name = "bridge", catalog = "exciting")
 public class BridgeEntity extends SuperBean {
     private static final Long serialVersionUID = -7874927950228503234L;
     private String watercourseLocation;     //所在河道

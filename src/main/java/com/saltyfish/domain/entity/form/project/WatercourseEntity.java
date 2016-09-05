@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * 河道
  */
 @Entity
-@Table(name = "watercourse", schema = "", catalog = "exciting")
+@Table(name = "watercourse", catalog = "exciting")
 public class WatercourseEntity extends SuperBean {
     private static final Long serialVersionUID = 8745279287298234L;
     private BigDecimal length;                   //长度,km

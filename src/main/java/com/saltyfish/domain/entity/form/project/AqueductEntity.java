@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 渡槽
  */
 @Entity
-@Table(name = "aqueduct", schema = "", catalog = "exciting")
+@Table(name = "aqueduct", catalog = "exciting")
 public class AqueductEntity extends SuperBean {
     private static final Long serialVersionUID = -3094094589759825424L;
     private String crossWatercourseLocation;        //所跨河道

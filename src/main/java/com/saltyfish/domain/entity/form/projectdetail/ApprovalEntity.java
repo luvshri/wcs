@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * 批复
  */
 @Entity
-@Table(name = "approval", schema = "", catalog = "exciting")
+@Table(name = "approval", catalog = "exciting")
 public class ApprovalEntity extends BaseBean {
     private static final Long serialVersionUID = -283479572243590424L;
 

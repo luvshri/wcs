@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * 经纬度
  */
 @Entity
-@Table(name = "location", schema = "", catalog = "exciting")
+@Table(name = "location", catalog = "exciting")
 public class LocationEntity extends BaseBean {
     private static final Long serialVersionUID = -2389744690840525370L;
     @Column(nullable = false, columnDefinition = "decimal(13,8)")

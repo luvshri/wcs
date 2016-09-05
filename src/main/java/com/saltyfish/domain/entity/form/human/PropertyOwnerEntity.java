@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 产权人
  */
 @Entity
-@Table(name = "property_owner", schema = "", catalog = "exciting")
+@Table(name = "property_owner", catalog = "exciting")
 public class PropertyOwnerEntity extends BaseBean {
 
     private static final Long serialVersionUID = 1254285092473892370L;

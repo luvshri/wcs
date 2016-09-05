@@ -10,7 +10,7 @@ import javax.persistence.*;
  * 组
  */
 @Entity
-@Table(name = "group", schema = "", catalog = "exciting")
+@Table(name = "group", catalog = "exciting")
 public class GroupEntity extends Unit {
     private static final Long serialVersionUID = -6128309824038223424L;
 

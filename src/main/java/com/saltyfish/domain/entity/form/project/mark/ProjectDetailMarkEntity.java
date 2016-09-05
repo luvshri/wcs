@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Created by weck on 16/9/2.
  */
 @Entity
-@Table(name = "project_detail_mark", schema = "", catalog = "exciting")
+@Table(name = "project_detail_mark", catalog = "exciting")
 public class ProjectDetailMarkEntity extends SuperBean {
     private static final Long serialVersionUID = 3092347950254928024L;
 

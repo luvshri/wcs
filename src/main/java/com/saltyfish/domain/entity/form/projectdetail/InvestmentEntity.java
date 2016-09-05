@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 投资
  */
 @Entity
-@Table(name = "investment", schema = "", catalog = "exciting")
+@Table(name = "investment", catalog = "exciting")
 public class InvestmentEntity extends BaseBean {
     private static final Long serialVersionUID = 954892794278590424L;
     private String countryInvest; //国家投资

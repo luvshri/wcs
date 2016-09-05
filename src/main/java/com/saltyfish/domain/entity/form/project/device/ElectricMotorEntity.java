@@ -14,7 +14,7 @@ import java.sql.Timestamp;
  * 电动机
  */
 @Entity
-@Table(name = "electric_motor", schema = "", catalog = "exciting")
+@Table(name = "electric_motor", catalog = "exciting")
 public class ElectricMotorEntity extends SuperBean {
     private static final Long serialVersionUID = -1987258246729432244L;
     @NotEmpty

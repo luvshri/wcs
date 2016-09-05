@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "culvert", schema = "", catalog = "exciting")
+@Table(name = "culvert", catalog = "exciting")
 public class CulvertEntity extends SuperBean {
     private static final Long serialVersionUID = -948052998025454234L;
     private String watercourseLocation;         //所在河道

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * 变压器
  */
 @Entity
-@Table(name = "transformer", schema = "", catalog = "exciting")
+@Table(name = "transformer", catalog = "exciting")
 public class TransformerEntity extends SuperBean {
     private static final Long serialVersionUID = 7842794270759825424L;
     @NotEmpty

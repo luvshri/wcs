@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 深水井
  */
 @Entity
-@Table(name = "deep_wells", schema = "", catalog = "exciting")
+@Table(name = "deep_wells", catalog = "exciting")
 public class DeepWellsEntity extends SuperBean {
     private static final Long serialVersionUID = -7391847456894534L;
     private BigDecimal irrigateArea;     //灌溉面积

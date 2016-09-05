@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  * 建设/维修
  */
 @Entity
-@Table(name = "construct", schema = "", catalog = "exciting")
+@Table(name = "construct", catalog = "exciting")
 public class ConstructEntity extends BaseBean {
     private static final Long serialVersionUID = -8846250942868421370L;
 

@@ -14,7 +14,7 @@ import java.sql.Timestamp;
  * 发电机
  */
 @Entity
-@Table(name = "generator", schema = "", catalog = "exciting")
+@Table(name = "generator", catalog = "exciting")
 public class GeneratorEntity extends SuperBean {
     private static final Long serialVersionUID = 489745829749432244L;
     @NotEmpty

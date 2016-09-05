@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "transformer", schema = "", catalog = "exciting")
+@Table(name = "transformer", catalog = "exciting")
 public class MaintainPersonEntity extends SuperBean {
     private static final Long serialVersionUID = -984759890284597424L;
     @NotEmpty

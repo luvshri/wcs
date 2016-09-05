@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * 角色
  */
 @Entity
-@Table(name = "role", schema = "", catalog = "exciting")
+@Table(name = "role", catalog = "exciting")
 public class RoleEntity extends BaseBean {
     private static final Long serialVersionUID = -6122347374515830424L;
     @Column(unique = true, nullable = false)

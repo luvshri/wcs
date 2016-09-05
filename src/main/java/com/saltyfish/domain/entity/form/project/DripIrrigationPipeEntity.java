@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 管滴灌
  */
 @Entity
-@Table(name = "drip_irrigation_pipe", schema = "", catalog = "exciting")
+@Table(name = "drip_irrigation_pipe", catalog = "exciting")
 public class DripIrrigationPipeEntity extends SuperBean {
     private static final Long serialVersionUID = -59475892792024924L;
     private BigDecimal irrigateArea;     //灌溉面积

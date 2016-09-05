@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by weck on 16/8/31.
+ * <p>
+ * 县仓库
  */
 @Repository
 public interface CountyRepository extends JpaRepository<CountyEntity, Integer> {

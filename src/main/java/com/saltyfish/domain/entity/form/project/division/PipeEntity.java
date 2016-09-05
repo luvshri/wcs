@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "pipe", schema = "", catalog = "exciting")
+@Table(name = "pipe", catalog = "exciting")
 public class PipeEntity extends SuperBean {
     private static final Long serialVersionUID = -2874592742389725424L;
     private String model;       //管道类型

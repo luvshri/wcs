@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by weck on 16/8/31.
+ * <p>
+ * 村庄仓库
  */
 @Repository
 public interface VillageRepository extends JpaRepository<VillageEntity, Integer> {

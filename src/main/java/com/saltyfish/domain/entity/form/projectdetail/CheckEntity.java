@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * 验收
  */
 @Entity
-@Table(name = "check", schema = "", catalog = "exciting")
+@Table(name = "check", catalog = "exciting")
 public class CheckEntity extends BaseBean {
     private static final Long serialVersionUID = 1238048502978590424L;
     @NotEmpty

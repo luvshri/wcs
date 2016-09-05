@@ -8,9 +8,6 @@ import com.saltyfish.framework.service.ResponseService;
 import com.saltyfish.framework.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +18,8 @@ import java.util.Map;
 
 /**
  * Created by weck on 16/9/2.
+ * <p>
+ * 用于处理公告相关的请求
  */
 @RestController
 @RequestMapping("/notification")
@@ -44,7 +43,7 @@ public class NotificationController {
      * @param content   内容
      * @param timeStamp 时间戳
      * @param category  种类
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/addNotification")
     public Response addNotification(@RequestParam("userId") Integer userId,
@@ -77,7 +76,7 @@ public class NotificationController {
      * @param title          标题
      * @param content        内容
      * @param timeStamp      时间戳
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/updateNotification")
     public Response updateNotification(@RequestParam("userId") Integer userId,
@@ -108,7 +107,7 @@ public class NotificationController {
      * @param token          登录token
      * @param notificationId 公告id
      * @param timeStamp      时间戳
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/deleteNotification")
     public Response deleteNotification(@RequestParam("userId") Integer userId,
@@ -137,7 +136,7 @@ public class NotificationController {
      *
      * @param page 页码
      * @param size 每页条数
-     * @return response
+     * @return 公告page
      */
     @RequestMapping("/indexNotifications")
     public Response getIndexNotifications(@RequestParam("page") Integer page,
@@ -162,7 +161,7 @@ public class NotificationController {
      * @param size   每页条数
      * @param userId 用户id
      * @param token  登录token
-     * @return response
+     * @return 公告page
      */
     @RequestMapping("/countyNotifications")
     public Response getCountyNotifications(@RequestParam("page") Integer page,
@@ -170,14 +169,12 @@ public class NotificationController {
                                            @RequestParam(value = "userId", required = false) Integer userId,
                                            @RequestParam(value = "token", required = false, defaultValue = "") String token) {
         Response response = new Response();
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
-        Pageable pageable = new PageRequest(page - 1, size, sort);
         try {
             /*如果用户未登录*/
             if (!userService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else {
-                Page<NotificationEntity> notifications = notificationService.getCountyNotifications(page, size, userId, token);
+                Page<NotificationEntity> notifications = notificationService.getCountyNotifications(page, size, userId);
                 response.setCode(HttpStatus.OK.value());
                 Map<String, Object> msg = new HashMap<>();
                 msg.put("notifications", notifications);

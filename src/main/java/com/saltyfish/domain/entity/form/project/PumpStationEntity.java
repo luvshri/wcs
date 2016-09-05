@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 泵站
  */
 @Entity
-@Table(name = "pump_station", schema = "", catalog = "exciting")
+@Table(name = "pump_station", catalog = "exciting")
 public class PumpStationEntity extends SuperBean {
     private static final Long serialVersionUID = -798391408317894179L;
     //受益面积

@@ -16,6 +16,8 @@ import java.util.Map;
 
 /**
  * Created by weck on 16/9/4.
+ * <p>
+ * 用于处理行政单位资源的相关请求
  */
 @RequestMapping("/unit")
 public class UnitController {
@@ -38,7 +40,7 @@ public class UnitController {
      * @param userId 用户id
      * @param token  登录token
      * @param townId 乡镇id
-     * @return
+     * @return 村庄list
      */
     @RequestMapping("getVillagesByTown")
     public Response getVillagesByTown(@RequestParam("userId") Integer userId,
@@ -68,7 +70,7 @@ public class UnitController {
      * @param userId    用户id
      * @param token     登录token
      * @param villageId 村庄id
-     * @return
+     * @return 组list
      */
     @RequestMapping("getGroupsByVillage")
     public Response getGroupsByVillage(@RequestParam("userId") Integer userId,
@@ -95,9 +97,9 @@ public class UnitController {
     /**
      * 获取县列表
      *
-     * @param userId
-     * @param token
-     * @return
+     * @param userId 用户id
+     * @param token  登录token
+     * @return 县list
      */
     @RequestMapping("getCounties")
     public Response getCounties(@RequestParam("userId") Integer userId,
@@ -129,7 +131,7 @@ public class UnitController {
      * @param longitude  东经
      * @param latitude   北纬
      * @param timeStamp  时间戳
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/addCounty")
     public Response addCounty(@RequestParam("userId") Integer userId,
@@ -153,6 +155,16 @@ public class UnitController {
         }
     }
 
+    /**
+     * 添加村庄
+     *
+     * @param userId      用户id
+     * @param token       登录token
+     * @param villageName 村庄名称
+     * @param timeStamp   时间戳
+     * @param townId      乡镇id
+     * @return 操作结果
+     */
     @RequestMapping("/addVillage")
     public Response addVillage(@RequestParam("userId") Integer userId,
                                @RequestParam("token") String token,
@@ -181,7 +193,7 @@ public class UnitController {
      * @param token     登录token
      * @param groupName 组名
      * @param timeStamp 时间戳
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/addGroup")
     public Response addGroup(@RequestParam("userId") Integer userId,
@@ -212,7 +224,7 @@ public class UnitController {
      * @param token     登录token
      * @param townName  乡镇名称
      * @param timeStamp 时间戳
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/addTown")
     public Response addTown(@RequestParam("userId") Integer userId,
@@ -242,7 +254,7 @@ public class UnitController {
      * @param townName  乡镇名称
      * @param timeStamp 时间戳
      * @param townId    当前修改乡镇的id
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/modifyTown")
     public Response modifyTown(@RequestParam("userId") Integer userId,
@@ -275,7 +287,7 @@ public class UnitController {
      * @param latitude   北纬
      * @param timeStamp  时间戳
      * @param countyId   当前修改县的id
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/updateCounty")
     public Response updateCounty(@RequestParam("userId") Integer userId,
@@ -305,7 +317,7 @@ public class UnitController {
      *
      * @param userId 用户id
      * @param token  登录token
-     * @return
+     * @return 乡镇list
      */
     @RequestMapping("/getAccessedTowns")
     public Response getAccessedTowns(@RequestParam("userId") Integer userId,

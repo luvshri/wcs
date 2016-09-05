@@ -11,7 +11,7 @@ import javax.persistence.*;
  * 县
  */
 @Entity
-@Table(name = "county", schema = "", catalog = "exciting")
+@Table(name = "county", catalog = "exciting")
 public class CountyEntity extends Unit {
     private static final Long serialVersionUID = -2394798247978590424L;
 

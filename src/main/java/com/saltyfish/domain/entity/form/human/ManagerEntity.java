@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 管理人
  */
 @Entity
-@Table(name = "manager", schema = "", catalog = "exciting")
+@Table(name = "manager", catalog = "exciting")
 public class ManagerEntity extends BaseBean {
     private static final Long serialVersionUID = -5937964902850421370L;
     private String manager;
