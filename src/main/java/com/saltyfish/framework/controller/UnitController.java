@@ -153,6 +153,58 @@ public class UnitController {
         }
     }
 
+    @RequestMapping("/addVillage")
+    public Response addVillage(@RequestParam("userId") Integer userId,
+                               @RequestParam("token") String token,
+                               @RequestParam("villageName") String villageName,
+                               @RequestParam("timeStamp") Long timeStamp,
+                               @RequestParam("townId") Integer townId) {
+        Response response = new Response();
+        try {
+            if (!userService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!userService.checkAdmin(userId) || !authService.checkUserTownAccess(userId, townId)) {
+                return responseService.noAccess(response);
+            } else {
+                unitService.addVillage(userId, townId, villageName, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    /**
+     * 添加组
+     *
+     * @param userId    用户id
+     * @param token     登录token
+     * @param groupName 组名
+     * @param timeStamp 时间戳
+     * @return
+     */
+    @RequestMapping("/addGroup")
+    public Response addGroup(@RequestParam("userId") Integer userId,
+                             @RequestParam("token") String token,
+                             @RequestParam("groupName") String groupName,
+                             @RequestParam("timeStamp") Long timeStamp,
+                             @RequestParam("villageId") Integer villageId) {
+        Response response = new Response();
+        try {
+            if (!userService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!userService.checkAdmin(userId) ||
+                    !authService.checkUserTownAccess(userId, unitService.getVillageById(villageId).getTown().getId())) {
+                return responseService.noAccess(response);
+            } else {
+                unitService.addGroup(userId, groupName, timeStamp, villageId);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
     /**
      * 添加乡镇
      *
@@ -175,6 +227,37 @@ public class UnitController {
                 return responseService.noAccess(response);
             } else {
                 unitService.addTown(userId, townName, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    /**
+     * 修改乡镇
+     *
+     * @param userId    用户id
+     * @param token     登录token
+     * @param townName  乡镇名称
+     * @param timeStamp 时间戳
+     * @param townId    当前修改乡镇的id
+     * @return
+     */
+    @RequestMapping("/modifyTown")
+    public Response modifyTown(@RequestParam("userId") Integer userId,
+                               @RequestParam("token") String token,
+                               @RequestParam("townName") String townName,
+                               @RequestParam("timeStamp") Long timeStamp,
+                               @RequestParam("townId") Integer townId) {
+        Response response = new Response();
+        try {
+            if (!userService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!userService.checkAdmin(userId)) {
+                return responseService.noAccess(response);
+            } else {
+                unitService.modifyTown(townName, townId, timeStamp);
                 return responseService.success(response);
             }
         } catch (Exception e) {

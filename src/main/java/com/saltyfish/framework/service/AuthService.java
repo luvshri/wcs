@@ -48,6 +48,9 @@ public class AuthService {
     public Boolean checkUserTownAccess(Integer userId, Integer townId) {
         UserEntity userEntity = userRepository.findById(userId);
         TownEntity townEntity = townRepository.findById(townId);
+        if (userService.checkAdmin(userId)) {
+            return userEntity.getCounty().getId().equals(townEntity.getCounty().getId());
+        }
         return userEntity.getTowns().contains(townEntity);
     }
 }

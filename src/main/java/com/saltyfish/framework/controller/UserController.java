@@ -2,9 +2,7 @@ package com.saltyfish.framework.controller;
 
 import com.saltyfish.common.bean.Response;
 import com.saltyfish.domain.entity.auth.UserEntity;
-import com.saltyfish.domain.repository.auth.UserRepository;
-import com.saltyfish.domain.repository.project.ProjectCategoryRepository;
-import com.saltyfish.framework.service.ProjectCategoryService;
+import com.saltyfish.framework.service.ProjectService;
 import com.saltyfish.framework.service.ResponseService;
 import com.saltyfish.framework.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +22,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ProjectCategoryService projectCategoryService;
-
-    @Autowired
-    private ProjectCategoryRepository projectCategoryRepository;
+    private ProjectService projectService;
 
     @Autowired
     private ResponseService responseService;
@@ -59,7 +51,7 @@ public class UserController {
                     rp.setCode(HttpStatus.OK.value());
                     Map<String, Object> msg = new HashMap<>();
                     msg.put("user", userEntity);
-                    msg.put("projectCategories", projectCategoryService.findAll());
+                    msg.put("projectCategories", projectService.findAll());
                     rp.setData(msg);
                     return rp;
                 } else {

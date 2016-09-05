@@ -176,4 +176,65 @@ public class UnitService {
         town.setCounty(userRepository.findById(userId).getCounty());
         townRepository.save(town);
     }
+
+    /**
+     * 修改乡镇
+     *
+     * @param townName  乡镇名称
+     * @param townId    乡镇id
+     * @param timeStamp 时间戳
+     */
+    public void modifyTown(String townName, Integer townId, Long timeStamp) {
+        TownEntity town = townRepository.findById(townId);
+        Timestamp time = new Timestamp(timeStamp);
+        town.setName(townName);
+        town.setUpdateTime(time);
+        townRepository.save(town);
+    }
+
+    /**
+     * 添加组
+     *
+     * @param userId    用户id
+     * @param groupName 组名
+     * @param timeStamp 时间戳
+     * @param villageId 村庄id
+     */
+    public void addGroup(Integer userId, String groupName, Long timeStamp, Integer villageId) {
+        UserEntity user = userRepository.findById(userId);
+        VillageEntity village = villageRepository.findById(villageId);
+        GroupEntity group = new GroupEntity();
+        Timestamp time = new Timestamp(timeStamp);
+        group.setName(groupName);
+        group.setIsActive(1);
+        group.setCounty(user.getCounty());
+        group.setCreateTime(time);
+        group.setUpdateTime(time);
+        group.setIsDelete(0);
+        group.setTown(village.getTown());
+        group.setVillage(village);
+        groupRepository.save(group);
+    }
+
+    /**
+     * 添加村庄
+     *
+     * @param userId      用户id
+     * @param townId      乡镇id
+     * @param villageName 村庄名称
+     * @param timeStamp   时间戳
+     */
+    public void addVillage(Integer userId, Integer townId, String villageName, Long timeStamp) {
+        UserEntity user = userRepository.findById(userId);
+        VillageEntity village = new VillageEntity();
+        Timestamp time = new Timestamp(timeStamp);
+        village.setCounty(user.getCounty());
+        village.setName(villageName);
+        village.setTown(townRepository.findById(townId));
+        village.setUpdateTime(time);
+        village.setIsActive(1);
+        village.setCreateTime(time);
+        village.setIsDelete(0);
+        villageRepository.save(village);
+    }
 }

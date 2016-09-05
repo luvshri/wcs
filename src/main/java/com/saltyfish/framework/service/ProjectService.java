@@ -11,7 +11,7 @@ import java.util.List;
  * Created by weck on 16/9/3.
  */
 @Service
-public class ProjectCategoryService {
+public class ProjectService {
     @Autowired
     private ProjectCategoryRepository projectCategoryRepository;
 
