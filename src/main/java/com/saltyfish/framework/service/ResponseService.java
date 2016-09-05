@@ -99,8 +99,8 @@ public class ResponseService {
 
     public Response errorPath(Response response) {
         response.setCode(HttpStatus.NOT_FOUND.value());
-        Map<String,Object> msg = new HashMap<>();
-        msg.put("details","请求url错误");
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("details", "请求url错误");
         response.setError(msg);
         return response;
     }

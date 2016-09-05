@@ -12,7 +12,6 @@ import com.saltyfish.domain.entity.unit.CountyEntity;
 import com.saltyfish.domain.entity.unit.GroupEntity;
 import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.entity.unit.VillageEntity;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -36,12 +35,12 @@ public class WaterConservationEntity extends BaseBean {
     private String manageModel;     //管理模式
 
     /*县*/
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
     private CountyEntity county;
 
     /*乡镇*/
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "town_id", referencedColumnName = "id", nullable = false)
     private TownEntity town;
 
@@ -51,7 +50,7 @@ public class WaterConservationEntity extends BaseBean {
     private GroupEntity group;
 
     /*村*/
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "village_id", referencedColumnName = "id", nullable = false)
     private VillageEntity village;
 
@@ -81,7 +80,7 @@ public class WaterConservationEntity extends BaseBean {
     private ProjectCategoryEntity projectCategory;
 
     /*工程标记*/
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,optional = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "project_mark_id", referencedColumnName = "id", nullable = false)
     private ProjectMarkEntity projectMark;
 
@@ -89,6 +88,10 @@ public class WaterConservationEntity extends BaseBean {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "project_detail_mark_id", referencedColumnName = "id")
     private ProjectDetailMarkEntity projectDetailMark;
+
+    public static Long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public String getManageModel() {
         return manageModel;
@@ -112,10 +115,6 @@ public class WaterConservationEntity extends BaseBean {
 
     public void setProjectDetailMark(ProjectDetailMarkEntity projectDetailMark) {
         this.projectDetailMark = projectDetailMark;
-    }
-
-    public static Long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public CountyEntity getCounty() {

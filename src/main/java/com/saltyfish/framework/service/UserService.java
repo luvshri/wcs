@@ -84,4 +84,8 @@ public class UserService {
     public UserEntity findByName(String userName) {
         return userRepository.findByName(userName);
     }
+
+    public Boolean checkAdmin(Integer userId) {
+        return userRepository.findById(userId).getRoles().contains(roleRepository.findByName("admin"));
+    }
 }

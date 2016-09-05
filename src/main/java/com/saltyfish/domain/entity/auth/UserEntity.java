@@ -34,8 +34,8 @@ public class UserEntity extends BaseBean {
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private List<RoleEntity> roles;
 
-    @ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
-    @JoinColumn(name = "town_id",referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "town_id", referencedColumnName = "id")
     private List<TownEntity> towns;
 
     private String phone;           //电话
@@ -45,16 +45,16 @@ public class UserEntity extends BaseBean {
     @Column(nullable = false)
     private String realName;        //真实姓名
 
+    public static Long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public List<TownEntity> getTowns() {
         return towns;
     }
 
     public void setTowns(List<TownEntity> towns) {
         this.towns = towns;
-    }
-
-    public static Long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public String getToken() {

@@ -13,4 +13,6 @@ import java.util.List;
 @Repository
 public interface TownRepository extends JpaRepository<TownEntity, Integer> {
     List<TownEntity> findByCountyId(@Param("county_id") Integer countyId);
+
+    TownEntity findById(@Param("id") Integer townId);
 }

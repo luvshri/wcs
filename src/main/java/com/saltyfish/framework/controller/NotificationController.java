@@ -71,12 +71,12 @@ public class NotificationController {
     /**
      * 更新公告
      *
-     * @param userId
-     * @param token
-     * @param notificationId
-     * @param title
-     * @param content
-     * @param timeStamp
+     * @param userId         用户id
+     * @param token          登录token
+     * @param notificationId 公告id
+     * @param title          标题
+     * @param content        内容
+     * @param timeStamp      时间戳
      * @return
      */
     @RequestMapping("/updateNotification")
@@ -104,10 +104,10 @@ public class NotificationController {
     /**
      * 删除公告,isDelete设为1
      *
-     * @param userId
-     * @param token
-     * @param notificationId
-     * @param timeStamp
+     * @param userId         用户id
+     * @param token          登录token
+     * @param notificationId 公告id
+     * @param timeStamp      时间戳
      * @return
      */
     @RequestMapping("/deleteNotification")

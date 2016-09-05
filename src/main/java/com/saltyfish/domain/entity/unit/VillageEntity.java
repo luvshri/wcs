@@ -1,7 +1,6 @@
 package com.saltyfish.domain.entity.unit;
 
 import com.saltyfish.domain.entity.base.Unit;
-import com.saltyfish.domain.entity.location.LocationEntity;
 
 import javax.persistence.*;
 
@@ -23,10 +22,6 @@ public class VillageEntity extends Unit {
     @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
     private CountyEntity county;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id", referencedColumnName = "id")
-    private LocationEntity location;
-
     public static Long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -45,13 +40,5 @@ public class VillageEntity extends Unit {
 
     public void setCounty(CountyEntity county) {
         this.county = county;
-    }
-
-    public LocationEntity getLocation() {
-        return location;
-    }
-
-    public void setLocation(LocationEntity location) {
-        this.location = location;
     }
 }
