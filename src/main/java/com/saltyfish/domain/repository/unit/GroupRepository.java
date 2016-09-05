@@ -15,4 +15,6 @@ import java.util.List;
 @Repository
 public interface GroupRepository extends JpaRepository<GroupEntity, Integer> {
     List<GroupEntity> findByVillageId(@Param("villageId") Integer villageId);
+
+    GroupEntity findById(@Param("id") Integer groupId);
 }

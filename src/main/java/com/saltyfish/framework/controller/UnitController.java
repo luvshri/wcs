@@ -186,6 +186,39 @@ public class UnitController {
         }
     }
 
+
+    /**
+     * 修改村庄信息
+     *
+     * @param userId      用户id
+     * @param token       登录token
+     * @param villageName 村庄名称
+     * @param villageId   村庄id
+     * @param timeStamp   时间戳
+     * @return 操作结果
+     */
+    @RequestMapping("/modifyVillage")
+    public Response modifyVillage(@RequestParam("userId") Integer userId,
+                                  @RequestParam("token") String token,
+                                  @RequestParam("villageName") String villageName,
+                                  @RequestParam("villageId") Integer villageId,
+                                  @RequestParam("timeStamp") Long timeStamp) {
+        Response response = new Response();
+        try {
+            if (!userService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!userService.checkAdmin(userId) || !authService.checkUserTownAccess(userId,
+                    unitService.getVillageById(villageId).getTown().getId())) {
+                return responseService.noAccess(response);
+            } else {
+                unitService.modifyVillage(villageName, timeStamp, villageId);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
     /**
      * 添加组
      *
@@ -210,6 +243,38 @@ public class UnitController {
                 return responseService.noAccess(response);
             } else {
                 unitService.addGroup(userId, groupName, timeStamp, villageId);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    /**
+     * 修改组
+     *
+     * @param userId    用户id
+     * @param token     登录token
+     * @param groupName 组名
+     * @param timeStamp 时间戳
+     * @param groupId   组id
+     * @return 操作结果
+     */
+    @RequestMapping("modifyGroup")
+    public Response modifyGroup(@RequestParam("userId") Integer userId,
+                                @RequestParam("token") String token,
+                                @RequestParam("groupName") String groupName,
+                                @RequestParam("timeStamp") Long timeStamp,
+                                @RequestParam("groupId") Integer groupId) {
+        Response response = new Response();
+        try {
+            if (!userService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!userService.checkAdmin(userId) ||
+                    !authService.checkUserTownAccess(userId, unitService.getByGroupId(groupId).getTown().getId())) {
+                return responseService.noAccess(response);
+            } else {
+                unitService.modifyGroup(groupName, groupId, timeStamp);
                 return responseService.success(response);
             }
         } catch (Exception e) {

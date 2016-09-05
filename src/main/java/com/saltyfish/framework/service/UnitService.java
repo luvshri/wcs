@@ -239,4 +239,45 @@ public class UnitService {
         village.setIsDelete(0);
         villageRepository.save(village);
     }
+
+    /**
+     * 修改村庄信息
+     *
+     * @param villageName 村庄名称
+     * @param timeStamp   时间戳
+     * @param villageId   村庄id
+     */
+    public void modifyVillage(String villageName, Long timeStamp, Integer villageId) {
+        Timestamp time = new Timestamp(timeStamp);
+        VillageEntity village = villageRepository.findById(villageId);
+        village.setName(villageName);
+        village.setUpdateTime(time);
+        villageRepository.save(village);
+    }
+
+
+    /**
+     * 根据id获取组
+     *
+     * @param groupId 组id
+     * @return 组对象
+     */
+    public GroupEntity getByGroupId(Integer groupId) {
+        return groupRepository.findById(groupId);
+    }
+
+    /**
+     * 修改组
+     *
+     * @param groupName 组名称
+     * @param groupId   组id
+     * @param timeStamp 时间戳
+     */
+    public void modifyGroup(String groupName, Integer groupId, Long timeStamp) {
+        Timestamp time = new Timestamp(timeStamp);
+        GroupEntity group = groupRepository.findById(groupId);
+        group.setName(groupName);
+        group.setUpdateTime(time);
+        groupRepository.save(group);
+    }
 }
