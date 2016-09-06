@@ -31,7 +31,7 @@ public class DamEntity extends SuperBean {
     private Integer developExplanation;         //若有生产开发,说明
     private Integer damRageQualified;           //大坝管理范围线是否达标
     private String damExplanation;              //大坝管理范围线未达标说明
-    private Integer pondDamRageQulified;            //塘坝管理范围线是否达标
+    private Integer pondDamRageQualified;            //塘坝管理范围线是否达标
     private String pondDamExplanation;          //塘坝管理范围线未达标说明
     private Integer sealManage;                 //大坝保护范围是否封闭管理
     private Integer retainingDam;               //是否有护坝地
@@ -170,12 +170,12 @@ public class DamEntity extends SuperBean {
         this.damExplanation = damExplanation;
     }
 
-    public Integer getPondDamRageQulified() {
-        return pondDamRageQulified;
+    public Integer getPondDamRageQualified() {
+        return pondDamRageQualified;
     }
 
-    public void setPondDamRageQulified(Integer pondDamRageQulified) {
-        this.pondDamRageQulified = pondDamRageQulified;
+    public void setPondDamRageQualified(Integer pondDamRageQualified) {
+        this.pondDamRageQualified = pondDamRageQualified;
     }
 
     public String getPondDamExplanation() {

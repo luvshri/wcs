@@ -23,9 +23,7 @@ public class ResponseService {
      */
     public Response notLogin(Response response) {
         response.setCode(HttpStatus.UNAUTHORIZED.value());
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("details", "请登录");
-        response.setError(msg);
+        response.setError("请登录");
         return response;
     }
 
@@ -36,9 +34,7 @@ public class ResponseService {
      * @return response
      */
     public Response serverError(Response response) {
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("details", "服务器错误");
-        response.setError(msg);
+        response.setError("服务器错误");
         response.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return response;
     }
@@ -51,9 +47,7 @@ public class ResponseService {
      */
     public Response noAccess(Response response) {
         response.setCode(HttpStatus.FORBIDDEN.value());
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("details", "对不起,您没有权限");
-        response.setError(msg);
+        response.setError("对不起,您没有权限");
         return response;
     }
 
@@ -65,9 +59,7 @@ public class ResponseService {
      */
     public Response notFound(Response response) {
         response.setCode(HttpStatus.NOT_FOUND.value());
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("details", "用户名不存在");
-        response.setError(msg);
+        response.setError("用户名不存在");
         return response;
     }
 
@@ -79,9 +71,7 @@ public class ResponseService {
      */
     public Response inCorrectPassword(Response response) {
         response.setCode(HttpStatus.NOT_ACCEPTABLE.value());
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("details", "密码不正确");
-        response.setError(msg);
+        response.setError("密码不正确");
         return response;
     }
 
@@ -108,9 +98,7 @@ public class ResponseService {
      */
     public Response errorPath(Response response) {
         response.setCode(HttpStatus.NOT_FOUND.value());
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("details", "请求url错误");
-        response.setError(msg);
+        response.setError("请求url错误");
         return response;
     }
 }

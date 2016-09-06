@@ -8,7 +8,7 @@ import java.util.Map;
 public class Response {
     private Integer code;
     private Map<String, Object> data;
-    private Map<String, Object> error;
+    private String error;
 
     public Integer getCode() {
         return code;
@@ -26,11 +26,11 @@ public class Response {
         this.data = data;
     }
 
-    public Map<String, Object> getError() {
+    public String getError() {
         return error;
     }
 
-    public void setError(Map<String, Object> error) {
+    public void setError(String error) {
         this.error = error;
     }
 }

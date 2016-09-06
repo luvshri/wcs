@@ -16,6 +16,8 @@ import java.util.Map;
 
 /**
  * Created by weck on 16/9/2.
+ * <p>
+ * 用户操作请求
  */
 @RestController
 @RequestMapping("/user")
@@ -36,7 +38,7 @@ public class UserController {
      *
      * @param userName 用户名
      * @param password 密码
-     * @return
+     * @return 操作结果
      */
     @RequestMapping("/login")
     public Response login(@RequestParam("userName") String userName,
