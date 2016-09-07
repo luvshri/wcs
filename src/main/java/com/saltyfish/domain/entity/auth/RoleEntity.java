@@ -14,7 +14,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "role", catalog = "exciting")
 public class RoleEntity extends BaseBean {
+
     private static final Long serialVersionUID = -6122347374515830424L;
+
     @Column(unique = true, nullable = false)
     private String name;        //guest只能查看权限范围内据,superGuest能查看全县所有乡镇的数据，admin能管理权限范围内的数据,countyManager能查看全县数据并管理县内用户,superAdmin能查看全市汇总并管理县级管理员
 

@@ -15,14 +15,22 @@ import java.util.List;
 @Entity
 @Table(name = "user", catalog = "exciting")
 public class UserEntity extends BaseBean {
+
     private static final Long serialVersionUID = -6128783497515830424L;
+
     @Column(unique = true, nullable = false)
     private String name;        //用户名
+
     @Column(nullable = false)
     private String password;        //密码
+
     @Column(nullable = false)
     private String salt;        //加密的盐
+
     private String token;
+
+    @Column(columnDefinition = "int(1) default 0", nullable = false)
+    private Integer isSuperAdmin;   //是否超级管理员
 
     /*一个县对应多个用户,获取用户信息的时候也要获取县的信息,如果县的信息为空,用户也不应该为空,比如超级管理员*/
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
@@ -30,19 +38,21 @@ public class UserEntity extends BaseBean {
     private CountyEntity county;
 
     /*一个用户对应多个角色,一个角色有多个用户,删除用户信息不能删除角色信息*/
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
-    private List<RoleEntity> roles;
+    private RoleEntity role;
 
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "town_id", referencedColumnName = "id")
     private List<TownEntity> towns;
 
     private String phone;           //电话
+
     @Column(columnDefinition = "int(1) default 1", nullable = false)
     private Integer isActive;       //是否启用
+
     private String email;           //邮箱
-    @Column(nullable = false)
+
     private String realName;        //真实姓名
 
     public static Long getSerialVersionUID() {
@@ -97,12 +107,20 @@ public class UserEntity extends BaseBean {
         this.county = county;
     }
 
-    public List<RoleEntity> getRoles() {
-        return roles;
+    public Integer getIsSuperAdmin() {
+        return isSuperAdmin;
     }
 
-    public void setRoles(List<RoleEntity> roles) {
-        this.roles = roles;
+    public void setIsSuperAdmin(Integer isSuperAdmin) {
+        this.isSuperAdmin = isSuperAdmin;
+    }
+
+    public RoleEntity getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEntity role) {
+        this.role = role;
     }
 
     public String getPhone() {

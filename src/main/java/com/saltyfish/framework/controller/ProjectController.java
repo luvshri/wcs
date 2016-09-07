@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by weck on 16/9/4.
+ * 工程操作请求
  */
 @RestController
-@RequestMapping("/waterConservation")
-public class WaterConservationController {
+@RequestMapping("/project")
+public class ProjectController {
 
 }

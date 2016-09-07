@@ -3,6 +3,7 @@ package com.saltyfish.framework.controller;
 import com.saltyfish.common.utils.UUIDGenerator;
 import com.saltyfish.domain.entity.auth.UserEntity;
 import com.saltyfish.domain.repository.auth.UserRepository;
+import com.saltyfish.domain.repository.unit.TownRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TownRepository townRepository;
 
     @RequestMapping("/test")
     public UserEntity test() {

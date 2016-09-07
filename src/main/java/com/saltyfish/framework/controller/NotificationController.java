@@ -54,9 +54,9 @@ public class NotificationController {
                                     @RequestParam(value = "category", required = false, defaultValue = "2") Integer category) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (category == 1 && !userService.checkSuperAdmin(userId)) {
+            } else if (category == 1 && !authService.checkSuperAdmin(userId)) {
                 return responseService.noAccess(response);
             } else {
                 notificationService.addNotification(title, content, timeStamp, userId, category);
@@ -87,7 +87,7 @@ public class NotificationController {
                                        @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else if (!authService.checkModifyNotificationAccess(notificationId, userId)) {
                 return responseService.noAccess(response);
@@ -116,7 +116,7 @@ public class NotificationController {
                                        @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else if (!authService.checkModifyNotificationAccess(notificationId, userId)) {
                 return responseService.noAccess(response);
@@ -171,7 +171,7 @@ public class NotificationController {
         Response response = new Response();
         try {
             /*如果用户未登录*/
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else {
                 Page<NotificationEntity> notifications = notificationService.getCountyNotifications(page, size, userId);

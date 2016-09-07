@@ -50,7 +50,7 @@ public class UnitController {
                                       @RequestParam("townId") Integer townId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else if (!authService.checkUserTownAccess(userId, townId)) {
                 return responseService.noAccess(response);
@@ -80,7 +80,7 @@ public class UnitController {
                                        @RequestParam("villageId") Integer villageId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else if (!authService.checkUserTownAccess(userId, unitService.getVillageById(villageId).getTown().getId())) {
                 return responseService.noAccess(response);
@@ -108,9 +108,9 @@ public class UnitController {
                                 @RequestParam("token") String token) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkSuperAdmin(userId)) {
+            } else if (!authService.checkSuperAdmin(userId)) {
                 return responseService.noAccess(response);
             } else {
                 response.setCode(HttpStatus.OK.value());
@@ -144,9 +144,9 @@ public class UnitController {
                               @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkSuperAdmin(userId)) {
+            } else if (!authService.checkSuperAdmin(userId)) {
                 return responseService.noAccess(response);
             } else {
                 unitService.addCounty(countyName, longitude, latitude, timeStamp);
@@ -175,9 +175,9 @@ public class UnitController {
                                @RequestParam("townId") Integer townId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkAdmin(userId) || !authService.checkUserTownAccess(userId, townId)) {
+            } else if (!authService.checkAdmin(userId) || !authService.checkUserTownAccess(userId, townId)) {
                 return responseService.noAccess(response);
             } else {
                 unitService.addVillage(userId, townId, villageName, timeStamp);
@@ -207,9 +207,9 @@ public class UnitController {
                                   @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkAdmin(userId) || !authService.checkUserTownAccess(userId,
+            } else if (!authService.checkAdmin(userId) || !authService.checkUserTownAccess(userId,
                     unitService.getVillageById(villageId).getTown().getId())) {
                 return responseService.noAccess(response);
             } else {
@@ -238,9 +238,9 @@ public class UnitController {
                              @RequestParam("villageId") Integer villageId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkAdmin(userId) ||
+            } else if (!authService.checkAdmin(userId) ||
                     !authService.checkUserTownAccess(userId, unitService.getVillageById(villageId).getTown().getId())) {
                 return responseService.noAccess(response);
             } else {
@@ -270,9 +270,9 @@ public class UnitController {
                                 @RequestParam("groupId") Integer groupId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkAdmin(userId) ||
+            } else if (!authService.checkAdmin(userId) ||
                     !authService.checkUserTownAccess(userId, unitService.getByGroupId(groupId).getTown().getId())) {
                 return responseService.noAccess(response);
             } else {
@@ -300,9 +300,9 @@ public class UnitController {
                             @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkAdmin(userId)) {
+            } else if (!authService.checkAdmin(userId)) {
                 return responseService.noAccess(response);
             } else {
                 unitService.addTown(userId, townName, timeStamp);
@@ -331,9 +331,9 @@ public class UnitController {
                                @RequestParam("townId") Integer townId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkAdmin(userId)) {
+            } else if (!authService.checkAdmin(userId)) {
                 return responseService.noAccess(response);
             } else {
                 unitService.modifyTown(townName, townId, timeStamp);
@@ -366,9 +366,9 @@ public class UnitController {
                                  @RequestParam("countyId") Integer countyId) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            } else if (!userService.checkSuperAdmin(userId)) {
+            } else if (!authService.checkSuperAdmin(userId)) {
                 return responseService.noAccess(response);
             } else {
                 unitService.updateCounty(countyId, countyName, longitude, latitude, timeStamp);
@@ -391,7 +391,7 @@ public class UnitController {
                                      @RequestParam("token") String token) {
         Response response = new Response();
         try {
-            if (!userService.checkLogin(userId, token)) {
+            if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else {
                 Map<String, Object> data = new HashMap<>();

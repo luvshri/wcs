@@ -29,18 +29,24 @@ public class UnitService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private TownRepository townRepository;
+
     @Autowired
     private CountyRepository countyRepository;
+
     @Autowired
     private LocationRepository locationRepository;
+
     @Autowired
     private VillageRepository villageRepository;
+
     @Autowired
     private GroupRepository groupRepository;
+
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
     /**
      * 根据用户id获取当前县信息
@@ -60,7 +66,7 @@ public class UnitService {
      */
     public List<TownEntity> getAccessedTowns(Integer userId) {
         UserEntity user = userRepository.findById(userId);
-        if (userService.checkAdmin(userId)) {
+        if (authService.checkAdmin(userId)) {
             return townRepository.findByCountyId(user.getCounty().getId());
         }
         return user.getTowns();
