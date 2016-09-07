@@ -13,7 +13,9 @@ import java.io.Serializable;
  */
 @MappedSuperclass
 public class SuperBean implements Serializable {
+
     private static final Long serialVersionUID = -945829729470298024L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;             //自增id

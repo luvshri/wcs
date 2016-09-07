@@ -1,5 +1,6 @@
 package com.saltyfish.domain.entity.other;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.saltyfish.domain.entity.auth.UserEntity;
 import com.saltyfish.domain.entity.base.BaseBean;
 import com.saltyfish.domain.entity.unit.CountyEntity;
@@ -14,16 +15,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "notification", catalog = "exciting")
 public class NotificationEntity extends BaseBean {
+
     private static final Long serialVersionUID = -5924582025423825370L;
+
     @Column(nullable = false)
     private String title;           //通知标题
+
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "county_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CountyEntity county;
+
     @Column(nullable = false)
     private String content;         //内容
+
     @Column(nullable = false)
     private Integer category;       //种类,1县级,2市级
+
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private UserEntity user;

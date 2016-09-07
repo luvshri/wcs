@@ -25,7 +25,7 @@ public class UserEntity extends BaseBean {
     private String token;
 
     /*一个县对应多个用户,获取用户信息的时候也要获取县的信息,如果县的信息为空,用户也不应该为空,比如超级管理员*/
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
     private CountyEntity county;
 

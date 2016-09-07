@@ -10,8 +10,10 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public class Unit extends BaseBean {
+
     private static final Long serialVersionUID = -2174837942509293370L;
     @Column(nullable = false)
+
     private String name;            //单位名称
 
     @Column(nullable = false)

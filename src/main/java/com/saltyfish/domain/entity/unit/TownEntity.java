@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "town", catalog = "exciting")
 public class TownEntity extends Unit {
+
     private static final Long serialVersionUID = -8390098490395830424L;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)

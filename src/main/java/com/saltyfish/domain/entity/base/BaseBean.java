@@ -13,8 +13,10 @@ import java.sql.Timestamp;
 public class BaseBean extends SuperBean {
 
     private static final Long serialVersionUID = -7674269980281525370L;
+
     @Column(nullable = false)
     private Timestamp createTime = new Timestamp(System.currentTimeMillis());       //创建时间
+
     @Column(nullable = false)
     private Timestamp updateTime = new Timestamp(System.currentTimeMillis());       //更新时间
 

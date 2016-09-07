@@ -38,7 +38,7 @@ public class UserController {
      *
      * @param userName 用户名
      * @param password 密码
-     * @return 操作结果
+     * @return
      */
     @RequestMapping("/login")
     public Response login(@RequestParam("userName") String userName,
@@ -53,7 +53,6 @@ public class UserController {
                     rp.setCode(HttpStatus.OK.value());
                     Map<String, Object> msg = new HashMap<>();
                     msg.put("user", userEntity);
-                    msg.put("projectCategories", projectService.findAll());
                     rp.setData(msg);
                     return rp;
                 } else {

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "group", catalog = "exciting")
 public class GroupEntity extends Unit {
+
     private static final Long serialVersionUID = -6128309824038223424L;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
