@@ -1,9 +1,9 @@
 package com.saltyfish.domain.entity.project.conservation;
 
 import com.saltyfish.domain.entity.base.SuperBean;
+import com.saltyfish.domain.entity.location.LocationEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by weck on 16/8/30.
@@ -38,9 +38,12 @@ public class WatercourseEntity extends SuperBean {
 
     private String sectionImage;                   //断面图
 
-    private String endpointLongitude;       //终点东经
-
-    private String endpointLatitude;        //终点北纬,父类的经纬度默认起点的东经北纬
+    /**
+     * 终点坐标,water_conservation的默认起点坐标
+     */
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "endpoint_location_id", referencedColumnName = "id")
+    private LocationEntity endpointLocation;
 
     private String startImage;          //照片头段
 
@@ -141,20 +144,12 @@ public class WatercourseEntity extends SuperBean {
         this.sectionImage = sectionImage;
     }
 
-    public String getEndpointLongitude() {
-        return endpointLongitude;
+    public LocationEntity getEndpointLocation() {
+        return endpointLocation;
     }
 
-    public void setEndpointLongitude(String endpointLongitude) {
-        this.endpointLongitude = endpointLongitude;
-    }
-
-    public String getEndpointLatitude() {
-        return endpointLatitude;
-    }
-
-    public void setEndpointLatitude(String endpointLatitude) {
-        this.endpointLatitude = endpointLatitude;
+    public void setEndpointLocation(LocationEntity endpointLocation) {
+        this.endpointLocation = endpointLocation;
     }
 
     public String getStartImage() {
