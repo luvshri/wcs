@@ -105,8 +105,6 @@ public class ProjectController {
      * @param affiliation              隶属关系
      * @param sumElectricCapacity      总装机容量
      * @param averageCapacity          平均容量
-     * @param internalImage            内部照片
-     * @param externalImage            外部照片
      * @param problem                  存在的问题
      * @param lastDredgingTime         上次疏浚时间
      * @param waterArea                水面积
@@ -426,6 +424,10 @@ public class ProjectController {
             String planeSketchPath = "";
             String internalImagePath = "";
             String externalImagePath = "";
+            String sectionImagePath = "";
+            String startImagePath = "";
+            String middleImagePath = "";
+            String endImagePath = "";
             switch (category) {
                 case "渡槽":
                     AqueductEntity aqueduct = new AqueductEntity();
@@ -525,6 +527,19 @@ public class ProjectController {
                     projectService.saveSluice(sluiceEntity, watercourseLocation, model, holeCount, door, hoistTonnage, holeHeight,
                             holeWidth, doorHeight, doorWidth, hoistModel, buildingSituation, doorSituation, hoistSituation, imagePath);
                     projectMark.setSluice(sluiceEntity);
+                    break;
+                case "河道":
+                    WatercourseEntity watercourseEntity = new WatercourseEntity();
+                    projectService.saveWaterCourse(watercourseEntity, length, lastDredgingTime, estuaryHeight, estuaryWidth, leftWidth,
+                            rightWidth, hediHeight, hediWidth, flowVillages, nature, sectionImagePath, startImagePath, middleImagePath,
+                            endImagePath, endpointLatitude, endpointLongitude, timeStamp);
+                    projectMark.setWatercourse(watercourseEntity);
+                    break;
+                case "水厂":
+                    WaterWorksEntity waterWorksEntity = new WaterWorksEntity();
+                    projectService.saveWaterWorks(waterWorksEntity, provideAmount, waterModel, haveCleaner, isRegularCheck, dayProvideAmount,
+                            provideVillageCount, providePopulation, haveProtectArea, imagePath);
+                    projectMark.setWaterWorks(waterWorksEntity);
                     break;
                 default:
                     break;

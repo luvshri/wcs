@@ -103,6 +103,12 @@ public class ProjectService {
     @Autowired
     private SluiceRepository sluiceRepository;
 
+    @Autowired
+    private WatercourseRepository watercourseRepository;
+
+    @Autowired
+    private WaterWorksRepository waterWorksRepository;
+
     /**
      * 保存共有属性
      */
@@ -609,5 +615,56 @@ public class ProjectService {
         sluiceEntity.setHoistSituation(hoistSituation);
         sluiceEntity.setImage(imagePath);
         sluiceRepository.save(sluiceEntity);
+    }
+
+    /**
+     * 保存河道基本信息
+     */
+    public void saveWaterCourse(WatercourseEntity watercourseEntity, String length, String lastDredgingTime, String estuaryHeight,
+                                String estuaryWidth, String leftWidth, String rightWidth, String hediHeight, String hediWidth,
+                                String flowVillages, String nature, String sectionImagePath, String startImagePath, String middleImagePath,
+                                String endImagePath, BigDecimal endpointLatitude, BigDecimal endpointLongitude, Long timeStamp) {
+        Timestamp time = new Timestamp(timeStamp);
+        watercourseEntity.setLastDredgingTime(lastDredgingTime);
+        watercourseEntity.setEstuaryHeight(estuaryHeight);
+        watercourseEntity.setLength(length);
+        watercourseEntity.setEstuaryWidth(estuaryWidth);
+        watercourseEntity.setNature(nature);
+        watercourseEntity.setLeftWidth(leftWidth);
+        watercourseEntity.setRightWidth(rightWidth);
+        watercourseEntity.setHediHeight(hediHeight);
+        watercourseEntity.setHediWidth(hediWidth);
+        watercourseEntity.setFlowVillages(flowVillages);
+        watercourseEntity.setSectionImage(sectionImagePath);
+        watercourseEntity.setStartImage(startImagePath);
+        watercourseEntity.setMiddleImage(middleImagePath);
+        watercourseEntity.setEndImage(endImagePath);
+        LocationEntity endpointLocation = new LocationEntity();
+        endpointLocation.setLatitude(endpointLatitude);
+        endpointLocation.setLongitude(endpointLongitude);
+        endpointLocation.setIsDelete(0);
+        endpointLocation.setUpdateTime(time);
+        endpointLocation.setCreateTime(time);
+        locationRepository.save(endpointLocation);
+        watercourseEntity.setEndpointLocation(endpointLocation);
+        watercourseRepository.save(watercourseEntity);
+    }
+
+    /**
+     * 保存水厂基本信息
+     */
+    public void saveWaterWorks(WaterWorksEntity waterWorksEntity, String provideAmount, String waterModel, String haveCleaner,
+                               String isRegularCheck, String dayProvideAmount, String provideVillageCount, String providePopulation,
+                               String haveProtectArea, String imagePath) {
+        waterWorksEntity.setProvideAmount(provideAmount);
+        waterWorksEntity.setWaterModel(waterModel);
+        waterWorksEntity.setHaveCleaner(haveCleaner);
+        waterWorksEntity.setIsRegularCheck(isRegularCheck);
+        waterWorksEntity.setDayProvideAmount(dayProvideAmount);
+        waterWorksEntity.setProvideVillageCount(provideVillageCount);
+        waterWorksEntity.setProvidePopulation(providePopulation);
+        waterWorksEntity.setHaveProtectArea(haveProtectArea);
+        waterWorksEntity.setImage(imagePath);
+        waterWorksRepository.save(waterWorksEntity);
     }
 }
