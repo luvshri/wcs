@@ -42,8 +42,18 @@ public class DamEntity extends SuperBean {
 
     private String specifiedMange;          //规范化管理
 
+    private String image;           //照片
+
     public static Long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getIsRegistered() {

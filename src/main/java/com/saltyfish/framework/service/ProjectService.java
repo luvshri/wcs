@@ -2,16 +2,16 @@ package com.saltyfish.framework.service;
 
 import com.saltyfish.domain.entity.location.LocationEntity;
 import com.saltyfish.domain.entity.project.WaterConservationEntity;
-import com.saltyfish.domain.entity.project.conservation.AqueductEntity;
-import com.saltyfish.domain.entity.project.conservation.BridgeEntity;
-import com.saltyfish.domain.entity.project.conservation.ChannelEntity;
+import com.saltyfish.domain.entity.project.conservation.*;
+import com.saltyfish.domain.entity.project.device.*;
 import com.saltyfish.domain.entity.project.division.CanalEntity;
+import com.saltyfish.domain.entity.project.division.PipeEntity;
 import com.saltyfish.domain.repository.LocationRepository;
 import com.saltyfish.domain.repository.auth.UserRepository;
-import com.saltyfish.domain.repository.project.conservation.AqueductRepository;
-import com.saltyfish.domain.repository.project.conservation.BridgeRepository;
-import com.saltyfish.domain.repository.project.conservation.ChannelRepository;
+import com.saltyfish.domain.repository.project.conservation.*;
+import com.saltyfish.domain.repository.project.device.*;
 import com.saltyfish.domain.repository.project.division.CanalRepository;
+import com.saltyfish.domain.repository.project.division.PipeRepository;
 import com.saltyfish.domain.repository.unit.GroupRepository;
 import com.saltyfish.domain.repository.unit.TownRepository;
 import com.saltyfish.domain.repository.unit.VillageRepository;
@@ -57,6 +57,51 @@ public class ProjectService {
 
     @Autowired
     private ChannelRepository channelRepository;
+
+    @Autowired
+    private CulvertRepository culvertRepository;
+
+    @Autowired
+    private DamRepository damRepository;
+
+    @Autowired
+    private DeepWellsRepository deepWellsRepository;
+
+    @Autowired
+    private PipeRepository pipeRepository;
+
+    @Autowired
+    private DripIrrigationPipeRepository dripIrrigationPipeRepository;
+
+    @Autowired
+    private GreatWellsRepository greatWellsRepository;
+
+    @Autowired
+    private TransformerRepository transformerRepository;
+
+    @Autowired
+    private TurbineRepository turbineRepository;
+
+    @Autowired
+    private GeneratorRepository generatorRepository;
+
+    @Autowired
+    private HydropowerRepository hydropowerRepository;
+
+    @Autowired
+    private PondRepository pondRepository;
+
+    @Autowired
+    private PumpRepository pumpRepository;
+
+    @Autowired
+    private ElectricMotorRepository electricMotorRepository;
+
+    @Autowired
+    private PumpStationRepository pumpStationRepository;
+
+    @Autowired
+    private SluiceRepository sluiceRepository;
 
     /**
      * 保存共有属性
@@ -106,6 +151,9 @@ public class ProjectService {
         aqueductRepository.save(aqueduct);
     }
 
+    /**
+     * 保存桥梁属性
+     */
     public void saveBridge(BridgeEntity bridgeEntity, String watercourseLocation, String crossCount,
                            String structureAndMaterial, String loadStandard, String crossLength, String width,
                            String length, String imagePath) {
@@ -120,6 +168,9 @@ public class ProjectService {
         bridgeRepository.save(bridgeEntity);
     }
 
+    /**
+     * 保存渠道及其分渠
+     */
     public void saveChannel(ChannelEntity channel, String headOrPumpStation, String buildingMatchRate, String length,
                             String goodConditionRate, String imagePath, String sectionSize, String seepageCanalLength,
                             String liningSectionSize, String sumLength, String planeSketchPath, String canalLength1,
@@ -162,56 +213,48 @@ public class ProjectService {
         canal1.setLiningMaterial(canalLiningMaterial1);
         canal1.setLength(canalLength1);
         canal1.setSectionSize(canalSectionSize1);
-        canalRepository.save(canal1);
         canal2.setLength(canalLength2);
         canal2.setLiningMaterial(canalLiningMaterial2);
         canal2.setSeepageCanalLength(canalSeepageLength2);
         canal2.setModel(canalModel2);
         canal2.setSectionSize(canalSectionSize2);
         canal2.setLiningSectionSize(canalLiningSectionSize2);
-        canalRepository.save(canal2);
         canal3.setLength(canalLength3);
         canal3.setLiningMaterial(canalLiningMaterial3);
         canal3.setSeepageCanalLength(canalSeepageLength3);
         canal3.setModel(canalModel3);
         canal3.setSectionSize(canalSectionSize3);
         canal3.setLiningSectionSize(canalLiningSectionSize3);
-        canalRepository.save(canal3);
         canal4.setLength(canalLength4);
         canal4.setLiningMaterial(canalLiningMaterial4);
         canal4.setSeepageCanalLength(canalSeepageLength4);
         canal4.setModel(canalModel4);
         canal4.setSectionSize(canalSectionSize4);
         canal4.setLiningSectionSize(canalLiningSectionSize4);
-        canalRepository.save(canal4);
         canal5.setLength(canalLength5);
         canal5.setLiningMaterial(canalLiningMaterial5);
         canal5.setSeepageCanalLength(canalSeepageLength5);
         canal5.setModel(canalModel5);
         canal5.setSectionSize(canalSectionSize5);
         canal5.setLiningSectionSize(canalLiningSectionSize5);
-        canalRepository.save(canal5);
         canal6.setLength(canalLength6);
         canal6.setLiningMaterial(canalLiningMaterial6);
         canal6.setSeepageCanalLength(canalSeepageLength6);
         canal6.setModel(canalModel6);
         canal6.setSectionSize(canalSectionSize6);
         canal6.setLiningSectionSize(canalLiningSectionSize6);
-        canalRepository.save(canal6);
         canal7.setLength(canalLength7);
         canal7.setLiningMaterial(canalLiningMaterial7);
         canal7.setSeepageCanalLength(canalSeepageLength7);
         canal7.setModel(canalModel7);
         canal7.setSectionSize(canalSectionSize7);
         canal7.setLiningSectionSize(canalLiningSectionSize7);
-        canalRepository.save(canal7);
         canal8.setLength(canalLength8);
         canal8.setLiningMaterial(canalLiningMaterial8);
         canal8.setSeepageCanalLength(canalSeepageLength8);
         canal8.setModel(canalModel8);
         canal8.setSectionSize(canalSectionSize8);
         canal8.setLiningSectionSize(canalLiningSectionSize8);
-        canalRepository.save(canal8);
         List<CanalEntity> canals = new ArrayList<>();
         canals.add(canal1);
         canals.add(canal2);
@@ -221,7 +264,350 @@ public class ProjectService {
         canals.add(canal6);
         canals.add(canal7);
         canals.add(canal8);
+        canalRepository.save(canals);
         channel.setCanals(canals);
         channelRepository.save(channel);
+    }
+
+    /**
+     * 保存涵洞基本属性
+     */
+    public void saveCulvert(CulvertEntity culvertEntity, String watercourseLocation, String culvertModel, String sectionSize,
+                            String length, String holeModel, String doorMaterial, String hoistModel, String holeMaterial,
+                            String imagePath) {
+        culvertEntity.setLength(length);
+        culvertEntity.setSectionSize(sectionSize);
+        culvertEntity.setCulvertModel(culvertModel);
+        culvertEntity.setWatercourseLocation(watercourseLocation);
+        culvertEntity.setHoistModel(hoistModel);
+        culvertEntity.setHoleMaterial(holeMaterial);
+        culvertEntity.setHoleModel(holeModel);
+        culvertEntity.setDoorMaterial(doorMaterial);
+        culvertEntity.setImage(imagePath);
+        culvertRepository.save(culvertEntity);
+    }
+
+    /**
+     * 保存塘坝基本属性
+     */
+    public void saveDam(DamEntity damEntity, String isRegistered, String features, String mainFunction, String isAccountability,
+                        String feeResources, String maintainPersonFee, String isCertificated, String development,
+                        String manageRageLine, String pondDamManageLine, String protectGround, String twoLinesBuilding,
+                        String specifiedManage, String imagePath) {
+        damEntity.setDevelopment(development);
+        damEntity.setIsAccountability(isAccountability);
+        damEntity.setIsRegistered(isRegistered);
+        damEntity.setFeatures(features);
+        damEntity.setMainFunctions(mainFunction);
+        damEntity.setFeeResources(feeResources);
+        damEntity.setMaintainPersonFee(maintainPersonFee);
+        damEntity.setIsCertificated(isCertificated);
+        damEntity.setManageRageLine(manageRageLine);
+        damEntity.setPondDamManageRageLine(pondDamManageLine);
+        damEntity.setProtectGround(protectGround);
+        damEntity.setTwoLinesBuilding(twoLinesBuilding);
+        damEntity.setSpecifiedMange(specifiedManage);
+        damEntity.setImage(imagePath);
+        damRepository.save(damEntity);
+    }
+
+    /**
+     * 保存深水井基本属性
+     */
+    public void saveDeepWells(DeepWellsEntity deepWellsEntity, String irrigateArea, String deepPump, String diameter,
+                              String depth, String material, String imagePath) {
+        deepWellsEntity.setDeepPump(deepPump);
+        deepWellsEntity.setIrrigateArea(irrigateArea);
+        deepWellsEntity.setDiameter(diameter);
+        deepWellsEntity.setDepth(depth);
+        deepWellsEntity.setMaterial(material);
+        deepWellsEntity.setImage(imagePath);
+        deepWellsRepository.save(deepWellsEntity);
+    }
+
+
+    /**
+     * 保存管滴灌及其支管
+     */
+    public void saveDripIrrigationPipe(DripIrrigationPipeEntity dripIrrigationPipeEntity, String irrigateArea, String intakeWay,
+                                       String waterResource, String sumLength, String sumDiameter, String imagePath,
+                                       String planeSketchPath, String pipeDiameter1, String pipeDiameter2, String pipeDiameter3,
+                                       String pipeDiameter4, String pipeDiameter5, String pipeDiameter6, String pipeLength1,
+                                       String pipeLength2, String pipeLength3, String pipeLength4, String pipeLength5,
+                                       String pipeLength6, String pipeMaterial1, String pipeMaterial2, String pipeMaterial3,
+                                       String pipeMaterial4, String pipeMaterial5, String pipeMaterial6, String pipeModel1,
+                                       String pipeModel2, String pipeModel3, String pipeModel4, String pipeModel5, String pipeModel6) {
+        dripIrrigationPipeEntity.setImage(imagePath);
+        dripIrrigationPipeEntity.setIrrigateArea(irrigateArea);
+        dripIrrigationPipeEntity.setIntakeWay(intakeWay);
+        dripIrrigationPipeEntity.setWaterResource(waterResource);
+        dripIrrigationPipeEntity.setSumLength(sumLength);
+        dripIrrigationPipeEntity.setSumDiameter(sumDiameter);
+        dripIrrigationPipeEntity.setSketch(planeSketchPath);
+        PipeEntity pipe1 = new PipeEntity();
+        PipeEntity pipe2 = new PipeEntity();
+        PipeEntity pipe3 = new PipeEntity();
+        PipeEntity pipe4 = new PipeEntity();
+        PipeEntity pipe5 = new PipeEntity();
+        PipeEntity pipe6 = new PipeEntity();
+        pipe1.setLength(pipeLength1);
+        pipe1.setModel(pipeModel1);
+        pipe1.setDiameter(pipeDiameter1);
+        pipe1.setMaterial(pipeMaterial1);
+        pipe2.setLength(pipeLength2);
+        pipe2.setModel(pipeModel2);
+        pipe2.setDiameter(pipeDiameter2);
+        pipe2.setMaterial(pipeMaterial2);
+        pipe3.setLength(pipeLength3);
+        pipe3.setModel(pipeModel3);
+        pipe3.setDiameter(pipeDiameter3);
+        pipe3.setMaterial(pipeMaterial3);
+        pipe4.setLength(pipeLength4);
+        pipe4.setModel(pipeModel4);
+        pipe4.setDiameter(pipeDiameter4);
+        pipe4.setMaterial(pipeMaterial4);
+        pipe5.setLength(pipeLength5);
+        pipe5.setModel(pipeModel5);
+        pipe5.setDiameter(pipeDiameter5);
+        pipe5.setMaterial(pipeMaterial5);
+        pipe6.setLength(pipeLength6);
+        pipe6.setModel(pipeModel6);
+        pipe6.setDiameter(pipeDiameter6);
+        pipe6.setMaterial(pipeMaterial6);
+        List<PipeEntity> pipes = new ArrayList<>();
+        pipes.add(pipe1);
+        pipes.add(pipe2);
+        pipes.add(pipe3);
+        pipes.add(pipe4);
+        pipes.add(pipe5);
+        pipes.add(pipe6);
+        pipeRepository.save(pipes);
+        dripIrrigationPipeEntity.setPipes(pipes);
+        dripIrrigationPipeRepository.save(dripIrrigationPipeEntity);
+    }
+
+    /**
+     * 保存大口井基本属性
+     */
+    public void saveGreatWells(GreatWellsEntity greatWellsEntity, String irrigateArea, String waterCapacity, String size,
+                               String depth, String modelAndMaterial, String imagePath) {
+        greatWellsEntity.setDepth(depth);
+        greatWellsEntity.setImage(imagePath);
+        greatWellsEntity.setIrrigateArea(irrigateArea);
+        greatWellsEntity.setWaterCapacity(waterCapacity);
+        greatWellsEntity.setModelAndMaterial(modelAndMaterial);
+        greatWellsEntity.setSize(size);
+        greatWellsRepository.save(greatWellsEntity);
+    }
+
+    /**
+     * 保存水电站及其水轮机,发电机,变压器信息
+     */
+    public void saveHydropower(HydropowerEntity hydropowerEntity, String irrigateArea, String paddyFieldArea,
+                               String drainageArea, String irrigateFee, String drainageFee, String annualFee,
+                               String watercourseLocation, String machineArea, String affiliation,
+                               String sumElectricCapacity, String averageCapacity, String internalImagePath,
+                               String externalImagePath, String problem, String transformerCapacity1,
+                               String transformerCapacity2, String transformerCapacity3, String transformerModel1,
+                               String transformerModel2, String transformerModel3, String turbineCount1,
+                               String turbineCount2, String turbineCount3, String turbineFactoryDate1,
+                               String turbineFactoryDate2, String turbineFactoryDate3, String turbineModel1,
+                               String turbineModel2, String turbineModel3, String turbineTurnsOrFlow1,
+                               String turbineTurnsOrFlow2, String turbineTurnsOrFlow3, String generatorFactoryDate1,
+                               String generatorFactoryDate2, String generatorFactoryDate3, String generatorModel1,
+                               String generatorModel2, String generatorModel3, String generatorPower1,
+                               String generatorPower2, String generatorPower3) {
+        hydropowerEntity.setIrrigateArea(irrigateArea);
+        hydropowerEntity.setPaddyFieldArea(paddyFieldArea);
+        hydropowerEntity.setDrainageArea(drainageArea);
+        hydropowerEntity.setIrrigateFee(irrigateFee);
+        hydropowerEntity.setDrainageFee(drainageFee);
+        hydropowerEntity.setAnnualFee(annualFee);
+        hydropowerEntity.setRiverLocation(watercourseLocation);
+        hydropowerEntity.setMachineArea(machineArea);
+        hydropowerEntity.setAffiliation(affiliation);
+        hydropowerEntity.setSumElectricCapacity(sumElectricCapacity);
+        hydropowerEntity.setAverageCapacity(averageCapacity);
+        hydropowerEntity.setInternalImage(internalImagePath);
+        hydropowerEntity.setExternalImage(externalImagePath);
+        hydropowerEntity.setProblem(problem);
+        TransformerEntity transformer1 = new TransformerEntity();
+        transformer1.setCapacity(transformerCapacity1);
+        transformer1.setModel(transformerModel1);
+        TransformerEntity transformer2 = new TransformerEntity();
+        transformer2.setModel(transformerModel2);
+        transformer2.setCapacity(transformerCapacity2);
+        TransformerEntity transformer3 = new TransformerEntity();
+        transformer3.setCapacity(transformerCapacity3);
+        transformer3.setModel(transformerModel3);
+        List<TransformerEntity> transformers = new ArrayList<>();
+        transformers.add(transformer1);
+        transformers.add(transformer2);
+        transformers.add(transformer3);
+        transformerRepository.save(transformers);
+        TurbineEntity turbine1 = new TurbineEntity();
+        turbine1.setModel(turbineModel1);
+        turbine1.setCount(turbineCount1);
+        turbine1.setFactoryDate(turbineFactoryDate1);
+        turbine1.setTurnsOrFlow(turbineTurnsOrFlow1);
+        TurbineEntity turbine2 = new TurbineEntity();
+        turbine2.setModel(turbineModel2);
+        turbine2.setTurnsOrFlow(turbineTurnsOrFlow2);
+        turbine2.setFactoryDate(turbineFactoryDate2);
+        turbine2.setCount(turbineCount2);
+        TurbineEntity turbine3 = new TurbineEntity();
+        turbine3.setModel(turbineModel3);
+        turbine3.setTurnsOrFlow(turbineTurnsOrFlow3);
+        turbine3.setFactoryDate(turbineFactoryDate3);
+        turbine3.setCount(turbineCount3);
+        List<TurbineEntity> turbines = new ArrayList<>();
+        turbines.add(turbine1);
+        turbines.add(turbine2);
+        turbines.add(turbine3);
+        turbineRepository.save(turbines);
+        GeneratorEntity generator1 = new GeneratorEntity();
+        generator1.setFactoryDate(generatorFactoryDate1);
+        generator1.setModel(generatorModel1);
+        generator1.setPower(generatorPower1);
+        GeneratorEntity generator2 = new GeneratorEntity();
+        generator2.setFactoryDate(generatorFactoryDate2);
+        generator2.setModel(generatorModel2);
+        generator2.setPower(generatorPower2);
+        GeneratorEntity generator3 = new GeneratorEntity();
+        generator3.setFactoryDate(generatorFactoryDate3);
+        generator3.setModel(generatorModel3);
+        generator3.setPower(generatorPower3);
+        List<GeneratorEntity> generators = new ArrayList<>();
+        generators.add(generator1);
+        generators.add(generator2);
+        generators.add(generator3);
+        generatorRepository.save(generators);
+        hydropowerEntity.setTransformers(transformers);
+        hydropowerEntity.setTurbines(turbines);
+        hydropowerEntity.setGenerators(generators);
+        hydropowerRepository.save(hydropowerEntity);
+    }
+
+    /**
+     * 保存水塘基本属性
+     */
+    public void savePond(PondEntity pondEntity, String mainFunction, String lastDredgingTime, String waterArea,
+                         String waterCapacity, String imagePath) {
+        pondEntity.setImage(imagePath);
+        pondEntity.setLastDredgingTime(lastDredgingTime);
+        pondEntity.setMainFunction(mainFunction);
+        pondEntity.setWaterArea(waterArea);
+        pondEntity.setWaterCapacity(waterCapacity);
+        pondRepository.save(pondEntity);
+    }
+
+    /**
+     * 保存泵站及其水泵、电动机、变压器信息
+     */
+    public void savePumpStation(PumpStationEntity pumpStationEntity, String watercourseLocation, String irrigateArea,
+                                String paddyFieldArea, String drainageArea, String irrigateFee, String drainageFee,
+                                String annualFee, String nature, String machineArea, String totalInstalledCapacity,
+                                String riverElevation, String poolHeight, String internalImagePath,
+                                String externalImagePath, String problem, String transformerCapacity1,
+                                String transformerCapacity2, String transformerCapacity3, String transformerModel1,
+                                String transformerModel2, String transformerModel3, String pumpCount1, String pumpCount2,
+                                String pumpCount3, String pumpFactoryDate1, String pumpFactoryDate2, String pumpFactoryDate3,
+                                String pumpLiftOrFlow1, String pumpLiftOrFlow2, String pumpLiftOrFlow3, String pumpModel1,
+                                String pumpModel2, String pumpModel3, String electricFactoryDate1, String electricFactoryDate2,
+                                String electricFactoryDate3, String electricMotorModel1, String electricMotorModel2,
+                                String electricMotorModel3, String electricPower1, String electricPower2, String electricPower3) {
+        pumpStationEntity.setAnnualFee(annualFee);
+        pumpStationEntity.setDrainageArea(drainageArea);
+        pumpStationEntity.setDrainageFee(drainageFee);
+        pumpStationEntity.setRiverLocation(watercourseLocation);
+        pumpStationEntity.setIrrigateArea(irrigateArea);
+        pumpStationEntity.setPaddyFieldArea(paddyFieldArea);
+        pumpStationEntity.setIrrigateFee(irrigateFee);
+        pumpStationEntity.setNature(nature);
+        pumpStationEntity.setMachineArea(machineArea);
+        pumpStationEntity.setTotalInstalledCapacity(totalInstalledCapacity);
+        pumpStationEntity.setRiverElevation(riverElevation);
+        pumpStationEntity.setPoolHeight(poolHeight);
+        pumpStationEntity.setInternalImage(internalImagePath);
+        pumpStationEntity.setExternalImage(externalImagePath);
+        pumpStationEntity.setProblem(problem);
+        TransformerEntity transformer1 = new TransformerEntity();
+        transformer1.setCapacity(transformerCapacity1);
+        transformer1.setModel(transformerModel1);
+        TransformerEntity transformer2 = new TransformerEntity();
+        transformer2.setCapacity(transformerCapacity2);
+        transformer2.setModel(transformerModel2);
+        TransformerEntity transformer3 = new TransformerEntity();
+        transformer3.setCapacity(transformerCapacity3);
+        transformer3.setModel(transformerModel3);
+        List<TransformerEntity> transformers = new ArrayList<>();
+        transformers.add(transformer1);
+        transformers.add(transformer2);
+        transformers.add(transformer3);
+        transformerRepository.save(transformers);
+        PumpEntity pump1 = new PumpEntity();
+        pump1.setFactoryDate(pumpFactoryDate1);
+        pump1.setModel(pumpModel1);
+        pump1.setCount(pumpCount1);
+        pump1.setLiftOrFlow(pumpLiftOrFlow1);
+        PumpEntity pump2 = new PumpEntity();
+        pump2.setFactoryDate(pumpFactoryDate2);
+        pump2.setModel(pumpModel2);
+        pump2.setCount(pumpCount2);
+        pump2.setLiftOrFlow(pumpLiftOrFlow2);
+        PumpEntity pump3 = new PumpEntity();
+        pump3.setFactoryDate(pumpFactoryDate3);
+        pump3.setModel(pumpModel3);
+        pump3.setCount(pumpCount3);
+        pump3.setLiftOrFlow(pumpLiftOrFlow3);
+        List<PumpEntity> pumps = new ArrayList<>();
+        pumps.add(pump1);
+        pumps.add(pump2);
+        pumps.add(pump3);
+        pumpRepository.save(pumps);
+        ElectricMotorEntity electricMotor1 = new ElectricMotorEntity();
+        electricMotor1.setFactoryDate(electricFactoryDate1);
+        electricMotor1.setModel(electricMotorModel1);
+        electricMotor1.setPower(electricPower1);
+        ElectricMotorEntity electricMotor2 = new ElectricMotorEntity();
+        electricMotor2.setFactoryDate(electricFactoryDate2);
+        electricMotor2.setModel(electricMotorModel2);
+        electricMotor2.setPower(electricPower2);
+        ElectricMotorEntity electricMotor3 = new ElectricMotorEntity();
+        electricMotor3.setFactoryDate(electricFactoryDate3);
+        electricMotor3.setModel(electricMotorModel3);
+        electricMotor3.setPower(electricPower3);
+        List<ElectricMotorEntity> electricMotors = new ArrayList<>();
+        electricMotors.add(electricMotor1);
+        electricMotors.add(electricMotor2);
+        electricMotors.add(electricMotor3);
+        electricMotorRepository.save(electricMotors);
+        pumpStationEntity.setTransformers(transformers);
+        pumpStationEntity.setElectricMotors(electricMotors);
+        pumpStationEntity.setPumps(pumps);
+        pumpStationRepository.save(pumpStationEntity);
+    }
+
+    /**
+     * 保存水闸基本信息
+     */
+    public void saveSluice(SluiceEntity sluiceEntity, String watercourseLocation, String model, String holeCount, String door,
+                           String hoistTonnage, String holeHeight, String holeWidth, String doorHeight, String doorWidth,
+                           String hoistModel, String buildingSituation, String doorSituation, String hoistSituation, String imagePath) {
+        sluiceEntity.setWatercourseLocation(watercourseLocation);
+        sluiceEntity.setModel(model);
+        sluiceEntity.setHoistModel(hoistModel);
+        sluiceEntity.setHoleCount(holeCount);
+        sluiceEntity.setDoor(door);
+        sluiceEntity.setHoistTonnage(hoistTonnage);
+        sluiceEntity.setHoleHeight(holeHeight);
+        sluiceEntity.setHoleWidth(holeWidth);
+        sluiceEntity.setDoorHeight(doorHeight);
+        sluiceEntity.setDoorWidth(doorWidth);
+        sluiceEntity.setBuildingSituation(buildingSituation);
+        sluiceEntity.setDoorSituation(doorSituation);
+        sluiceEntity.setHoistSituation(hoistSituation);
+        sluiceEntity.setImage(imagePath);
+        sluiceRepository.save(sluiceEntity);
     }
 }

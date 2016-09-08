@@ -2,9 +2,7 @@ package com.saltyfish.framework.controller;
 
 import com.saltyfish.common.bean.Response;
 import com.saltyfish.domain.entity.project.WaterConservationEntity;
-import com.saltyfish.domain.entity.project.conservation.AqueductEntity;
-import com.saltyfish.domain.entity.project.conservation.BridgeEntity;
-import com.saltyfish.domain.entity.project.conservation.ChannelEntity;
+import com.saltyfish.domain.entity.project.conservation.*;
 import com.saltyfish.domain.entity.project.mark.ProjectMarkEntity;
 import com.saltyfish.domain.repository.project.WaterConservationRepository;
 import com.saltyfish.framework.service.AuthService;
@@ -240,8 +238,8 @@ public class ProjectController {
                                     @RequestParam(value = "affiliation", required = false, defaultValue = "") String affiliation,
                                     @RequestParam(value = "sumElectricCapacity", required = false, defaultValue = "") String sumElectricCapacity,
                                     @RequestParam(value = "averageCapacity", required = false, defaultValue = "") String averageCapacity,
-                                    @RequestParam(value = "internalImage", required = false, defaultValue = "") String internalImage,
-                                    @RequestParam(value = "externalImage", required = false, defaultValue = "") String externalImage,
+//                                    @RequestParam(value = "internalImage", required = false, defaultValue = "") MultipartFile internalImage,
+//                                    @RequestParam(value = "externalImage", required = false, defaultValue = "") MultipartFile externalImage,
                                     @RequestParam(value = "problem", required = false, defaultValue = "") String problem,
                                     @RequestParam(value = "lastDredgingTime", required = false, defaultValue = "") String lastDredgingTime,
                                     @RequestParam(value = "waterArea", required = false, defaultValue = "") String waterArea,
@@ -281,6 +279,9 @@ public class ProjectController {
                                     @RequestParam(value = "providePopulation", required = false, defaultValue = "") String providePopulation,
                                     @RequestParam(value = "haveProtectArea", required = false, defaultValue = "") String haveProtectArea,
                                     @RequestParam(value = "mainFunction", required = false, defaultValue = "") String mainFunction,
+                                    @RequestParam(value = "totalInstalledCapacity", required = false, defaultValue = "") String totalInstalledCapacity,
+                                    @RequestParam(value = "riverElevation", required = false, defaultValue = "") String riverElevation,
+                                    @RequestParam(value = "poolHeight", required = false, defaultValue = "") String poolHeight,
                                     //发电机
                                     @RequestParam(value = "generatorModel1", required = false, defaultValue = "") String generatorModel1,
                                     @RequestParam(value = "generatorPower1", required = false, defaultValue = "") String generatorPower1,
@@ -423,6 +424,8 @@ public class ProjectController {
             ProjectMarkEntity projectMark = new ProjectMarkEntity();
             String imagePath = "";
             String planeSketchPath = "";
+            String internalImagePath = "";
+            String externalImagePath = "";
             switch (category) {
                 case "渡槽":
                     AqueductEntity aqueduct = new AqueductEntity();
@@ -461,6 +464,67 @@ public class ProjectController {
                     projectMark.setChannel(channelEntity);
                     break;
                 case "涵洞":
+                    CulvertEntity culvertEntity = new CulvertEntity();
+                    projectService.saveCulvert(culvertEntity, watercourseLocation, culvertModel, sectionSize, length, holeModel,
+                            doorMaterial, hoistModel, holeMaterial, imagePath);
+                    projectMark.setCulvert(culvertEntity);
+                    break;
+                case "塘坝":
+                    DamEntity damEntity = new DamEntity();
+                    projectService.saveDam(damEntity, isRegistered, features, mainFunction, isAccountability, feeResources, maintainPersonFee,
+                            isCertificated, development, manageRageLine, pondDamManageLine, protectGround, twoLinesBuilding, specifiedManage, imagePath);
+                    projectMark.setDam(damEntity);
+                    break;
+                case "深水井":
+                    DeepWellsEntity deepWellsEntity = new DeepWellsEntity();
+                    projectService.saveDeepWells(deepWellsEntity, irrigateArea, deepPump, diameter, depth, material, imagePath);
+                    projectMark.setDeepWells(deepWellsEntity);
+                    break;
+                case "管滴灌":
+                    DripIrrigationPipeEntity dripIrrigationPipeEntity = new DripIrrigationPipeEntity();
+                    projectService.saveDripIrrigationPipe(dripIrrigationPipeEntity, irrigateArea, intakeWay, waterResource, sumLength, sumDiameter,
+                            imagePath, planeSketchPath, pipeDiameter1, pipeDiameter2, pipeDiameter3, pipeDiameter4, pipeDiameter5, pipeDiameter6,
+                            pipeLength1, pipeLength2, pipeLength3, pipeLength4, pipeLength5, pipeLength6, pipeMaterial1, pipeMaterial2, pipeMaterial3,
+                            pipeMaterial4, pipeMaterial5, pipeMaterial6, pipeModel1, pipeModel2, pipeModel3, pipeModel4, pipeModel5, pipeModel6);
+                    projectMark.setDripIrrigationPipe(dripIrrigationPipeEntity);
+                    break;
+                case "大口井":
+                    GreatWellsEntity greatWellsEntity = new GreatWellsEntity();
+                    projectService.saveGreatWells(greatWellsEntity, irrigateArea, waterCapacity, size, depth, modelAndMaterial, imagePath);
+                    projectMark.setGreatWells(greatWellsEntity);
+                    break;
+                case "水电站":
+                    HydropowerEntity hydropowerEntity = new HydropowerEntity();
+                    projectService.saveHydropower(hydropowerEntity, irrigateArea, paddyFieldArea, drainageArea, irrigateFee, drainageFee,
+                            annualFee, watercourseLocation, machineArea, affiliation, sumElectricCapacity, averageCapacity, internalImagePath,
+                            externalImagePath, problem, transformerCapacity1, transformerCapacity2, transformerCapacity3, transformerModel1,
+                            transformerModel2, transformerModel3, turbineCount1, turbineCount2, turbineCount3, turbineFactoryDate1,
+                            turbineFactoryDate2, turbineFactoryDate3, turbineModel1, turbineModel2, turbineModel3, turbineTurnsOrFlow1,
+                            turbineTurnsOrFlow2, turbineTurnsOrFlow3, generatorFactoryDate1, generatorFactoryDate2, generatorFactoryDate3,
+                            generatorModel1, generatorModel2, generatorModel3, generatorPower1, generatorPower2, generatorPower3);
+                    projectMark.setHydropower(hydropowerEntity);
+                    break;
+                case "水塘":
+                    PondEntity pondEntity = new PondEntity();
+                    projectService.savePond(pondEntity, mainFunction, lastDredgingTime, waterArea, waterCapacity, imagePath);
+                    projectMark.setPond(pondEntity);
+                    break;
+                case "泵站":
+                    PumpStationEntity pumpStationEntity = new PumpStationEntity();
+                    projectService.savePumpStation(pumpStationEntity, watercourseLocation, irrigateArea, paddyFieldArea, drainageArea,
+                            irrigateFee, drainageFee, annualFee, nature, machineArea, totalInstalledCapacity, riverElevation, poolHeight,
+                            internalImagePath, externalImagePath, problem, transformerCapacity1, transformerCapacity2, transformerCapacity3,
+                            transformerModel1, transformerModel2, transformerModel3, pumpCount1, pumpCount2, pumpCount3, pumpFactoryDate1,
+                            pumpFactoryDate2, pumpFactoryDate3, pumpLiftOrFlow1, pumpLiftOrFlow2, pumpLiftOrFlow3, pumpModel1, pumpModel2,
+                            pumpModel3, electricFactoryDate1, electricFactoryDate2, electricFactoryDate3, electricMotorModel1,
+                            electricMotorModel2, electricMotorModel3, electricPower1, electricPower2, electricPower3);
+                    projectMark.setPumpStation(pumpStationEntity);
+                    break;
+                case "水闸":
+                    SluiceEntity sluiceEntity = new SluiceEntity();
+                    projectService.saveSluice(sluiceEntity, watercourseLocation, model, holeCount, door, hoistTonnage, holeHeight,
+                            holeWidth, doorHeight, doorWidth, hoistModel, buildingSituation, doorSituation, hoistSituation, imagePath);
+                    projectMark.setSluice(sluiceEntity);
                     break;
                 default:
                     break;

@@ -33,7 +33,7 @@ public class PumpStationEntity extends SuperBean {
 
     private String drainageFee;     //排涝收费标准
 
-    private String annualIncome;    //年收费
+    private String annualFee;    //年收费
 
     private String nature;          //泵站的性质
 
@@ -149,12 +149,12 @@ public class PumpStationEntity extends SuperBean {
         this.drainageFee = drainageFee;
     }
 
-    public String getAnnualIncome() {
-        return annualIncome;
+    public String getAnnualFee() {
+        return annualFee;
     }
 
-    public void setAnnualIncome(String annualIncome) {
-        this.annualIncome = annualIncome;
+    public void setAnnualFee(String annualFee) {
+        this.annualFee = annualFee;
     }
 
     public String getNature() {

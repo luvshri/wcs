@@ -4,7 +4,6 @@ import com.saltyfish.domain.entity.base.SuperBean;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 /**
  * Created by weck on 16/8/30.
@@ -14,22 +13,35 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "sluice", catalog = "exciting")
 public class SluiceEntity extends SuperBean {
+
     private static final Long serialVersionUID = 2934598279259054234L;
+
     private String watercourseLocation;     //所在河道
+
     private String model;           //型号
-    private Integer holeCount;          //水闸孔数
+
+    private String holeCount;          //水闸孔数
+
     private String door;            //闸门
-    private BigDecimal hoistTonnage;         //单孔启闭机吨位
+
+    private String hoistTonnage;         //单孔启闭机吨位
+
     //单孔尺寸
-    private BigDecimal holeHeight;       //单孔高
-    private BigDecimal holeWidth;        //单孔宽
+    private String holeHeight;       //单孔高
+
+    private String holeWidth;        //单孔宽
+
     //闸门尺寸
-    private BigDecimal doorHeight;       //闸门高
-    private BigDecimal doorWidth;        //闸门宽
+    private String doorHeight;       //闸门高
+
+    private String doorWidth;        //闸门宽
 
     private String hoistModel;      //启闭机类型
+
     private String buildingSituation;       //建筑完好情况
+
     private String doorSituation;       //闸门完好情况
+
     private String hoistSituation;      //启闭设备完好情况
 
     private String image;       //照片
@@ -54,11 +66,11 @@ public class SluiceEntity extends SuperBean {
         this.model = model;
     }
 
-    public Integer getHoleCount() {
+    public String getHoleCount() {
         return holeCount;
     }
 
-    public void setHoleCount(Integer holeCount) {
+    public void setHoleCount(String holeCount) {
         this.holeCount = holeCount;
     }
 
@@ -70,43 +82,43 @@ public class SluiceEntity extends SuperBean {
         this.door = door;
     }
 
-    public BigDecimal getHoistTonnage() {
+    public String getHoistTonnage() {
         return hoistTonnage;
     }
 
-    public void setHoistTonnage(BigDecimal hoistTonnage) {
+    public void setHoistTonnage(String hoistTonnage) {
         this.hoistTonnage = hoistTonnage;
     }
 
-    public BigDecimal getHoleHeight() {
+    public String getHoleHeight() {
         return holeHeight;
     }
 
-    public void setHoleHeight(BigDecimal holeHeight) {
+    public void setHoleHeight(String holeHeight) {
         this.holeHeight = holeHeight;
     }
 
-    public BigDecimal getHoleWidth() {
+    public String getHoleWidth() {
         return holeWidth;
     }
 
-    public void setHoleWidth(BigDecimal holeWidth) {
+    public void setHoleWidth(String holeWidth) {
         this.holeWidth = holeWidth;
     }
 
-    public BigDecimal getDoorHeight() {
+    public String getDoorHeight() {
         return doorHeight;
     }
 
-    public void setDoorHeight(BigDecimal doorHeight) {
+    public void setDoorHeight(String doorHeight) {
         this.doorHeight = doorHeight;
     }
 
-    public BigDecimal getDoorWidth() {
+    public String getDoorWidth() {
         return doorWidth;
     }
 
-    public void setDoorWidth(BigDecimal doorWidth) {
+    public void setDoorWidth(String doorWidth) {
         this.doorWidth = doorWidth;
     }
 
