@@ -6,6 +6,7 @@ import com.saltyfish.domain.entity.project.conservation.AqueductEntity;
 import com.saltyfish.domain.entity.project.conservation.BridgeEntity;
 import com.saltyfish.domain.entity.project.conservation.ChannelEntity;
 import com.saltyfish.domain.entity.project.mark.ProjectMarkEntity;
+import com.saltyfish.domain.repository.project.WaterConservationRepository;
 import com.saltyfish.framework.service.AuthService;
 import com.saltyfish.framework.service.FileService;
 import com.saltyfish.framework.service.ProjectService;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -38,6 +38,9 @@ public class ProjectController {
     @Autowired
     private ResponseService responseService;
 
+    @Autowired
+    private WaterConservationRepository waterConservationRepository;
+
     /**
      * @param userId                   用户id
      * @param token                    登录token
@@ -58,7 +61,6 @@ public class ProjectController {
      * @param crossCount               跨数
      * @param sectionSize              断面尺寸
      * @param structureAndMaterial     结构和材质
-     * @param image                    照片
      * @param crossLength              每跨长
      * @param length                   总长
      * @param width                    宽度
@@ -68,7 +70,6 @@ public class ProjectController {
      * @param buildingMatchRate        建筑物配套率
      * @param goodConditionRate        渠道及建筑物完好率
      * @param sumLength                总计长度
-     * @param planeSketch              平面草图
      * @param culvertModel             涵洞类型
      * @param holeModel                洞省类型
      * @param doorMaterial             洞口闸门材质
@@ -130,14 +131,10 @@ public class ProjectController {
      * @param rightWidth               右岸宽
      * @param flowVillages             流经村庄
      * @param nature                   性质
-     * @param sectionImage             断面图
      * @param longitude                经度
      * @param latitude                 纬度
      * @param endpointLongitude        终点经度
      * @param endpointLatitude         终点纬度
-     * @param startImage               起点照片
-     * @param middleImage              中部照片
-     * @param endImage                 尾部照片
      * @param provideAmount            日供水量
      * @param waterModel               水源类型
      * @param haveCleaner              有无净化设施
@@ -193,7 +190,7 @@ public class ProjectController {
                                     @RequestParam(value = "crossCount", required = false, defaultValue = "") String crossCount,
                                     @RequestParam(value = "sectionSize", required = false, defaultValue = "") String sectionSize,
                                     @RequestParam(value = "structureAndMaterial", required = false, defaultValue = "") String structureAndMaterial,
-                                    @RequestParam(value = "image", required = false, defaultValue = "") MultipartFile image,
+                                    // @RequestParam(value = "image", required = false, defaultValue = "") MultipartFile image,
                                     @RequestParam(value = "crossLength", required = false, defaultValue = "") String crossLength,
                                     @RequestParam(value = "length", required = false, defaultValue = "") String length,
                                     @RequestParam(value = "width", required = false, defaultValue = "") String width,
@@ -205,7 +202,7 @@ public class ProjectController {
                                     @RequestParam(value = "seepageCanalLength", required = false, defaultValue = "") String seepageCanalLength,
                                     @RequestParam(value = "liningSectionSize", required = false, defaultValue = "") String liningSectionSize,
                                     @RequestParam(value = "sumLength", required = false, defaultValue = "") String sumLength,
-                                    @RequestParam(value = "planeSketch", required = false, defaultValue = "") MultipartFile planeSketch,
+                                    //  @RequestParam(value = "planeSketch", required = false, defaultValue = "") MultipartFile planeSketch,
                                     @RequestParam(value = "culvertModel", required = false, defaultValue = "") String culvertModel,
                                     @RequestParam(value = "holeModel", required = false, defaultValue = "") String holeModel,
                                     @RequestParam(value = "doorMaterial", required = false, defaultValue = "") String doorMaterial,
@@ -267,14 +264,14 @@ public class ProjectController {
                                     @RequestParam(value = "rightWidth", required = false, defaultValue = "") String rightWidth,
                                     @RequestParam(value = "flowVillages", required = false, defaultValue = "") String flowVillages,
                                     @RequestParam(value = "nature", required = false, defaultValue = "") String nature,
-                                    @RequestParam(value = "sectionImage", required = false, defaultValue = "") MultipartFile sectionImage,
-                                    @RequestParam(value = "longitude", required = false, defaultValue = "") BigDecimal longitude,
-                                    @RequestParam(value = "latitude", required = false, defaultValue = "") BigDecimal latitude,
-                                    @RequestParam(value = "endpointLongitude", required = false, defaultValue = "") BigDecimal endpointLongitude,
-                                    @RequestParam(value = "endpointLatitude", required = false, defaultValue = "") BigDecimal endpointLatitude,
-                                    @RequestParam(value = "startImage", required = false, defaultValue = "") MultipartFile startImage,
-                                    @RequestParam(value = "middleImage", required = false, defaultValue = "") MultipartFile middleImage,
-                                    @RequestParam(value = "endImage", required = false, defaultValue = "") MultipartFile endImage,
+                                    //   @RequestParam(value = "sectionImage", required = false, defaultValue = "") MultipartFile sectionImage,
+                                    @RequestParam(value = "longitude", required = false, defaultValue = "0.0") BigDecimal longitude,
+                                    @RequestParam(value = "latitude", required = false, defaultValue = "0.0") BigDecimal latitude,
+                                    @RequestParam(value = "endpointLongitude", required = false, defaultValue = "0.0") BigDecimal endpointLongitude,
+                                    @RequestParam(value = "endpointLatitude", required = false, defaultValue = "0.0") BigDecimal endpointLatitude,
+                                    //   @RequestParam(value = "startImage", required = false, defaultValue = "") MultipartFile startImage,
+                                    //   @RequestParam(value = "middleImage", required = false, defaultValue = "") MultipartFile middleImage,
+                                    //   @RequestParam(value = "endImage", required = false, defaultValue = "") MultipartFile endImage,
                                     @RequestParam(value = "provideAmount", required = false, defaultValue = "") String provideAmount,
                                     @RequestParam(value = "waterModel", required = false, defaultValue = "") String waterModel,
                                     @RequestParam(value = "haveCleaner", required = false, defaultValue = "") String haveCleaner,
@@ -429,28 +426,28 @@ public class ProjectController {
             switch (category) {
                 case "渡槽":
                     AqueductEntity aqueduct = new AqueductEntity();
-                    if (image != null) {
-                        imagePath = fileService.saveFile(image);
-                    }
+//                    if (image != null) {
+//                        imagePath = fileService.saveFile(image);
+//                    }
                     projectService.saveAqueduct(aqueduct, crossWatercourseLocation, crossCount, sectionSize, structureAndMaterial,
                             crossLength, imagePath);
                     projectMark.setAqueduct(aqueduct);
                     break;
                 case "桥梁":
                     BridgeEntity bridgeEntity = new BridgeEntity();
-                    if (image != null) {
-                        imagePath = fileService.saveFile(image);
-                    }
+//                    if (image != null) {
+//                        imagePath = fileService.saveFile(image);
+//                    }
                     projectService.saveBridge(bridgeEntity, watercourseLocation, crossCount, structureAndMaterial, loadStandard,
                             crossLength, width, length, imagePath);
                     projectMark.setBridge(bridgeEntity);
                     break;
                 case "渠道":
                     ChannelEntity channelEntity = new ChannelEntity();
-                    if (image != null) {
-                        imagePath = fileService.saveFile(image);
-                        planeSketchPath = fileService.saveFile(planeSketch);
-                    }
+//                    if (image != null) {
+//                        imagePath = fileService.saveFile(image);
+//                        planeSketchPath = fileService.saveFile(planeSketch);
+//                    }
                     projectService.saveChannel(channelEntity, headOrPumpStation, buildingMatchRate, length, goodConditionRate, imagePath, sectionSize,
                             seepageCanalLength, liningSectionSize, sumLength, planeSketchPath, canalLength1, canalLength2, canalLength3, canalLength4,
                             canalLength5, canalLength6, canalLength7, canalLength8, canalLiningMaterial1, canalLiningMaterial2, canalLiningMaterial3,
@@ -469,6 +466,7 @@ public class ProjectController {
                     break;
             }
             waterConservationEntity.setProjectMark(projectMark);
+            waterConservationRepository.save(waterConservationEntity);
             return responseService.success(response);
         } catch (Exception e) {
             return responseService.serverError(response);

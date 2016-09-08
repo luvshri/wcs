@@ -1,4 +1,4 @@
-package com.saltyfish.domain.repository.project;
+package com.saltyfish.domain.repository.project.conservation;
 
 import com.saltyfish.domain.entity.project.conservation.BridgeEntity;
 import org.springframework.data.repository.CrudRepository;

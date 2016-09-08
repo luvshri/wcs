@@ -16,7 +16,7 @@ public class Unit extends BaseBean {
 
     private String name;            //单位名称
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int(1) default 1")
     private Integer isActive;       //是否启用
 
     public static Long getSerialVersionUID() {

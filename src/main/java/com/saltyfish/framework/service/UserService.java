@@ -195,4 +195,16 @@ public class UserService {
         user.setUpdateTime(new Timestamp(timeStamp));
         userRepository.save(user);
     }
+
+    /**
+     * 登出
+     *
+     * @param userId 用户id
+     */
+    public void logout(Integer userId, Long timeStamp) {
+        UserEntity user = userRepository.findById(userId);
+        user.setToken("");
+        user.setUpdateTime(new Timestamp(timeStamp));
+        userRepository.save(user);
+    }
 }

@@ -33,6 +33,32 @@ public class UserController {
     @Autowired
     private AuthService authService;
 
+
+    /**
+     * 登出
+     *
+     * @param userId    用户id
+     * @param token     登录token
+     * @param timeStamp 时间戳
+     * @return 操作结果
+     */
+    @RequestMapping("/logout")
+    public Response logout(@RequestParam("userId") Integer userId,
+                           @RequestParam("token") String token,
+                           @RequestParam("timeStamp") Long timeStamp) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            }
+            userService.logout(userId, timeStamp);
+            return responseService.success(response);
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+
+    }
+
     /**
      * 获取用户列表
      *
