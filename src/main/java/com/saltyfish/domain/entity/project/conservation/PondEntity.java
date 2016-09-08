@@ -16,7 +16,7 @@ public class PondEntity extends SuperBean {
 
     private static final Long serialVersionUID = -193848050958205434L;
 
-    private String features;        //主要功能
+    private String mainFunction;        //主要功能
 
     private String lastDredgingTime;     //上次疏浚时间
 
@@ -30,12 +30,12 @@ public class PondEntity extends SuperBean {
         return serialVersionUID;
     }
 
-    public String getFeatures() {
-        return features;
+    public String getMainFunction() {
+        return mainFunction;
     }
 
-    public void setFeatures(String features) {
-        this.features = features;
+    public void setMainFunction(String mainFunction) {
+        this.mainFunction = mainFunction;
     }
 
     public String getLastDredgingTime() {

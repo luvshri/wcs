@@ -18,7 +18,7 @@ public class DamEntity extends SuperBean {
 
     private String isRegistered;        //是否注册登记
 
-    private String fetures; //坝长,坝高,库容,堰顶高程
+    private String features; //坝长,坝高,库容,堰顶高程
 
     private String mainFunctions;   //主要功能
 
@@ -26,7 +26,7 @@ public class DamEntity extends SuperBean {
 
     private String feeResources;    //主要运行经费来源
 
-    private String maintainPersonfee;   //聘用维护人员工资
+    private String maintainPersonFee;   //聘用维护人员工资
 
     private String isCertificated;      //是否持证上岗
 
@@ -54,12 +54,12 @@ public class DamEntity extends SuperBean {
         this.isRegistered = isRegistered;
     }
 
-    public String getFetures() {
-        return fetures;
+    public String getFeatures() {
+        return features;
     }
 
-    public void setFetures(String fetures) {
-        this.fetures = fetures;
+    public void setFeatures(String features) {
+        this.features = features;
     }
 
     public String getMainFunctions() {
@@ -86,12 +86,12 @@ public class DamEntity extends SuperBean {
         this.feeResources = feeResources;
     }
 
-    public String getMaintainPersonfee() {
-        return maintainPersonfee;
+    public String getMaintainPersonFee() {
+        return maintainPersonFee;
     }
 
-    public void setMaintainPersonfee(String maintainPersonfee) {
-        this.maintainPersonfee = maintainPersonfee;
+    public void setMaintainPersonFee(String maintainPersonFee) {
+        this.maintainPersonFee = maintainPersonFee;
     }
 
     public String getIsCertificated() {

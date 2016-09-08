@@ -24,7 +24,7 @@ public class GreatWellsEntity extends SuperBean {
 
     private String depth;            //井深
 
-    private String modelAndmaterial;         //井型和井壁材质
+    private String modelAndMaterial;         //井型和井壁材质
 
     private String image;           //照片
 
@@ -65,12 +65,12 @@ public class GreatWellsEntity extends SuperBean {
         this.depth = depth;
     }
 
-    public String getModelAndmaterial() {
-        return modelAndmaterial;
+    public String getModelAndMaterial() {
+        return modelAndMaterial;
     }
 
-    public void setModelAndmaterial(String modelAndmaterial) {
-        this.modelAndmaterial = modelAndmaterial;
+    public void setModelAndMaterial(String modelAndMaterial) {
+        this.modelAndMaterial = modelAndMaterial;
     }
 
     public String getImage() {

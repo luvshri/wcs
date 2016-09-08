@@ -7,7 +7,9 @@ import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.repository.auth.RoleRepository;
 import com.saltyfish.domain.repository.auth.UserRepository;
 import com.saltyfish.domain.repository.other.NotificationRepository;
+import com.saltyfish.domain.repository.unit.GroupRepository;
 import com.saltyfish.domain.repository.unit.TownRepository;
+import com.saltyfish.domain.repository.unit.VillageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,12 @@ public class AuthService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private VillageRepository villageRepository;
+
+    @Autowired
+    private GroupRepository groupRepository;
 
 
     /**
@@ -119,5 +127,27 @@ public class AuthService {
             return userEntity.getCounty().getId().equals(townEntity.getCounty().getId());
         }
         return userEntity.getTowns().contains(townEntity);
+    }
+
+    /**
+     * 检测用户是否guest
+     *
+     * @param userId 用户id
+     * @return bool
+     */
+    public Boolean checkGuest(Integer userId) {
+        return userRepository.findById(userId).getRole().getName().equals("guest");
+    }
+
+    /**
+     * 检测城乡包含关系
+     *
+     * @param townId    乡镇id
+     * @param villageId 村id
+     * @param groupId   组id
+     * @return bool
+     */
+    public Boolean unitContainingCheck(Integer townId, Integer villageId, Integer groupId) {
+        return villageRepository.findById(villageId).getTown().getId().equals(townId) && groupRepository.findById(groupId).getVillage().getId().equals(villageId);
     }
 }

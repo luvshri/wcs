@@ -22,17 +22,21 @@ public class ChannelEntity extends SuperBean {
 
     private String buildingMatchRate;         //建筑物配套率(%)
 
-    private String sumLength;                //渠道总长(KM)
+    private String length;                //渠道总长(KM)
 
     private String goodConditionRate;        //渠道及建筑完好率(%)
 
     private String image;                   //照片
 
-    private String sumSectionSize;           //总计断面尺寸
+    private String SectionSize;           //总计断面尺寸
 
-    private String sumSeepageCanalLength;        //总计其中防渗渠长度(KM)
+    private String SeepageCanalLength;        //总计其中防渗渠长度(KM)
 
-    private String sumLiningSectionSize;         //总计衬砌断面尺寸
+    private String LiningSectionSize;         //总计衬砌断面尺寸
+
+    private String sumLength;           //总计长度
+
+    private String planeSketch;         //平面草图
 
     /**
      * 渠道组成部分
@@ -43,6 +47,22 @@ public class ChannelEntity extends SuperBean {
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public String getSumLength() {
+        return sumLength;
+    }
+
+    public void setSumLength(String sumLength) {
+        this.sumLength = sumLength;
+    }
+
+    public String getPlaneSketch() {
+        return planeSketch;
+    }
+
+    public void setPlaneSketch(String planeSketch) {
+        this.planeSketch = planeSketch;
     }
 
     public List<CanalEntity> getCanals() {
@@ -69,12 +89,12 @@ public class ChannelEntity extends SuperBean {
         this.buildingMatchRate = buildingMatchRate;
     }
 
-    public String getSumLength() {
-        return sumLength;
+    public String getLength() {
+        return length;
     }
 
-    public void setSumLength(String sumLength) {
-        this.sumLength = sumLength;
+    public void setLength(String length) {
+        this.length = length;
     }
 
     public String getGoodConditionRate() {
@@ -93,27 +113,27 @@ public class ChannelEntity extends SuperBean {
         this.image = image;
     }
 
-    public String getSumSectionSize() {
-        return sumSectionSize;
+    public String getSectionSize() {
+        return SectionSize;
     }
 
-    public void setSumSectionSize(String sumSectionSize) {
-        this.sumSectionSize = sumSectionSize;
+    public void setSectionSize(String sectionSize) {
+        SectionSize = sectionSize;
     }
 
-    public String getSumSeepageCanalLength() {
-        return sumSeepageCanalLength;
+    public String getSeepageCanalLength() {
+        return SeepageCanalLength;
     }
 
-    public void setSumSeepageCanalLength(String sumSeepageCanalLength) {
-        this.sumSeepageCanalLength = sumSeepageCanalLength;
+    public void setSeepageCanalLength(String seepageCanalLength) {
+        SeepageCanalLength = seepageCanalLength;
     }
 
-    public String getSumLiningSectionSize() {
-        return sumLiningSectionSize;
+    public String getLiningSectionSize() {
+        return LiningSectionSize;
     }
 
-    public void setSumLiningSectionSize(String sumLiningSectionSize) {
-        this.sumLiningSectionSize = sumLiningSectionSize;
+    public void setLiningSectionSize(String liningSectionSize) {
+        LiningSectionSize = liningSectionSize;
     }
 }

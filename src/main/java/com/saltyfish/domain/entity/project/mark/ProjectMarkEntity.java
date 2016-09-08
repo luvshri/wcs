@@ -69,5 +69,119 @@ public class ProjectMarkEntity extends SuperBean {
     @JoinColumn(name = "water_works_id", referencedColumnName = "id")
     private WaterWorksEntity waterWorks;
 
+    public static Long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public AqueductEntity getAqueduct() {
+        return aqueduct;
+    }
+
+    public void setAqueduct(AqueductEntity aqueduct) {
+        this.aqueduct = aqueduct;
+    }
+
+    public BridgeEntity getBridge() {
+        return bridge;
+    }
+
+    public void setBridge(BridgeEntity bridge) {
+        this.bridge = bridge;
+    }
+
+    public ChannelEntity getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ChannelEntity channel) {
+        this.channel = channel;
+    }
+
+    public CulvertEntity getCulvert() {
+        return culvert;
+    }
+
+    public void setCulvert(CulvertEntity culvert) {
+        this.culvert = culvert;
+    }
+
+    public DamEntity getDam() {
+        return dam;
+    }
+
+    public void setDam(DamEntity dam) {
+        this.dam = dam;
+    }
+
+    public DeepWellsEntity getDeepWells() {
+        return deepWells;
+    }
+
+    public void setDeepWells(DeepWellsEntity deepWells) {
+        this.deepWells = deepWells;
+    }
+
+    public DripIrrigationPipeEntity getDripIrrigationPipe() {
+        return dripIrrigationPipe;
+    }
+
+    public void setDripIrrigationPipe(DripIrrigationPipeEntity dripIrrigationPipe) {
+        this.dripIrrigationPipe = dripIrrigationPipe;
+    }
+
+    public GreatWellsEntity getGreatWells() {
+        return greatWells;
+    }
+
+    public void setGreatWells(GreatWellsEntity greatWells) {
+        this.greatWells = greatWells;
+    }
+
+    public HydropowerEntity getHydropower() {
+        return hydropower;
+    }
+
+    public void setHydropower(HydropowerEntity hydropower) {
+        this.hydropower = hydropower;
+    }
+
+    public PondEntity getPond() {
+        return pond;
+    }
+
+    public void setPond(PondEntity pond) {
+        this.pond = pond;
+    }
+
+    public PumpStationEntity getPumpStation() {
+        return pumpStation;
+    }
+
+    public void setPumpStation(PumpStationEntity pumpStation) {
+        this.pumpStation = pumpStation;
+    }
+
+    public SluiceEntity getSluice() {
+        return sluice;
+    }
+
+    public void setSluice(SluiceEntity sluice) {
+        this.sluice = sluice;
+    }
+
+    public WatercourseEntity getWatercourse() {
+        return watercourse;
+    }
+
+    public void setWatercourse(WatercourseEntity watercourse) {
+        this.watercourse = watercourse;
+    }
+
+    public WaterWorksEntity getWaterWorks() {
+        return waterWorks;
+    }
+
+    public void setWaterWorks(WaterWorksEntity waterWorks) {
+        this.waterWorks = waterWorks;
+    }
 }

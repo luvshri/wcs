@@ -21,7 +21,7 @@ public class BridgeEntity extends SuperBean {
 
     private String crossCount;             //桥跨数
 
-    private String beamStructureAndStructure;           //梁板结构形式及材质
+    private String structureAndMaterial;           //梁板结构形式及材质
 
     private String loadStandard;                     //负载标准,T
 
@@ -53,12 +53,12 @@ public class BridgeEntity extends SuperBean {
         this.crossCount = crossCount;
     }
 
-    public String getBeamStructureAndStructure() {
-        return beamStructureAndStructure;
+    public String getStructureAndMaterial() {
+        return structureAndMaterial;
     }
 
-    public void setBeamStructureAndStructure(String beamStructureAndStructure) {
-        this.beamStructureAndStructure = beamStructureAndStructure;
+    public void setStructureAndMaterial(String structureAndMaterial) {
+        this.structureAndMaterial = structureAndMaterial;
     }
 
     public String getLoadStandard() {

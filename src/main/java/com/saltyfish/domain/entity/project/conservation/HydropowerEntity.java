@@ -31,7 +31,7 @@ public class HydropowerEntity extends SuperBean {
 
     private String drainageFee;     //排涝收费标准
 
-    private String annualIncome;    //年收入
+    private String annualFee;    //年收入
 
     private String riverLocation;   //所在河流
 
@@ -140,12 +140,12 @@ public class HydropowerEntity extends SuperBean {
         this.drainageFee = drainageFee;
     }
 
-    public String getAnnualIncome() {
-        return annualIncome;
+    public String getAnnualFee() {
+        return annualFee;
     }
 
-    public void setAnnualIncome(String annualIncome) {
-        this.annualIncome = annualIncome;
+    public void setAnnualFee(String annualFee) {
+        this.annualFee = annualFee;
     }
 
     public String getRiverLocation() {
