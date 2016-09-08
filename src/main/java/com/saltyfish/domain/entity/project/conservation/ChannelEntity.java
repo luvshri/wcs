@@ -28,11 +28,11 @@ public class ChannelEntity extends SuperBean {
 
     private String image;                   //照片
 
-    private String SectionSize;           //总计断面尺寸
+    private String sectionSize;           //总计断面尺寸
 
-    private String SeepageCanalLength;        //总计其中防渗渠长度(KM)
+    private String seepageCanalLength;        //总计其中防渗渠长度(KM)
 
-    private String LiningSectionSize;         //总计衬砌断面尺寸
+    private String liningSectionSize;         //总计衬砌断面尺寸
 
     private String sumLength;           //总计长度
 
@@ -114,26 +114,26 @@ public class ChannelEntity extends SuperBean {
     }
 
     public String getSectionSize() {
-        return SectionSize;
+        return sectionSize;
     }
 
     public void setSectionSize(String sectionSize) {
-        SectionSize = sectionSize;
+        this.sectionSize = sectionSize;
     }
 
     public String getSeepageCanalLength() {
-        return SeepageCanalLength;
+        return seepageCanalLength;
     }
 
     public void setSeepageCanalLength(String seepageCanalLength) {
-        SeepageCanalLength = seepageCanalLength;
+        this.seepageCanalLength = seepageCanalLength;
     }
 
     public String getLiningSectionSize() {
-        return LiningSectionSize;
+        return liningSectionSize;
     }
 
     public void setLiningSectionSize(String liningSectionSize) {
-        LiningSectionSize = liningSectionSize;
+        this.liningSectionSize = liningSectionSize;
     }
 }

@@ -2,7 +2,6 @@ package com.saltyfish.domain.entity.project.device;
 
 import com.saltyfish.domain.entity.base.SuperBean;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -18,9 +17,6 @@ public class TurbineEntity extends SuperBean {
 
     private static final Long serialVersionUID = -975132493522824424L;
 
-    @Column(nullable = false)
-    private Integer projectId;          //工程id
-
     private String model;               //型号
 
     private String count;               //台数
@@ -31,14 +27,6 @@ public class TurbineEntity extends SuperBean {
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     public String getModel() {

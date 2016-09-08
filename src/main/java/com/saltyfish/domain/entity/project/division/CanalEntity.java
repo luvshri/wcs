@@ -2,7 +2,6 @@ package com.saltyfish.domain.entity.project.division;
 
 import com.saltyfish.domain.entity.base.SuperBean;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,9 +15,6 @@ import javax.persistence.Table;
 public class CanalEntity extends SuperBean {
 
     private static final Long serialVersionUID = -5847937472510125424L;
-
-    @Column(nullable = false)
-    private Integer projectId;      //工程id
 
     private String model;           //类别
 
@@ -34,14 +30,6 @@ public class CanalEntity extends SuperBean {
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     public String getModel() {

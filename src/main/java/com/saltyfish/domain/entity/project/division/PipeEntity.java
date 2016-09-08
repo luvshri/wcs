@@ -2,7 +2,6 @@ package com.saltyfish.domain.entity.project.division;
 
 import com.saltyfish.domain.entity.base.SuperBean;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -21,9 +20,6 @@ public class PipeEntity extends SuperBean {
     private String model;       //管道类型
 
     private String length;           //长度
-
-    @Column(nullable = false)
-    private Integer projectId;          //工程id
 
     private String diameter;         //直径
 
@@ -47,14 +43,6 @@ public class PipeEntity extends SuperBean {
 
     public void setLength(String length) {
         this.length = length;
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     public String getDiameter() {

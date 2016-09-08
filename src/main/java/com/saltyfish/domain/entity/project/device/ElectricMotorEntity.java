@@ -2,7 +2,6 @@ package com.saltyfish.domain.entity.project.device;
 
 import com.saltyfish.domain.entity.base.SuperBean;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,9 +16,6 @@ public class ElectricMotorEntity extends SuperBean {
 
     private static final Long serialVersionUID = -1987258246729432244L;
 
-    @Column(nullable = false)
-    private Integer projectId;      //工程id
-
     private String model;           //型号
 
     private String power;            //单台功率*台数
@@ -28,14 +24,6 @@ public class ElectricMotorEntity extends SuperBean {
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     public String getModel() {

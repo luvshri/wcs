@@ -3,6 +3,8 @@ package com.saltyfish.framework.controller;
 import com.saltyfish.common.bean.Response;
 import com.saltyfish.domain.entity.project.WaterConservationEntity;
 import com.saltyfish.domain.entity.project.conservation.AqueductEntity;
+import com.saltyfish.domain.entity.project.conservation.BridgeEntity;
+import com.saltyfish.domain.entity.project.conservation.ChannelEntity;
 import com.saltyfish.domain.entity.project.mark.ProjectMarkEntity;
 import com.saltyfish.framework.service.AuthService;
 import com.saltyfish.framework.service.FileService;
@@ -65,8 +67,6 @@ public class ProjectController {
      * @param headOrPumpStation        渠首或者取水泵站
      * @param buildingMatchRate        建筑物配套率
      * @param goodConditionRate        渠道及建筑物完好率
-     * @param SeepageCanalLength       总计其中防渗渠长度
-     * @param LiningSectionSize        总计衬砌断面尺寸
      * @param sumLength                总计长度
      * @param planeSketch              平面草图
      * @param culvertModel             涵洞类型
@@ -168,7 +168,6 @@ public class ProjectController {
      * @param pipeMaterial1            管道材质
      * @param canalModel1              沟渠类型
      * @param canalLength1             沟渠长度
-     * @param canalSection1            沟渠断面
      * @param canalSeepageLength1      沟渠防渗渠长度
      * @param canalLiningSectionSize1  沟渠砌断面尺寸
      * @param canalLiningMaterial1     沟渠衬砌材质
@@ -203,8 +202,8 @@ public class ProjectController {
                                     @RequestParam(value = "headOrPumpStation", required = false, defaultValue = "") String headOrPumpStation,
                                     @RequestParam(value = "buildingMatchRate", required = false, defaultValue = "") String buildingMatchRate,
                                     @RequestParam(value = "goodConditionRate", required = false, defaultValue = "") String goodConditionRate,
-                                    @RequestParam(value = "SeepageCanalLength", required = false, defaultValue = "") String SeepageCanalLength,
-                                    @RequestParam(value = "LiningSectionSize", required = false, defaultValue = "") String LiningSectionSize,
+                                    @RequestParam(value = "seepageCanalLength", required = false, defaultValue = "") String seepageCanalLength,
+                                    @RequestParam(value = "liningSectionSize", required = false, defaultValue = "") String liningSectionSize,
                                     @RequestParam(value = "sumLength", required = false, defaultValue = "") String sumLength,
                                     @RequestParam(value = "planeSketch", required = false, defaultValue = "") MultipartFile planeSketch,
                                     @RequestParam(value = "culvertModel", required = false, defaultValue = "") String culvertModel,
@@ -366,49 +365,49 @@ public class ProjectController {
                                     //渠道的小渠
                                     @RequestParam(value = "canalModel1", required = false, defaultValue = "干渠1") String canalModel1,
                                     @RequestParam(value = "canalLength1", required = false, defaultValue = "") String canalLength1,
-                                    @RequestParam(value = "canalSection1", required = false, defaultValue = "") String canalSection1,
+                                    @RequestParam(value = "canalSectionSize1", required = false, defaultValue = "") String canalSectionSize1,
                                     @RequestParam(value = "canalSeepageLength1", required = false, defaultValue = "") String canalSeepageLength1,
                                     @RequestParam(value = "canalLiningSectionSize1", required = false, defaultValue = "") String canalLiningSectionSize1,
                                     @RequestParam(value = "canalLiningMaterial1", required = false, defaultValue = "") String canalLiningMaterial1,
                                     @RequestParam(value = "canalModel2", required = false, defaultValue = "干渠2") String canalModel2,
                                     @RequestParam(value = "canalLength2", required = false, defaultValue = "") String canalLength2,
-                                    @RequestParam(value = "canalSection2", required = false, defaultValue = "") String canalSection2,
+                                    @RequestParam(value = "canalSectionSize2", required = false, defaultValue = "") String canalSectionSize2,
                                     @RequestParam(value = "canalSeepageLength2", required = false, defaultValue = "") String canalSeepageLength2,
                                     @RequestParam(value = "canalLiningSectionSize2", required = false, defaultValue = "") String canalLiningSectionSize2,
                                     @RequestParam(value = "canalLiningMaterial2", required = false, defaultValue = "") String canalLiningMaterial2,
                                     @RequestParam(value = "canalModel3", required = false, defaultValue = "支渠1") String canalModel3,
                                     @RequestParam(value = "canalLength3", required = false, defaultValue = "") String canalLength3,
-                                    @RequestParam(value = "canalSection3", required = false, defaultValue = "") String canalSection3,
+                                    @RequestParam(value = "canalSectionSize3", required = false, defaultValue = "") String canalSectionSize3,
                                     @RequestParam(value = "canalSeepageLength3", required = false, defaultValue = "") String canalSeepageLength3,
                                     @RequestParam(value = "canalLiningSectionSize3", required = false, defaultValue = "") String canalLiningSectionSize3,
                                     @RequestParam(value = "canalLiningMaterial3", required = false, defaultValue = "") String canalLiningMaterial3,
                                     @RequestParam(value = "canalModel4", required = false, defaultValue = "支渠2") String canalModel4,
                                     @RequestParam(value = "canalLength4", required = false, defaultValue = "") String canalLength4,
-                                    @RequestParam(value = "canalSection4", required = false, defaultValue = "") String canalSection4,
+                                    @RequestParam(value = "canalSectionSize4", required = false, defaultValue = "") String canalSectionSize4,
                                     @RequestParam(value = "canalSeepageLength4", required = false, defaultValue = "") String canalSeepageLength4,
                                     @RequestParam(value = "canalLiningSectionSize4", required = false, defaultValue = "") String canalLiningSectionSize4,
                                     @RequestParam(value = "canalLiningMaterial4", required = false, defaultValue = "") String canalLiningMaterial4,
                                     @RequestParam(value = "canalModel5", required = false, defaultValue = "斗渠1") String canalModel5,
                                     @RequestParam(value = "canalLength5", required = false, defaultValue = "") String canalLength5,
-                                    @RequestParam(value = "canalSection5", required = false, defaultValue = "") String canalSection5,
+                                    @RequestParam(value = "canalSectionSize5", required = false, defaultValue = "") String canalSectionSize5,
                                     @RequestParam(value = "canalSeepageLength5", required = false, defaultValue = "") String canalSeepageLength5,
                                     @RequestParam(value = "canalLiningSectionSize5", required = false, defaultValue = "") String canalLiningSectionSize5,
                                     @RequestParam(value = "canalLiningMaterial5", required = false, defaultValue = "") String canalLiningMaterial5,
                                     @RequestParam(value = "canalModel6", required = false, defaultValue = "斗渠2") String canalModel6,
                                     @RequestParam(value = "canalLength6", required = false, defaultValue = "") String canalLength6,
-                                    @RequestParam(value = "canalSection6", required = false, defaultValue = "") String canalSection6,
+                                    @RequestParam(value = "canalSectionSize6", required = false, defaultValue = "") String canalSectionSize6,
                                     @RequestParam(value = "canalSeepageLength6", required = false, defaultValue = "") String canalSeepageLength6,
                                     @RequestParam(value = "canalLiningSectionSize6", required = false, defaultValue = "") String canalLiningSectionSize6,
                                     @RequestParam(value = "canalLiningMaterial6", required = false, defaultValue = "") String canalLiningMaterial6,
                                     @RequestParam(value = "canalModel7", required = false, defaultValue = "农渠1") String canalModel7,
                                     @RequestParam(value = "canalLength7", required = false, defaultValue = "") String canalLength7,
-                                    @RequestParam(value = "canalSection7", required = false, defaultValue = "") String canalSection7,
+                                    @RequestParam(value = "canalSectionSize7", required = false, defaultValue = "") String canalSectionSize7,
                                     @RequestParam(value = "canalSeepageLength7", required = false, defaultValue = "") String canalSeepageLength7,
                                     @RequestParam(value = "canalLiningSectionSize7", required = false, defaultValue = "") String canalLiningSectionSize7,
                                     @RequestParam(value = "canalLiningMaterial7", required = false, defaultValue = "") String canalLiningMaterial7,
                                     @RequestParam(value = "canalModel8", required = false, defaultValue = "农渠2") String canalModel8,
                                     @RequestParam(value = "canalLength8", required = false, defaultValue = "") String canalLength8,
-                                    @RequestParam(value = "canalSection8", required = false, defaultValue = "") String canalSection8,
+                                    @RequestParam(value = "canalSectionSize8", required = false, defaultValue = "") String canalSectionSize8,
                                     @RequestParam(value = "canalSeepageLength8", required = false, defaultValue = "") String canalSeepageLength8,
                                     @RequestParam(value = "canalLiningSectionSize8", required = false, defaultValue = "") String canalLiningSectionSize8,
                                     @RequestParam(value = "canalLiningMaterial8", required = false, defaultValue = "") String canalLiningMaterial8,
@@ -425,18 +424,46 @@ public class ProjectController {
             projectService.setCommonProperty(waterConservationEntity, userId, category, remark, name, code, manageModel, townId, villageId,
                     groupId, situation, constructTime, constructUnit, propertyOwner, manager, longitude, latitude, timeStamp);
             ProjectMarkEntity projectMark = new ProjectMarkEntity();
+            String imagePath = "";
+            String planeSketchPath = "";
             switch (category) {
                 case "渡槽":
-                    String imagePath = "";
                     AqueductEntity aqueduct = new AqueductEntity();
                     if (image != null) {
                         imagePath = fileService.saveFile(image);
                     }
-                    projectService.saveAqueduct(aqueduct, crossWatercourseLocation, crossCount, sectionSize, structureAndMaterial, crossLength, imagePath);
+                    projectService.saveAqueduct(aqueduct, crossWatercourseLocation, crossCount, sectionSize, structureAndMaterial,
+                            crossLength, imagePath);
                     projectMark.setAqueduct(aqueduct);
                     break;
                 case "桥梁":
-                    //TODO 13中类型的各一种情况
+                    BridgeEntity bridgeEntity = new BridgeEntity();
+                    if (image != null) {
+                        imagePath = fileService.saveFile(image);
+                    }
+                    projectService.saveBridge(bridgeEntity, watercourseLocation, crossCount, structureAndMaterial, loadStandard,
+                            crossLength, width, length, imagePath);
+                    projectMark.setBridge(bridgeEntity);
+                    break;
+                case "渠道":
+                    ChannelEntity channelEntity = new ChannelEntity();
+                    if (image != null) {
+                        imagePath = fileService.saveFile(image);
+                        planeSketchPath = fileService.saveFile(planeSketch);
+                    }
+                    projectService.saveChannel(channelEntity, headOrPumpStation, buildingMatchRate, length, goodConditionRate, imagePath, sectionSize,
+                            seepageCanalLength, liningSectionSize, sumLength, planeSketchPath, canalLength1, canalLength2, canalLength3, canalLength4,
+                            canalLength5, canalLength6, canalLength7, canalLength8, canalLiningMaterial1, canalLiningMaterial2, canalLiningMaterial3,
+                            canalLiningMaterial4, canalLiningMaterial5, canalLiningMaterial6, canalLiningMaterial7, canalLiningMaterial8,
+                            canalLiningSectionSize1, canalLiningSectionSize2, canalLiningSectionSize3, canalLiningSectionSize4, canalLiningSectionSize5,
+                            canalLiningSectionSize6, canalLiningSectionSize7, canalLiningSectionSize8, canalModel1, canalModel2, canalModel3,
+                            canalModel4, canalModel5, canalModel6, canalModel7, canalModel8, canalSectionSize1, canalSectionSize2, canalSectionSize3,
+                            canalSectionSize4, canalSectionSize5, canalSectionSize6, canalSectionSize7, canalSectionSize8, canalSeepageLength1,
+                            canalSeepageLength2, canalSeepageLength3, canalSeepageLength4, canalSeepageLength5, canalSeepageLength6, canalSeepageLength7,
+                            canalSeepageLength8);
+                    projectMark.setChannel(channelEntity);
+                    break;
+                case "涵洞":
                     break;
                 default:
                     break;
