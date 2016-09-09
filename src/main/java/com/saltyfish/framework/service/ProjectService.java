@@ -6,8 +6,10 @@ import com.saltyfish.domain.entity.project.conservation.*;
 import com.saltyfish.domain.entity.project.device.*;
 import com.saltyfish.domain.entity.project.division.CanalEntity;
 import com.saltyfish.domain.entity.project.division.PipeEntity;
+import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.repository.LocationRepository;
 import com.saltyfish.domain.repository.auth.UserRepository;
+import com.saltyfish.domain.repository.project.WaterConservationRepository;
 import com.saltyfish.domain.repository.project.conservation.*;
 import com.saltyfish.domain.repository.project.device.*;
 import com.saltyfish.domain.repository.project.division.CanalRepository;
@@ -16,6 +18,10 @@ import com.saltyfish.domain.repository.unit.GroupRepository;
 import com.saltyfish.domain.repository.unit.TownRepository;
 import com.saltyfish.domain.repository.unit.VillageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -108,6 +114,9 @@ public class ProjectService {
 
     @Autowired
     private WaterWorksRepository waterWorksRepository;
+
+    @Autowired
+    private WaterConservationRepository waterConservationRepository;
 
     /**
      * 保存共有属性
@@ -666,5 +675,15 @@ public class ProjectService {
         waterWorksEntity.setHaveProtectArea(haveProtectArea);
         waterWorksEntity.setImage(imagePath);
         waterWorksRepository.save(waterWorksEntity);
+    }
+
+    /**
+     * 根据种类查找设施
+     * @param category  工程种类
+     */
+    public Page<WaterConservationEntity> getConservationsByCategory(List<Integer> townIds,String category,Integer page,Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByCategoryAndTownIdIn(category,townIds,pageable);
     }
 }

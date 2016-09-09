@@ -4,17 +4,17 @@ import com.saltyfish.common.bean.Response;
 import com.saltyfish.domain.entity.project.WaterConservationEntity;
 import com.saltyfish.domain.entity.project.conservation.*;
 import com.saltyfish.domain.entity.project.mark.ProjectMarkEntity;
+import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.repository.project.WaterConservationRepository;
-import com.saltyfish.framework.service.AuthService;
-import com.saltyfish.framework.service.FileService;
-import com.saltyfish.framework.service.ProjectService;
-import com.saltyfish.framework.service.ResponseService;
+import com.saltyfish.framework.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * Created by weck on 16/9/4.
@@ -28,7 +28,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @Autowired
-    private FileService fileService;
+    private FileService fileService;// TODO: 16/9/9  save file data to mongodb
 
     @Autowired
     private AuthService authService;
@@ -38,6 +38,50 @@ public class ProjectController {
 
     @Autowired
     private WaterConservationRepository waterConservationRepository;
+
+    @Autowired
+    private UnitService unitService;
+
+
+    /**
+     * 获取设施分页列表
+     * @param userId    用户id
+     * @param token 登录token
+     * @param category  工程种类
+     * @return 工程page
+     */
+    @RequestMapping("/getConservations")
+    public Response getConservations(@RequestParam("userId") Integer userId,
+                                     @RequestParam("token") String token,
+                                     @RequestParam("category") String category,
+                                     @RequestParam(value = "townId",required = false) Integer townId,
+                                     @RequestParam(value = "villageId",required = false) Integer villageId,
+                                     @RequestParam(value = "groupId",required = false) Integer groupId,
+                                     @RequestParam(value = "manageModel",required = false) String manageModel,
+                                     @RequestParam(value = "situation",required = false) String situation,
+                                     @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
+                                     @RequestParam(value = "size",required = false,defaultValue = "10") Integer size){
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            }
+            else {
+                response.setCode(HttpStatus.OK.value());
+                if (townId==null){
+                    List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                    Map<String,Object> data = new HashMap<>();
+                    data.put("conservations",projectService.getConservationsByCategory(townIds,category,page,size));
+                    response.setData(data);
+                    return response;
+                }
+                return null;
+                //TODO if townId is not null and villageId is null; if villageId is not null and groupId is null...
+            }
+        }catch (Exception e){
+            return responseService.serverError(response);
+        }
+    }
 
     /**
      * @param userId                   用户id

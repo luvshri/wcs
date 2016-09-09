@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -285,5 +287,20 @@ public class UnitService {
         group.setName(groupName);
         group.setUpdateTime(time);
         groupRepository.save(group);
+    }
+
+    /**
+     * 获取用户权限范围内的乡镇id集合
+     * @param userId    用户id
+     * @return  乡镇id集合
+     */
+    public List<Integer> getAccessedTownIds(Integer userId) {
+        List<TownEntity> towns = getAccessedTowns(userId);
+        List<Integer> townIds = new ArrayList<>();
+        Iterator<TownEntity> it = towns.iterator();
+        while (it.hasNext()){
+            townIds.add(it.next().getId());
+        }
+        return townIds;
     }
 }
