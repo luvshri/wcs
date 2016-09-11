@@ -47,9 +47,6 @@ public class UnitService {
     @Autowired
     private GroupRepository groupRepository;
 
-    @Autowired
-    private AuthService authService;
-
     /**
      * 根据用户id获取当前县信息
      *
@@ -68,9 +65,6 @@ public class UnitService {
      */
     public List<TownEntity> getAccessedTowns(Integer userId) {
         UserEntity user = userRepository.findById(userId);
-        if (authService.checkAdmin(userId)) {
-            return townRepository.findByCountyId(user.getCounty().getId());
-        }
         return user.getTowns();
     }
 
@@ -291,14 +285,15 @@ public class UnitService {
 
     /**
      * 获取用户权限范围内的乡镇id集合
-     * @param userId    用户id
-     * @return  乡镇id集合
+     *
+     * @param userId 用户id
+     * @return 乡镇id集合
      */
     public List<Integer> getAccessedTownIds(Integer userId) {
         List<TownEntity> towns = getAccessedTowns(userId);
         List<Integer> townIds = new ArrayList<>();
         Iterator<TownEntity> it = towns.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             townIds.add(it.next().getId());
         }
         return townIds;

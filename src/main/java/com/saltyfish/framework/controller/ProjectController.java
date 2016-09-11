@@ -4,7 +4,6 @@ import com.saltyfish.common.bean.Response;
 import com.saltyfish.domain.entity.project.WaterConservationEntity;
 import com.saltyfish.domain.entity.project.conservation.*;
 import com.saltyfish.domain.entity.project.mark.ProjectMarkEntity;
-import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.repository.project.WaterConservationRepository;
 import com.saltyfish.framework.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by weck on 16/9/4.
@@ -45,40 +46,98 @@ public class ProjectController {
 
     /**
      * 获取设施分页列表
-     * @param userId    用户id
-     * @param token 登录token
-     * @param category  工程种类
+     *
+     * @param userId   用户id
+     * @param token    登录token
+     * @param category 工程种类
      * @return 工程page
      */
     @RequestMapping("/getConservations")
     public Response getConservations(@RequestParam("userId") Integer userId,
                                      @RequestParam("token") String token,
                                      @RequestParam("category") String category,
-                                     @RequestParam(value = "townId",required = false) Integer townId,
-                                     @RequestParam(value = "villageId",required = false) Integer villageId,
-                                     @RequestParam(value = "groupId",required = false) Integer groupId,
-                                     @RequestParam(value = "manageModel",required = false) String manageModel,
-                                     @RequestParam(value = "situation",required = false) String situation,
-                                     @RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
-                                     @RequestParam(value = "size",required = false,defaultValue = "10") Integer size){
+                                     @RequestParam(value = "townId", required = false) Integer townId,
+                                     @RequestParam(value = "villageId", required = false) Integer villageId,
+                                     @RequestParam(value = "groupId", required = false) Integer groupId,
+                                     @RequestParam(value = "manageModel", required = false) String manageModel,
+                                     @RequestParam(value = "situation", required = false) String situation,
+                                     @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(value = "size", required = false, defaultValue = "10") Integer size) {
         Response response = new Response();
         try {
             if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
-            }
-            else {
+            } else {
                 response.setCode(HttpStatus.OK.value());
-                if (townId==null){
-                    List<Integer> townIds = unitService.getAccessedTownIds(userId);
-                    Map<String,Object> data = new HashMap<>();
-                    data.put("conservations",projectService.getConservationsByCategory(townIds,category,page,size));
-                    response.setData(data);
-                    return response;
+                Map<String, Object> data = new HashMap<>();
+                if (situation == null) {
+                    if (manageModel == null) {
+                        if (townId == null && villageId == null && groupId == null) {
+                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                            data.put("conservations", projectService.getConservationsByCategory(townIds, category, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId == null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsByCategoryAndTownId(category, townId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsByCategoryAndVillageId(category, villageId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null) {
+                            data.put("conservations", projectService.getConservationsByCategoryAndGroupId(category, groupId, page, size));
+                            response.setData(data);
+                        }
+                    } else {
+                        if (townId == null && villageId == null && groupId == null) {
+                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                            data.put("conservations", projectService.getConservationsByCategoryAndManageModel(manageModel, townIds, category, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId == null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsByCategoryAndManageModelAndTownId(manageModel, category, townId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsByManageModelAndCategoryAndVillageId(manageModel, category, villageId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null) {
+                            data.put("conservations", projectService.getConservationsByManageModelAndCategoryAndGroupId(manageModel, category, groupId, page, size));
+                            response.setData(data);
+                        }
+                    }
+                } else {
+                    if (manageModel == null) {
+                        if (townId == null && villageId == null && groupId == null) {
+                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                            data.put("conservations", projectService.getConservationsByCategoryAndSituation(situation, townIds, category, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId == null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsByCategoryAndSituationAndTownId(situation, category, townId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndVillageId(situation, category, villageId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null) {
+                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndGroupId(situation, category, groupId, page, size));
+                            response.setData(data);
+                        }
+                    } else {
+                        if (townId == null && villageId == null && groupId == null) {
+                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                            data.put("conservations", projectService.getConservationsByCategoryAndSituationAndManageModel(situation, manageModel, townIds, category, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId == null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsByCategoryAndSituationAndManageModelAndTownId(situation, manageModel, category, townId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null && groupId == null) {
+                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndManageModelAndVillageId(situation, manageModel, category, villageId, page, size));
+                            response.setData(data);
+                        } else if (townId != null && villageId != null) {
+                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndManageModelAndGroupId(situation, manageModel, category, groupId, page, size));
+                            response.setData(data);
+                        }
+                    }
                 }
-                return null;
-                //TODO if townId is not null and villageId is null; if villageId is not null and groupId is null...
+                return response;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return responseService.serverError(response);
         }
     }

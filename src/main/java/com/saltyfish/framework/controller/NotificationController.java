@@ -139,8 +139,8 @@ public class NotificationController {
      * @return 公告page
      */
     @RequestMapping("/indexNotifications")
-    public Response getIndexNotifications(@RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
-                                          @RequestParam(value = "size",required = false,defaultValue = "5") Integer size) {
+    public Response getIndexNotifications(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                          @RequestParam(value = "size", required = false, defaultValue = "5") Integer size) {
         Response response = new Response();
         try {
             Page<NotificationEntity> notifications = notificationService.getIndexNotifications(page, size);
@@ -164,8 +164,8 @@ public class NotificationController {
      * @return 公告page
      */
     @RequestMapping("/countyNotifications")
-    public Response getCountyNotifications(@RequestParam(value = "page",required = false,defaultValue = "1") Integer page,
-                                           @RequestParam(value = "size",required = false,defaultValue = "5") Integer size,
+    public Response getCountyNotifications(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                           @RequestParam(value = "size", required = false, defaultValue = "5") Integer size,
                                            @RequestParam(value = "userId", required = false) Integer userId,
                                            @RequestParam(value = "token", required = false, defaultValue = "") String token) {
         Response response = new Response();

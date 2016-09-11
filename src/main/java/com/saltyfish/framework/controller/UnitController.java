@@ -395,7 +395,6 @@ public class UnitController {
                 return responseService.notLogin(response);
             } else {
                 Map<String, Object> data = new HashMap<>();
-                data.put("county", unitService.getCountyByUserId(userId));
                 data.put("towns", unitService.getAccessedTowns(userId));
                 response.setData(data);
                 response.setCode(HttpStatus.OK.value());

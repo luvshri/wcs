@@ -6,7 +6,6 @@ import com.saltyfish.domain.entity.project.conservation.*;
 import com.saltyfish.domain.entity.project.device.*;
 import com.saltyfish.domain.entity.project.division.CanalEntity;
 import com.saltyfish.domain.entity.project.division.PipeEntity;
-import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.repository.LocationRepository;
 import com.saltyfish.domain.repository.auth.UserRepository;
 import com.saltyfish.domain.repository.project.WaterConservationRepository;
@@ -679,11 +678,102 @@ public class ProjectService {
 
     /**
      * 根据种类查找设施
-     * @param category  工程种类
+     *
+     * @param category 工程种类
      */
-    public Page<WaterConservationEntity> getConservationsByCategory(List<Integer> townIds,String category,Integer page,Integer size) {
+    public Page<WaterConservationEntity> getConservationsByCategory(List<Integer> townIds, String category, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndTownIdIn(category,townIds,pageable);
+        return waterConservationRepository.findByCategoryAndTownIdIn(category, townIds, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndTownId(String category, Integer townId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByCategoryAndTownId(category, townId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndVillageId(String category, Integer villageId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByCategoryAndVillageId(category, villageId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndGroupId(String category, Integer groupId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByCategoryAndGroupId(category, groupId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndManageModel(String manageModel, List<Integer> townIds, String category, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndCategoryAndTownIdIn(manageModel, category, townIds, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndManageModelAndTownId(String manageModel, String category, Integer townId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndCategoryAndTownId(manageModel, category, townId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByManageModelAndCategoryAndVillageId(String manageModel, String category, Integer villageId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndCategoryAndVillageId(manageModel, category, villageId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByManageModelAndCategoryAndGroupId(String manageModel, String category, Integer groupId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndCategoryAndGroupId(manageModel, category, groupId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndSituation(String situation, List<Integer> townIds, String category, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findBySituationAndCategoryAndTownIdIn(situation, category, townIds, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndSituationAndTownId(String situation, String category, Integer townId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findBySituationAndCategoryAndTownId(situation, category, townId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndVillageId(String situation, String category, Integer villageId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findBySituationAndCategoryAndVillageId(situation, category, villageId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndGroupId(String situation, String category, Integer groupId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findBySituationAndCategoryAndGroupId(situation, category, groupId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndSituationAndManageModel(String situation, String manageModel, List<Integer> townIds, String category, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndTownIdIn(manageModel, situation, category, townIds, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndSituationAndManageModelAndTownId(String situation, String manageModel, String category, Integer townId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndTownId(manageModel, situation, category, townId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndManageModelAndVillageId(String situation, String manageModel, String category, Integer villageId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndVillageId(manageModel, situation, category, villageId, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndManageModelAndGroupId(String situation, String manageModel, String category, Integer groupId, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndGroupId(manageModel, situation, category, groupId, pageable);
     }
 }

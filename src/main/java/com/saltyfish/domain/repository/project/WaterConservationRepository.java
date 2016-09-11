@@ -15,6 +15,82 @@ import java.util.List;
 @Repository
 public interface WaterConservationRepository extends JpaRepository<WaterConservationEntity, Integer> {
     Page<WaterConservationEntity> findByCategoryAndTownIdIn(@Param("category") String category,
-                                                            @Param("townId") List<Integer> townIds,
+                                                            @Param("town_id") List<Integer> townIds,
                                                             Pageable pageable);
+
+    Page<WaterConservationEntity> findByCategoryAndTownId(@Param("category") String category,
+                                                          @Param("town_id") Integer townId,
+                                                          Pageable pageable);
+
+    Page<WaterConservationEntity> findByCategoryAndVillageId(@Param("category") String category,
+                                                             @Param("village_id") Integer villageId,
+                                                             Pageable pageable);
+
+    Page<WaterConservationEntity> findByCategoryAndGroupId(@Param("category") String category,
+                                                           @Param("group_id") Integer groupId,
+                                                           Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndCategoryAndTownIdIn(@Param("manage_model") String manageModel,
+                                                                          @Param("category") String category,
+                                                                          @Param("town_id") List<Integer> townIds,
+                                                                          Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndCategoryAndTownId(@Param("manage_model") String manageModel,
+                                                                        @Param("category") String category,
+                                                                        @Param("town_id") Integer townId,
+                                                                        Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndCategoryAndVillageId(@Param("manage_model") String manageModel,
+                                                                           @Param("category") String category,
+                                                                           @Param("village_id") Integer villageId,
+                                                                           Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndCategoryAndGroupId(@Param("manage_model") String manageModel,
+                                                                         @Param("category") String category,
+                                                                         @Param("group_id") Integer groupId,
+                                                                         Pageable pageable);
+
+    Page<WaterConservationEntity> findBySituationAndCategoryAndTownIdIn(@Param("situation") String situation,
+                                                                        @Param("category") String category,
+                                                                        @Param("town_id") List<Integer> townIds,
+                                                                        Pageable pageable);
+
+    Page<WaterConservationEntity> findBySituationAndCategoryAndTownId(@Param("situation") String situation,
+                                                                      @Param("category") String category,
+                                                                      @Param("town_id") Integer townId,
+                                                                      Pageable pageable);
+
+    Page<WaterConservationEntity> findBySituationAndCategoryAndVillageId(@Param("situation") String situation,
+                                                                         @Param("category") String category,
+                                                                         @Param("village_id") Integer villageId,
+                                                                         Pageable pageable);
+
+    Page<WaterConservationEntity> findBySituationAndCategoryAndGroupId(@Param("situation") String situation,
+                                                                       @Param("category") String category,
+                                                                       @Param("group_id") Integer groupId,
+                                                                       Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndSituationAndCategoryAndTownIdIn(@Param("manage_model") String manageModel,
+                                                                                      @Param("situation") String situation,
+                                                                                      @Param("category") String category,
+                                                                                      @Param("town_id") List<Integer> townIds,
+                                                                                      Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndSituationAndCategoryAndTownId(@Param("manage_model") String manageModel,
+                                                                                    @Param("situation") String situation,
+                                                                                    @Param("category") String category,
+                                                                                    @Param("town_id") Integer townId,
+                                                                                    Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndSituationAndCategoryAndVillageId(@Param("manage_model") String manageModel,
+                                                                                       @Param("situation") String situation,
+                                                                                       @Param("category") String category,
+                                                                                       @Param("village_id") Integer villageId,
+                                                                                       Pageable pageable);
+
+    Page<WaterConservationEntity> findByManageModelAndSituationAndCategoryAndGroupId(@Param("manage_model") String manageModel,
+                                                                                     @Param("situation") String situation,
+                                                                                     @Param("category") String category,
+                                                                                     @Param("group_id") Integer groupId,
+                                                                                     Pageable pageable);
 }
