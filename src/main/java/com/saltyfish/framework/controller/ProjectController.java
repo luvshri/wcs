@@ -53,7 +53,11 @@ public class ProjectController {
      * @return 工程page
      */
     @RequestMapping("/getConservations")
-    public Response getConservations(@RequestParam("userId") Integer userId,
+    public Response getConservations(@RequestParam(value = "startDate", required = false) Long startDate,
+                                     @RequestParam(value = "endDate", required = false) Long endDate,
+                                     @RequestParam(value = "code", required = false) String code,
+                                     @RequestParam(value = "name", required = false) String name,
+                                     @RequestParam("userId") Integer userId,
                                      @RequestParam("token") String token,
                                      @RequestParam("category") String category,
                                      @RequestParam(value = "townId", required = false) Integer townId,
@@ -70,67 +74,81 @@ public class ProjectController {
             } else {
                 response.setCode(HttpStatus.OK.value());
                 Map<String, Object> data = new HashMap<>();
-                if (situation == null) {
-                    if (manageModel == null) {
-                        if (townId == null && villageId == null && groupId == null) {
-                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
-                            data.put("conservations", projectService.getConservationsByCategory(townIds, category, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId == null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsByCategoryAndTownId(category, townId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsByCategoryAndVillageId(category, villageId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null) {
-                            data.put("conservations", projectService.getConservationsByCategoryAndGroupId(category, groupId, page, size));
-                            response.setData(data);
+                List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                if (startDate == null && endDate == null && code == null && name == null) {
+                    if (situation == null) {
+                        if (manageModel == null) {
+                            if (townId == null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategory(townIds, category, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndTownId(category, townId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndVillageId(category, villageId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndGroupId(category, groupId, page, size));
+                                response.setData(data);
+                            }
+                        } else {
+                            if (townId == null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndManageModel(manageModel, townIds, category, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndManageModelAndTownId(manageModel, category, townId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByManageModelAndCategoryAndVillageId(manageModel, category, villageId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null) {
+                                data.put("conservations", projectService.getConservationsByManageModelAndCategoryAndGroupId(manageModel, category, groupId, page, size));
+                                response.setData(data);
+                            }
                         }
                     } else {
-                        if (townId == null && villageId == null && groupId == null) {
-                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
-                            data.put("conservations", projectService.getConservationsByCategoryAndManageModel(manageModel, townIds, category, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId == null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsByCategoryAndManageModelAndTownId(manageModel, category, townId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsByManageModelAndCategoryAndVillageId(manageModel, category, villageId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null) {
-                            data.put("conservations", projectService.getConservationsByManageModelAndCategoryAndGroupId(manageModel, category, groupId, page, size));
-                            response.setData(data);
+                        if (manageModel == null) {
+                            if (townId == null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndSituation(situation, townIds, category, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndSituationAndTownId(situation, category, townId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsBySituationAndCategoryAndVillageId(situation, category, villageId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null) {
+                                data.put("conservations", projectService.getConservationsBySituationAndCategoryAndGroupId(situation, category, groupId, page, size));
+                                response.setData(data);
+                            }
+                        } else {
+                            if (townId == null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndSituationAndManageModel(situation, manageModel, townIds, category, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId == null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndSituationAndManageModelAndTownId(situation, manageModel, category, townId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null && groupId == null) {
+                                data.put("conservations", projectService.getConservationsBySituationAndCategoryAndManageModelAndVillageId(situation, manageModel, category, villageId, page, size));
+                                response.setData(data);
+                            } else if (townId != null && villageId != null) {
+                                data.put("conservations", projectService.getConservationsBySituationAndCategoryAndManageModelAndGroupId(situation, manageModel, category, groupId, page, size));
+                                response.setData(data);
+                            }
                         }
                     }
                 } else {
-                    if (manageModel == null) {
-                        if (townId == null && villageId == null && groupId == null) {
-                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
-                            data.put("conservations", projectService.getConservationsByCategoryAndSituation(situation, townIds, category, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId == null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsByCategoryAndSituationAndTownId(situation, category, townId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndVillageId(situation, category, villageId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null) {
-                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndGroupId(situation, category, groupId, page, size));
-                            response.setData(data);
-                        }
-                    } else {
-                        if (townId == null && villageId == null && groupId == null) {
-                            List<Integer> townIds = unitService.getAccessedTownIds(userId);
-                            data.put("conservations", projectService.getConservationsByCategoryAndSituationAndManageModel(situation, manageModel, townIds, category, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId == null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsByCategoryAndSituationAndManageModelAndTownId(situation, manageModel, category, townId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null && groupId == null) {
-                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndManageModelAndVillageId(situation, manageModel, category, villageId, page, size));
-                            response.setData(data);
-                        } else if (townId != null && villageId != null) {
-                            data.put("conservations", projectService.getConservationsBySituationAndCategoryAndManageModelAndGroupId(situation, manageModel, category, groupId, page, size));
+                    if (startDate != null && endDate != null) {
+                        if (code != null) {
+                            if (name != null) {
+                                data.put("conservations", projectService.getConservationsByCategoryAndName(townIds, category, name, page, size));
+                                response.setData(data);
+                            } else {
+                                data.put("conservations", projectService.getConservationsByCategoryAndCode(townIds, category, code, page, size));
+                                response.setData(data);
+                            }
+                        } else {
+                            data.put("conservations", projectService.getConservationsByCategoryAndDate(townIds, category, startDate, endDate, page, size));
                             response.setData(data);
                         }
                     }

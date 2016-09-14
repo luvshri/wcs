@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -93,4 +94,20 @@ public interface WaterConservationRepository extends JpaRepository<WaterConserva
                                                                                      @Param("category") String category,
                                                                                      @Param("group_id") Integer groupId,
                                                                                      Pageable pageable);
+
+    Page<WaterConservationEntity> findByCategoryAndTownIdInAndUpdateTimeBetween(@Param("category") String category,
+                                                                                @Param("town_id") List<Integer> townIds,
+                                                                                @Param("update_time") Timestamp startTime,
+                                                                                @Param("update_time") Timestamp endTime,
+                                                                                Pageable pageable);
+
+    Page<WaterConservationEntity> findByCategoryAndTownIdInAndCodeLike(@Param("category") String category,
+                                                                       @Param("town_id") List<Integer> townIds,
+                                                                       @Param("code") String code,
+                                                                       Pageable pageable);
+
+    Page<WaterConservationEntity> findByCategoryAndTownIdInAndNameLike(@Param("category") String category,
+                                                                       @Param("town_id") List<Integer> townIds,
+                                                                       @Param("name") String name,
+                                                                       Pageable pageable);
 }

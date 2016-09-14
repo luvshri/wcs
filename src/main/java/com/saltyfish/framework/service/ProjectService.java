@@ -776,4 +776,24 @@ public class ProjectService {
         Pageable pageable = new PageRequest(page - 1, size, sort);
         return waterConservationRepository.findByManageModelAndSituationAndCategoryAndGroupId(manageModel, situation, category, groupId, pageable);
     }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndDate(List<Integer> townIds, String category, Long startDate, Long endDate, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        Timestamp startTime = new Timestamp(startDate);
+        Timestamp endTime = new Timestamp(endDate);
+        return waterConservationRepository.findByCategoryAndTownIdInAndUpdateTimeBetween(category, townIds, startTime, endTime, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndCode(List<Integer> townIds, String category, String code, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByCategoryAndTownIdInAndCodeLike(category, townIds, code, pageable);
+    }
+
+    public Page<WaterConservationEntity> getConservationsByCategoryAndName(List<Integer> townIds, String category, String name, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByCategoryAndTownIdInAndNameLike(category, townIds, name, pageable);
+    }
 }
