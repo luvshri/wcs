@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @Autowired
-    private FileService fileService;// TODO: 16/9/9  save file data to mongodb
+    private FileService fileService;
 
     @Autowired
     private AuthService authService;
@@ -307,7 +308,7 @@ public class ProjectController {
                                     @RequestParam(value = "crossCount", required = false, defaultValue = "") String crossCount,
                                     @RequestParam(value = "sectionSize", required = false, defaultValue = "") String sectionSize,
                                     @RequestParam(value = "structureAndMaterial", required = false, defaultValue = "") String structureAndMaterial,
-                                    // @RequestParam(value = "image", required = false, defaultValue = "") MultipartFile image,
+                                    @RequestParam(value = "image", required = false) MultipartFile image,
                                     @RequestParam(value = "crossLength", required = false, defaultValue = "") String crossLength,
                                     @RequestParam(value = "length", required = false, defaultValue = "") String length,
                                     @RequestParam(value = "width", required = false, defaultValue = "") String width,
@@ -319,7 +320,7 @@ public class ProjectController {
                                     @RequestParam(value = "seepageCanalLength", required = false, defaultValue = "") String seepageCanalLength,
                                     @RequestParam(value = "liningSectionSize", required = false, defaultValue = "") String liningSectionSize,
                                     @RequestParam(value = "sumLength", required = false, defaultValue = "") String sumLength,
-                                    //  @RequestParam(value = "planeSketch", required = false, defaultValue = "") MultipartFile planeSketch,
+                                    @RequestParam(value = "planeSketch", required = false) MultipartFile planeSketch,
                                     @RequestParam(value = "culvertModel", required = false, defaultValue = "") String culvertModel,
                                     @RequestParam(value = "holeModel", required = false, defaultValue = "") String holeModel,
                                     @RequestParam(value = "doorMaterial", required = false, defaultValue = "") String doorMaterial,
@@ -357,8 +358,8 @@ public class ProjectController {
                                     @RequestParam(value = "affiliation", required = false, defaultValue = "") String affiliation,
                                     @RequestParam(value = "sumElectricCapacity", required = false, defaultValue = "") String sumElectricCapacity,
                                     @RequestParam(value = "averageCapacity", required = false, defaultValue = "") String averageCapacity,
-//                                    @RequestParam(value = "internalImage", required = false, defaultValue = "") MultipartFile internalImage,
-//                                    @RequestParam(value = "externalImage", required = false, defaultValue = "") MultipartFile externalImage,
+                                    @RequestParam(value = "internalImage", required = false) MultipartFile internalImage,
+                                    @RequestParam(value = "externalImage", required = false) MultipartFile externalImage,
                                     @RequestParam(value = "problem", required = false, defaultValue = "") String problem,
                                     @RequestParam(value = "lastDredgingTime", required = false, defaultValue = "") String lastDredgingTime,
                                     @RequestParam(value = "waterArea", required = false, defaultValue = "") String waterArea,
@@ -381,14 +382,14 @@ public class ProjectController {
                                     @RequestParam(value = "rightWidth", required = false, defaultValue = "") String rightWidth,
                                     @RequestParam(value = "flowVillages", required = false, defaultValue = "") String flowVillages,
                                     @RequestParam(value = "nature", required = false, defaultValue = "") String nature,
-                                    //   @RequestParam(value = "sectionImage", required = false, defaultValue = "") MultipartFile sectionImage,
+                                    @RequestParam(value = "sectionImage", required = false, defaultValue = "") MultipartFile sectionImage,
                                     @RequestParam(value = "longitude", required = false, defaultValue = "0.0") BigDecimal longitude,
                                     @RequestParam(value = "latitude", required = false, defaultValue = "0.0") BigDecimal latitude,
                                     @RequestParam(value = "endpointLongitude", required = false, defaultValue = "0.0") BigDecimal endpointLongitude,
                                     @RequestParam(value = "endpointLatitude", required = false, defaultValue = "0.0") BigDecimal endpointLatitude,
-                                    //   @RequestParam(value = "startImage", required = false, defaultValue = "") MultipartFile startImage,
-                                    //   @RequestParam(value = "middleImage", required = false, defaultValue = "") MultipartFile middleImage,
-                                    //   @RequestParam(value = "endImage", required = false, defaultValue = "") MultipartFile endImage,
+                                    @RequestParam(value = "startImage", required = false, defaultValue = "") MultipartFile startImage,
+                                    @RequestParam(value = "middleImage", required = false, defaultValue = "") MultipartFile middleImage,
+                                    @RequestParam(value = "endImage", required = false, defaultValue = "") MultipartFile endImage,
                                     @RequestParam(value = "provideAmount", required = false, defaultValue = "") String provideAmount,
                                     @RequestParam(value = "waterModel", required = false, defaultValue = "") String waterModel,
                                     @RequestParam(value = "haveCleaner", required = false, defaultValue = "") String haveCleaner,
@@ -549,31 +550,45 @@ public class ProjectController {
             String startImagePath = "";
             String middleImagePath = "";
             String endImagePath = "";
+            if (!image.isEmpty()) {
+                imagePath = fileService.saveImage(image, timeStamp);
+            }
+            if (!planeSketch.isEmpty()) {
+                planeSketchPath = fileService.saveImage(planeSketch, timeStamp);
+            }
+            if (!internalImage.isEmpty()) {
+                internalImagePath = fileService.saveImage(internalImage, timeStamp);
+            }
+            if (!externalImage.isEmpty()) {
+                externalImagePath = fileService.saveImage(externalImage, timeStamp);
+            }
+            if (!sectionImage.isEmpty()) {
+                sectionImagePath = fileService.saveImage(sectionImage, timeStamp);
+            }
+            if (!startImage.isEmpty()) {
+                startImagePath = fileService.saveImage(startImage, timeStamp);
+            }
+            if (!middleImage.isEmpty()) {
+                middleImagePath = fileService.saveImage(middleImage, timeStamp);
+            }
+            if (!endImage.isEmpty()) {
+                endImagePath = fileService.saveImage(endImage, timeStamp);
+            }
             switch (category) {
                 case "渡槽":
                     AqueductEntity aqueduct = new AqueductEntity();
-//                    if (image != null) {
-//                        imagePath = fileService.saveFile(image);
-//                    }
                     projectService.saveAqueduct(aqueduct, crossWatercourseLocation, crossCount, sectionSize, structureAndMaterial,
                             crossLength, imagePath);
                     projectMark.setAqueduct(aqueduct);
                     break;
                 case "桥梁":
                     BridgeEntity bridgeEntity = new BridgeEntity();
-//                    if (image != null) {
-//                        imagePath = fileService.saveFile(image);
-//                    }
                     projectService.saveBridge(bridgeEntity, watercourseLocation, crossCount, structureAndMaterial, loadStandard,
                             crossLength, width, length, imagePath);
                     projectMark.setBridge(bridgeEntity);
                     break;
                 case "渠道":
                     ChannelEntity channelEntity = new ChannelEntity();
-//                    if (image != null) {
-//                        imagePath = fileService.saveFile(image);
-//                        planeSketchPath = fileService.saveFile(planeSketch);
-//                    }
                     projectService.saveChannel(channelEntity, headOrPumpStation, buildingMatchRate, length, goodConditionRate, imagePath, sectionSize,
                             seepageCanalLength, liningSectionSize, sumLength, planeSketchPath, canalLength1, canalLength2, canalLength3, canalLength4,
                             canalLength5, canalLength6, canalLength7, canalLength8, canalLiningMaterial1, canalLiningMaterial2, canalLiningMaterial3,
