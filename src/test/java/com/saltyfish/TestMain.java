@@ -1,4 +1,4 @@
-package com.saltyfish.framework.controller;
+package com.saltyfish;
 
 import com.saltyfish.common.utils.PasswordEncode;
 
