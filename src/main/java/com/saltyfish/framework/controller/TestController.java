@@ -57,7 +57,7 @@ public class TestController {
             if (!authService.checkLogin(userId, token)) {
                 return responseService.notLogin(response);
             } else {
-                fileService.saveDocument(file, timeStamp);
+                fileService.saveFile(file, timeStamp);
                 return responseService.success(response);
             }
         } catch (IOException e) {

@@ -15,7 +15,6 @@ import com.saltyfish.domain.repository.unit.VillageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -76,7 +75,7 @@ public class UnitService {
      * @param latitude   纬度
      * @param timeStamp  时间戳
      */
-    public void addCounty(String countyName, BigDecimal longitude, BigDecimal latitude, Long timeStamp) {
+    public void addCounty(String countyName, String longitude, String latitude, Long timeStamp) {
         Timestamp time = new Timestamp(timeStamp);
         LocationEntity location = new LocationEntity();
         location.setCreateTime(time);
@@ -104,7 +103,7 @@ public class UnitService {
      * @param latitude   纬度
      * @param timeStamp  时间戳
      */
-    public void updateCounty(Integer countyId, String countyName, BigDecimal longitude, BigDecimal latitude, Long timeStamp) {
+    public void updateCounty(Integer countyId, String countyName, String longitude, String latitude, Long timeStamp) {
         Timestamp time = new Timestamp(timeStamp);
         CountyEntity county = countyRepository.findById(countyId);
         if (!county.getLocation().getLatitude().equals(latitude) || !county.getLocation().getLongitude().equals(longitude)) {

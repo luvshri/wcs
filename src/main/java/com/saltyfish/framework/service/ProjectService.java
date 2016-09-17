@@ -23,7 +23,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +122,7 @@ public class ProjectService {
     public void setCommonProperty(WaterConservationEntity wc, Integer userId, String category, String remark,
                                   String name, String code, String manageModel, Integer townId, Integer villageId,
                                   Integer groupId, String situation, String constructTime, String constructUnit,
-                                  String propertyOwner, String manager, BigDecimal longitude, BigDecimal latitude,
+                                  String propertyOwner, String manager, String longitude, String latitude,
                                   Long timeStamp) {
         Timestamp time = new Timestamp(timeStamp);
         wc.setCounty(userRepository.findById(userId).getCounty());
@@ -631,7 +630,7 @@ public class ProjectService {
     public void saveWaterCourse(WatercourseEntity watercourseEntity, String length, String lastDredgingTime, String estuaryHeight,
                                 String estuaryWidth, String leftWidth, String rightWidth, String hediHeight, String hediWidth,
                                 String flowVillages, String nature, String sectionImagePath, String startImagePath, String middleImagePath,
-                                String endImagePath, BigDecimal endpointLatitude, BigDecimal endpointLongitude, Long timeStamp) {
+                                String endImagePath, String endpointLatitude, String endpointLongitude, Long timeStamp) {
         Timestamp time = new Timestamp(timeStamp);
         watercourseEntity.setLastDredgingTime(lastDredgingTime);
         watercourseEntity.setEstuaryHeight(estuaryHeight);

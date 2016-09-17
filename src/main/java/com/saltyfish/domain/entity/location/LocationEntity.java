@@ -5,7 +5,6 @@ import com.saltyfish.domain.entity.base.BaseBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 /**
  * Created by weck on 16/9/1.
@@ -18,29 +17,29 @@ public class LocationEntity extends BaseBean {
 
     private static final Long serialVersionUID = -2389744690840525370L;
 
-    @Column(nullable = false, columnDefinition = "decimal(13,8)")
-    private BigDecimal longitude;
+    @Column(nullable = false)
+    private String longitude;
 
-    @Column(nullable = false, columnDefinition = "decimal(13,8)")
-    private BigDecimal latitude;
+    @Column(nullable = false)
+    private String latitude;
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public BigDecimal getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -139,8 +138,8 @@ public class UnitController {
     public Response addCounty(@RequestParam("userId") Integer userId,
                               @RequestParam("token") String token,
                               @RequestParam("countyName") String countyName,
-                              @RequestParam("longitude") BigDecimal longitude,
-                              @RequestParam("latitude") BigDecimal latitude,
+                              @RequestParam("longitude") String longitude,
+                              @RequestParam("latitude") String latitude,
                               @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
@@ -360,8 +359,8 @@ public class UnitController {
     public Response updateCounty(@RequestParam("userId") Integer userId,
                                  @RequestParam("token") String token,
                                  @RequestParam("countyName") String countyName,
-                                 @RequestParam("longitude") BigDecimal longitude,
-                                 @RequestParam("latitude") BigDecimal latitude,
+                                 @RequestParam("longitude") String longitude,
+                                 @RequestParam("latitude") String latitude,
                                  @RequestParam("timeStamp") Long timeStamp,
                                  @RequestParam("countyId") Integer countyId) {
         Response response = new Response();

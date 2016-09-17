@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -382,14 +381,14 @@ public class ProjectController {
                                     @RequestParam(value = "rightWidth", required = false, defaultValue = "") String rightWidth,
                                     @RequestParam(value = "flowVillages", required = false, defaultValue = "") String flowVillages,
                                     @RequestParam(value = "nature", required = false, defaultValue = "") String nature,
-                                    @RequestParam(value = "sectionImage", required = false, defaultValue = "") MultipartFile sectionImage,
-                                    @RequestParam(value = "longitude", required = false, defaultValue = "0.0") BigDecimal longitude,
-                                    @RequestParam(value = "latitude", required = false, defaultValue = "0.0") BigDecimal latitude,
-                                    @RequestParam(value = "endpointLongitude", required = false, defaultValue = "0.0") BigDecimal endpointLongitude,
-                                    @RequestParam(value = "endpointLatitude", required = false, defaultValue = "0.0") BigDecimal endpointLatitude,
-                                    @RequestParam(value = "startImage", required = false, defaultValue = "") MultipartFile startImage,
-                                    @RequestParam(value = "middleImage", required = false, defaultValue = "") MultipartFile middleImage,
-                                    @RequestParam(value = "endImage", required = false, defaultValue = "") MultipartFile endImage,
+                                    @RequestParam(value = "sectionImage", required = false) MultipartFile sectionImage,
+                                    @RequestParam(value = "longitude", required = false, defaultValue = "0.0") String longitude,
+                                    @RequestParam(value = "latitude", required = false, defaultValue = "0.0") String latitude,
+                                    @RequestParam(value = "endpointLongitude", required = false, defaultValue = "0.0") String endpointLongitude,
+                                    @RequestParam(value = "endpointLatitude", required = false, defaultValue = "0.0") String endpointLatitude,
+                                    @RequestParam(value = "startImage", required = false) MultipartFile startImage,
+                                    @RequestParam(value = "middleImage", required = false) MultipartFile middleImage,
+                                    @RequestParam(value = "endImage", required = false) MultipartFile endImage,
                                     @RequestParam(value = "provideAmount", required = false, defaultValue = "") String provideAmount,
                                     @RequestParam(value = "waterModel", required = false, defaultValue = "") String waterModel,
                                     @RequestParam(value = "haveCleaner", required = false, defaultValue = "") String haveCleaner,
@@ -550,30 +549,24 @@ public class ProjectController {
             String startImagePath = "";
             String middleImagePath = "";
             String endImagePath = "";
-            if (!image.isEmpty()) {
-                imagePath = fileService.saveImage(image, timeStamp);
-            }
-            if (!planeSketch.isEmpty()) {
-                planeSketchPath = fileService.saveImage(planeSketch, timeStamp);
-            }
-            if (!internalImage.isEmpty()) {
-                internalImagePath = fileService.saveImage(internalImage, timeStamp);
-            }
-            if (!externalImage.isEmpty()) {
-                externalImagePath = fileService.saveImage(externalImage, timeStamp);
-            }
-            if (!sectionImage.isEmpty()) {
-                sectionImagePath = fileService.saveImage(sectionImage, timeStamp);
-            }
-            if (!startImage.isEmpty()) {
-                startImagePath = fileService.saveImage(startImage, timeStamp);
-            }
-            if (!middleImage.isEmpty()) {
-                middleImagePath = fileService.saveImage(middleImage, timeStamp);
-            }
-            if (!endImage.isEmpty()) {
-                endImagePath = fileService.saveImage(endImage, timeStamp);
-            }
+//            if (!image.isEmpty()) {
+//                imagePath = fileService.saveFile(image, timeStamp);
+//            }
+//            if (!planeSketch.isEmpty()) {
+//                planeSketchPath = fileService.saveFile(planeSketch, timeStamp);
+//            }
+//            if (!sectionImage.isEmpty()) {
+//                sectionImagePath = fileService.saveFile(sectionImage, timeStamp);
+//            }
+//            if (!startImage.isEmpty()) {
+//                startImagePath = fileService.saveFile(startImage, timeStamp);
+//            }
+//            if (!middleImage.isEmpty()) {
+//                middleImagePath = fileService.saveFile(middleImage, timeStamp);
+//            }
+//            if (!endImage.isEmpty()) {
+//                endImagePath = fileService.saveFile(endImage, timeStamp);
+//            }
             switch (category) {
                 case "渡槽":
                     AqueductEntity aqueduct = new AqueductEntity();
@@ -649,6 +642,12 @@ public class ProjectController {
                     break;
                 case "泵站":
                     PumpStationEntity pumpStationEntity = new PumpStationEntity();
+                    if (internalImage != null) {
+                        internalImagePath = fileService.saveFile(internalImage, timeStamp);
+                    }
+                    if (externalImage != null) {
+                        externalImagePath = fileService.saveFile(externalImage, timeStamp);
+                    }
                     projectService.savePumpStation(pumpStationEntity, watercourseLocation, irrigateArea, paddyFieldArea, drainageArea,
                             irrigateFee, drainageFee, annualFee, nature, machineArea, totalInstalledCapacity, riverElevation, poolHeight,
                             internalImagePath, externalImagePath, problem, transformerCapacity1, transformerCapacity2, transformerCapacity3,

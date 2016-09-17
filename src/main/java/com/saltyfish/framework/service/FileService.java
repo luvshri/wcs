@@ -20,32 +20,20 @@ public class FileService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public String saveImage(MultipartFile image, Long timeStamp) throws IOException {
-        String fileType = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
-        if (!fileType.equalsIgnoreCase("BMP") && !fileType.equalsIgnoreCase("JPG") && !fileType.equalsIgnoreCase("JPEG") && !fileType.equalsIgnoreCase("PNG") && !fileType.equalsIgnoreCase("GIF")) {
-            return "";
-        }
-        InputStream inputStream = image.getInputStream();
-        String aliases = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-        saveFileStream("image", inputStream, aliases, fileType, image.getOriginalFilename(), timeStamp);
-        return "/file/download/" + aliases;
-    }
-
-    public String saveDocument(MultipartFile file, Long timeStamp) throws IOException {
-        String fileType = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+    public String saveFile(MultipartFile file, Long timeStamp) throws IOException {
         InputStream inputStream = file.getInputStream();
         String aliases = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        saveFileStream("doc", inputStream, aliases, fileType, file.getOriginalFilename(), timeStamp);
-        return "/file/download/" + aliases;
+        saveFileStream("fs", inputStream, file.getContentType(), aliases, file.getOriginalFilename(), timeStamp);
+        return "/file/" + aliases;
     }
 
-    public void saveFileStream(String collectionName, InputStream inputStream, String aliases, String fileType, String originalName, Long timeStamp) {
+    public void saveFileStream(String collectionName, InputStream inputStream, String contentType, String aliases, String originalName, Long timeStamp) {
         DB db = mongoTemplate.getDb();
         GridFS gridFS = new GridFS(db, collectionName);
         GridFSInputFile gridFSInputFile = gridFS.createFile(inputStream);
         gridFSInputFile.put("originalName", originalName);
         gridFSInputFile.put("aliases", aliases);
-        gridFSInputFile.put("fileType", fileType);
+        gridFSInputFile.put("contentType", contentType);
         gridFSInputFile.put("timeStamp", timeStamp);
         gridFSInputFile.save();
     }

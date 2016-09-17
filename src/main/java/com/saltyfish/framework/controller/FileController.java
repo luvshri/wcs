@@ -23,7 +23,7 @@ public class FileController {
     @Autowired
     private GridFsTemplate gridFsTemplate;
 
-    @RequestMapping("/download/{fileName}")
+    @RequestMapping("/{fileName}")
     public void downloadFile(HttpServletResponse response,
                              @PathVariable("fileName") String filename) {
         Query query = new Query();
