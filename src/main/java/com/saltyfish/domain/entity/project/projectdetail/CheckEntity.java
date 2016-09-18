@@ -22,18 +22,8 @@ public class CheckEntity extends BaseBean {
 
     private Integer grade;          //等级,1国家级,2省级,3市级,4县级
 
-    private Integer projectId;
-
     public static Long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     public String getTime() {

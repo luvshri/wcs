@@ -135,7 +135,7 @@ public class ProjectService {
         wc.setVillage(villageRepository.findById(villageId));
         wc.setGroup(groupRepository.findById(groupId));
         wc.setSituation(situation);
-        wc.setConstructTIme(constructTime);
+        wc.setConstructTime(constructTime);
         wc.setConstructUnit(constructUnit);
         wc.setPropertyOwner(propertyOwner);
         wc.setManager(manager);

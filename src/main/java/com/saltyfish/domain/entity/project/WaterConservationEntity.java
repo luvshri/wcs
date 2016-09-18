@@ -42,9 +42,6 @@ public class WaterConservationEntity extends BaseBean {
 
     private String category;        //工程种类,泵站或者什么的
 
-    private String sumFactInvestment;   //实际到位投资总额
-
-    private String sumEstimateInvestment;   //概算投资总额
     /*县*/
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "county_id", referencedColumnName = "id", nullable = false)
@@ -72,22 +69,6 @@ public class WaterConservationEntity extends BaseBean {
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public String getSumFactInvestment() {
-        return sumFactInvestment;
-    }
-
-    public void setSumFactInvestment(String sumFactInvestment) {
-        this.sumFactInvestment = sumFactInvestment;
-    }
-
-    public String getSumEstimateInvestment() {
-        return sumEstimateInvestment;
-    }
-
-    public void setSumEstimateInvestment(String sumEstimateInvestment) {
-        this.sumEstimateInvestment = sumEstimateInvestment;
     }
 
     public String getSituation() {

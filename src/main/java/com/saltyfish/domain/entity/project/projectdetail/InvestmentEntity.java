@@ -28,18 +28,8 @@ public class InvestmentEntity extends BaseBean {
 
     private Integer category;           //1 概算投资,2实际到位投资
 
-    private Integer projectId;
-
     public static Long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     public String getCountryInvest() {
