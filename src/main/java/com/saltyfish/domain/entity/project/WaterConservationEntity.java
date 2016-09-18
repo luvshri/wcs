@@ -22,6 +22,7 @@ public class WaterConservationEntity extends BaseBean {
 
     @Column(nullable = false)
     private String code;            //编码
+
     @Column(nullable = false)
     private String name;            //名称
 
@@ -31,7 +32,7 @@ public class WaterConservationEntity extends BaseBean {
 
     private String situation;       //完好情况
 
-    private String constructTIme;       //建设/改造时间
+    private String constructTime;       //建设/改造时间
 
     private String constructUnit;       //建设/改造单位
 
@@ -97,12 +98,13 @@ public class WaterConservationEntity extends BaseBean {
         this.situation = situation;
     }
 
-    public String getConstructTIme() {
-        return constructTIme;
+
+    public String getConstructTime() {
+        return constructTime;
     }
 
-    public void setConstructTIme(String constructTIme) {
-        this.constructTIme = constructTIme;
+    public void setConstructTime(String constructTime) {
+        this.constructTime = constructTime;
     }
 
     public String getConstructUnit() {

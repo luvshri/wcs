@@ -329,11 +329,11 @@ public class ProjectController {
                                     @RequestParam(value = "holeMaterial", required = false, defaultValue = "") String holeMaterial,
                                     @RequestParam(value = "hoistModel", required = false, defaultValue = "") String hoistModel,
                                     @RequestParam(value = "isRegistered", required = false, defaultValue = "") String isRegistered,
-                                    @RequestParam(value = "features", required = false, defaultValue = "") String features,
-                                    @RequestParam(value = "isAccountability", required = false, defaultValue = "") String isAccountability,
+                                    @RequestParam(value = "features", required = false, defaultValue = "否") String features,
+                                    @RequestParam(value = "isAccountability", required = false, defaultValue = "否") String isAccountability,
                                     @RequestParam(value = "feeResources", required = false, defaultValue = "") String feeResources,
                                     @RequestParam(value = "maintainPersonFee", required = false, defaultValue = "") String maintainPersonFee,
-                                    @RequestParam(value = "isCertificated", required = false, defaultValue = "") String isCertificated,
+                                    @RequestParam(value = "isCertificated", required = false, defaultValue = "否") String isCertificated,
                                     @RequestParam(value = "development", required = false, defaultValue = "") String development,
                                     @RequestParam(value = "manageRageLine", required = false, defaultValue = "") String manageRageLine,
                                     @RequestParam(value = "pondDamManageLine", required = false, defaultValue = "") String pondDamManageLine,
@@ -341,6 +341,7 @@ public class ProjectController {
                                     @RequestParam(value = "twoLinesBuilding", required = false, defaultValue = "") String twoLinesBuilding,
                                     @RequestParam(value = "specifiedManage", required = false, defaultValue = "") String specifiedManage,
                                     @RequestParam(value = "irrigateArea", required = false, defaultValue = "") String irrigateArea,
+                                    @RequestParam(value = "protectRageManagement", required = false, defaultValue = "") String protectRageManagement,
                                     @RequestParam(value = "deepPump", required = false, defaultValue = "") String deepPump,
                                     @RequestParam(value = "diameter", required = false, defaultValue = "") String diameter,
                                     @RequestParam(value = "depth", required = false, defaultValue = "") String depth,
@@ -612,7 +613,7 @@ public class ProjectController {
                 case "塘坝":
                     DamEntity damEntity = new DamEntity();
                     projectService.saveDam(damEntity, isRegistered, features, mainFunction, isAccountability, feeResources, maintainPersonFee,
-                            isCertificated, development, manageRageLine, pondDamManageLine, protectGround, twoLinesBuilding, specifiedManage, imagePath);
+                            isCertificated, development, manageRageLine, pondDamManageLine, protectGround, twoLinesBuilding, specifiedManage, imagePath, protectRageManagement);
                     projectMark.setDam(damEntity);
                     break;
                 case "深水井":

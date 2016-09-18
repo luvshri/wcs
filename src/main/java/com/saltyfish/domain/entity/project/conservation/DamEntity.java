@@ -44,8 +44,18 @@ public class DamEntity extends SuperBean {
 
     private String image;           //照片
 
+    private String protectRageManagement;       //大坝保护范围封闭管理
+
     public static Long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public String getProtectRageManagement() {
+        return protectRageManagement;
+    }
+
+    public void setProtectRageManagement(String protectRageManagement) {
+        this.protectRageManagement = protectRageManagement;
     }
 
     public String getImage() {

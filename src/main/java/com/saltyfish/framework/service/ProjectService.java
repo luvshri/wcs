@@ -306,7 +306,7 @@ public class ProjectService {
     public void saveDam(DamEntity damEntity, String isRegistered, String features, String mainFunction, String isAccountability,
                         String feeResources, String maintainPersonFee, String isCertificated, String development,
                         String manageRageLine, String pondDamManageLine, String protectGround, String twoLinesBuilding,
-                        String specifiedManage, String imagePath) {
+                        String specifiedManage, String imagePath, String protectRageManagement) {
         damEntity.setDevelopment(development);
         damEntity.setIsAccountability(isAccountability);
         damEntity.setIsRegistered(isRegistered);
@@ -321,6 +321,7 @@ public class ProjectService {
         damEntity.setTwoLinesBuilding(twoLinesBuilding);
         damEntity.setSpecifiedMange(specifiedManage);
         damEntity.setImage(imagePath);
+        damEntity.setProtectRageManagement(protectRageManagement);
         damRepository.save(damEntity);
     }
 
