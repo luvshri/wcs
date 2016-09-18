@@ -552,24 +552,30 @@ public class ProjectController {
             String startImagePath = "";
             String middleImagePath = "";
             String endImagePath = "";
-//            if (!image.isEmpty()) {
-//                imagePath = fileService.saveFile(image, timeStamp);
-//            }
-//            if (!planeSketch.isEmpty()) {
-//                planeSketchPath = fileService.saveFile(planeSketch, timeStamp);
-//            }
-//            if (!sectionImage.isEmpty()) {
-//                sectionImagePath = fileService.saveFile(sectionImage, timeStamp);
-//            }
-//            if (!startImage.isEmpty()) {
-//                startImagePath = fileService.saveFile(startImage, timeStamp);
-//            }
-//            if (!middleImage.isEmpty()) {
-//                middleImagePath = fileService.saveFile(middleImage, timeStamp);
-//            }
-//            if (!endImage.isEmpty()) {
-//                endImagePath = fileService.saveFile(endImage, timeStamp);
-//            }
+            if (image != null) {
+                imagePath = fileService.saveFile(image, timeStamp);
+            }
+            if (planeSketch != null) {
+                planeSketchPath = fileService.saveFile(planeSketch, timeStamp);
+            }
+            if (sectionImage != null) {
+                sectionImagePath = fileService.saveFile(sectionImage, timeStamp);
+            }
+            if (startImage != null) {
+                startImagePath = fileService.saveFile(startImage, timeStamp);
+            }
+            if (middleImage != null) {
+                middleImagePath = fileService.saveFile(middleImage, timeStamp);
+            }
+            if (endImage != null) {
+                endImagePath = fileService.saveFile(endImage, timeStamp);
+            }
+            if (internalImage != null) {
+                internalImagePath = fileService.saveFile(internalImage, timeStamp);
+            }
+            if (externalImage != null) {
+                externalImagePath = fileService.saveFile(externalImage, timeStamp);
+            }
             switch (category) {
                 case "渡槽":
                     AqueductEntity aqueduct = new AqueductEntity();
@@ -645,12 +651,6 @@ public class ProjectController {
                     break;
                 case "泵站":
                     PumpStationEntity pumpStationEntity = new PumpStationEntity();
-                    if (internalImage != null) {
-                        internalImagePath = fileService.saveFile(internalImage, timeStamp);
-                    }
-                    if (externalImage != null) {
-                        externalImagePath = fileService.saveFile(externalImage, timeStamp);
-                    }
                     projectService.savePumpStation(pumpStationEntity, watercourseLocation, irrigateArea, paddyFieldArea, drainageArea,
                             irrigateFee, drainageFee, annualFee, nature, machineArea, totalInstalledCapacity, riverElevation, poolHeight,
                             internalImagePath, externalImagePath, problem, transformerCapacity1, transformerCapacity2, transformerCapacity3,

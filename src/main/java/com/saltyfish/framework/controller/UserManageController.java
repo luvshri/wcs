@@ -16,6 +16,8 @@ import java.util.Map;
 
 /**
  * Created by weck on 16/9/18.
+ * <p>
+ * 用户管理
  */
 @RestController
 @RequestMapping("/userManage")

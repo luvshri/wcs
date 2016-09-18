@@ -34,7 +34,7 @@ public class ChannelEntity extends SuperBean {
 
     private String liningSectionSize;         //总计衬砌断面尺寸
 
-    private String sumLength;           //总计长度
+    private String sumLength;           //合计长度
 
     private String planeSketch;         //平面草图
 
