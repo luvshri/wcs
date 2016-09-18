@@ -138,8 +138,8 @@ public class UnitController {
     public Response addCounty(@RequestParam("userId") Integer userId,
                               @RequestParam("token") String token,
                               @RequestParam("countyName") String countyName,
-                              @RequestParam("longitude") String longitude,
-                              @RequestParam("latitude") String latitude,
+                              @RequestParam(value = "longitude", required = false, defaultValue = "") String longitude,
+                              @RequestParam(value = "latitude", required = false, defaultValue = "") String latitude,
                               @RequestParam("timeStamp") Long timeStamp) {
         Response response = new Response();
         try {
@@ -359,8 +359,8 @@ public class UnitController {
     public Response updateCounty(@RequestParam("userId") Integer userId,
                                  @RequestParam("token") String token,
                                  @RequestParam("countyName") String countyName,
-                                 @RequestParam("longitude") String longitude,
-                                 @RequestParam("latitude") String latitude,
+                                 @RequestParam(value = "longitude", required = false, defaultValue = "") String longitude,
+                                 @RequestParam(value = "latitude", required = false, defaultValue = "") String latitude,
                                  @RequestParam("timeStamp") Long timeStamp,
                                  @RequestParam("countyId") Integer countyId) {
         Response response = new Response();

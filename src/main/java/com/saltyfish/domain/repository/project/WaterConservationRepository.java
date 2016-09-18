@@ -110,4 +110,7 @@ public interface WaterConservationRepository extends JpaRepository<WaterConserva
                                                                        @Param("town_id") List<Integer> townIds,
                                                                        @Param("name") String name,
                                                                        Pageable pageable);
+
+    Page<WaterConservationEntity> findByTownIdIn(@Param("town_id") List<Integer> townIds,
+                                                 Pageable pageable);
 }

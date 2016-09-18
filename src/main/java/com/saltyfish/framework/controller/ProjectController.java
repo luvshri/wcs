@@ -59,7 +59,7 @@ public class ProjectController {
                                      @RequestParam(value = "name", required = false) String name,
                                      @RequestParam("userId") Integer userId,
                                      @RequestParam("token") String token,
-                                     @RequestParam("category") String category,
+                                     @RequestParam(value = "category", required = false) String category,
                                      @RequestParam(value = "townId", required = false) Integer townId,
                                      @RequestParam(value = "villageId", required = false) Integer villageId,
                                      @RequestParam(value = "groupId", required = false) Integer groupId,
@@ -75,6 +75,9 @@ public class ProjectController {
                 response.setCode(HttpStatus.OK.value());
                 Map<String, Object> data = new HashMap<>();
                 List<Integer> townIds = unitService.getAccessedTownIds(userId);
+                if (category == null) {
+                    data.put("conservations", projectService.getConservations(townIds, page, size));
+                }
                 if (startDate == null && endDate == null && code == null && name == null) {
                     if (situation == null) {
                         if (manageModel == null) {

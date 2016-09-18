@@ -74,8 +74,14 @@ public class UserService {
      * @param roleId   角色id
      * @param isActive 是否启用
      */
-    public void addUser(Integer userId, String name, String password, String phone, String email, String realName, Integer roleId, Integer isActive, Long timeStamp) {
+    public void addUser(Integer userId, String name, String password, String phone, String email, String realName, Integer roleId, Integer isActive, Long timeStamp, List<Integer> townIds) {
         UserEntity user = new UserEntity();
+        List<TownEntity> towns = new ArrayList<>();
+        Iterator<Integer> it = townIds.iterator();
+        while (it.hasNext()) {
+            TownEntity town = townRepository.findById(it.next());
+            towns.add(town);
+        }
         Timestamp time = new Timestamp(timeStamp);
         String salt = PasswordEncode.generateSalt();
         user.setSalt(salt);
@@ -90,6 +96,7 @@ public class UserService {
         user.setRealName(realName);
         user.setRole(roleRepository.findById(roleId));
         user.setIsDelete(0);
+        user.setTowns(towns);
         userRepository.save(user);
     }
 
@@ -143,7 +150,7 @@ public class UserService {
             towns.add(town);
         }
         user.setRole(roleRepository.findById(roleId));
-        user.setPassword(password);
+        user.setPassword(PasswordEncode.getHashedPassword(password, user.getSalt()));
         user.setPhone(phone);
         user.setEmail(email);
         user.setRealName(realName);
@@ -205,6 +212,27 @@ public class UserService {
         UserEntity user = userRepository.findById(userId);
         user.setToken("");
         user.setUpdateTime(new Timestamp(timeStamp));
+        userRepository.save(user);
+    }
+
+    /**
+     * 用户修改个人信息
+     *
+     * @param userId    用户id
+     * @param name      用户名
+     * @param realName  真实姓名
+     * @param email     邮箱
+     * @param phone     手机
+     * @param timeStamp 时间戳
+     */
+    public void modifyUserInfo(Integer userId, String name, String realName, String email, String phone, Long timeStamp) {
+        UserEntity user = userRepository.findById(userId);
+        Timestamp time = new Timestamp(timeStamp);
+        user.setRealName(realName);
+        user.setName(name);
+        user.setPhone(phone);
+        user.setEmail(email);
+        user.setUpdateTime(time);
         userRepository.save(user);
     }
 }

@@ -795,4 +795,10 @@ public class ProjectService {
         Pageable pageable = new PageRequest(page - 1, size, sort);
         return waterConservationRepository.findByCategoryAndTownIdInAndNameLike(category, townIds, name, pageable);
     }
+
+    public Page<WaterConservationEntity> getConservations(List<Integer> townIds, Integer page, Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return waterConservationRepository.findByTownIdIn(townIds, pageable);
+    }
 }
