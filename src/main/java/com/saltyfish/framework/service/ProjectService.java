@@ -684,97 +684,97 @@ public class ProjectService {
     public Page<WaterConservationEntity> getConservationsByCategory(List<Integer> townIds, String category, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndTownIdIn(category, townIds, pageable);
+        return waterConservationRepository.findByCategoryAndIsDeleteAndTownIdIn(category, 0, townIds, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndTownId(String category, Integer townId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndTownId(category, townId, pageable);
+        return waterConservationRepository.findByCategoryAndTownIdAndIsDelete(category, townId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndVillageId(String category, Integer villageId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndVillageId(category, villageId, pageable);
+        return waterConservationRepository.findByCategoryAndVillageIdAndIsDelete(category, villageId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndGroupId(String category, Integer groupId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndGroupId(category, groupId, pageable);
+        return waterConservationRepository.findByCategoryAndGroupIdAndIsDelete(category, groupId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndManageModel(String manageModel, List<Integer> townIds, String category, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndCategoryAndTownIdIn(manageModel, category, townIds, pageable);
+        return waterConservationRepository.findByManageModelAndCategoryAndIsDeleteAndTownIdIn(manageModel, category, 0, townIds, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndManageModelAndTownId(String manageModel, String category, Integer townId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndCategoryAndTownId(manageModel, category, townId, pageable);
+        return waterConservationRepository.findByManageModelAndCategoryAndTownIdAndIsDelete(manageModel, category, townId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByManageModelAndCategoryAndVillageId(String manageModel, String category, Integer villageId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndCategoryAndVillageId(manageModel, category, villageId, pageable);
+        return waterConservationRepository.findByManageModelAndCategoryAndVillageIdAndIsDelete(manageModel, category, villageId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByManageModelAndCategoryAndGroupId(String manageModel, String category, Integer groupId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndCategoryAndGroupId(manageModel, category, groupId, pageable);
+        return waterConservationRepository.findByManageModelAndCategoryAndGroupIdAndIsDelete(manageModel, category, groupId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndSituation(String situation, List<Integer> townIds, String category, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findBySituationAndCategoryAndTownIdIn(situation, category, townIds, pageable);
+        return waterConservationRepository.findBySituationAndCategoryAndIsDeleteAndTownIdIn(situation, category, 0, townIds, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndSituationAndTownId(String situation, String category, Integer townId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findBySituationAndCategoryAndTownId(situation, category, townId, pageable);
+        return waterConservationRepository.findBySituationAndCategoryAndTownIdAndIsDelete(situation, category, townId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndVillageId(String situation, String category, Integer villageId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findBySituationAndCategoryAndVillageId(situation, category, villageId, pageable);
+        return waterConservationRepository.findBySituationAndCategoryAndVillageIdAndIsDelete(situation, category, villageId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndGroupId(String situation, String category, Integer groupId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findBySituationAndCategoryAndGroupId(situation, category, groupId, pageable);
+        return waterConservationRepository.findBySituationAndCategoryAndGroupIdAndIsDelete(situation, category, groupId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndSituationAndManageModel(String situation, String manageModel, List<Integer> townIds, String category, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndTownIdIn(manageModel, situation, category, townIds, pageable);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndIsDeleteAndTownIdIn(manageModel, situation, category, 0, townIds, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndSituationAndManageModelAndTownId(String situation, String manageModel, String category, Integer townId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndTownId(manageModel, situation, category, townId, pageable);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndTownIdAndIsDelete(manageModel, situation, category, townId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndManageModelAndVillageId(String situation, String manageModel, String category, Integer villageId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndVillageId(manageModel, situation, category, villageId, pageable);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndVillageIdAndIsDelete(manageModel, situation, category, villageId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsBySituationAndCategoryAndManageModelAndGroupId(String situation, String manageModel, String category, Integer groupId, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndGroupId(manageModel, situation, category, groupId, pageable);
+        return waterConservationRepository.findByManageModelAndSituationAndCategoryAndGroupIdAndIsDelete(manageModel, situation, category, groupId, 0, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndDate(List<Integer> townIds, String category, Long startDate, Long endDate, Integer page, Integer size) {
@@ -782,24 +782,24 @@ public class ProjectService {
         Pageable pageable = new PageRequest(page - 1, size, sort);
         Timestamp startTime = new Timestamp(startDate);
         Timestamp endTime = new Timestamp(endDate);
-        return waterConservationRepository.findByCategoryAndTownIdInAndUpdateTimeBetween(category, townIds, startTime, endTime, pageable);
+        return waterConservationRepository.findByCategoryAndIsDeleteAndTownIdInAndUpdateTimeBetween(category, 0, townIds, startTime, endTime, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndCode(List<Integer> townIds, String category, String code, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndTownIdInAndCodeLike(category, townIds, code, pageable);
+        return waterConservationRepository.findByCategoryAndIsDeleteAndTownIdInAndCodeLike(category, 0, townIds, code, pageable);
     }
 
     public Page<WaterConservationEntity> getConservationsByCategoryAndName(List<Integer> townIds, String category, String name, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByCategoryAndTownIdInAndNameLike(category, townIds, name, pageable);
+        return waterConservationRepository.findByCategoryAndIsDeleteAndTownIdInAndNameLike(category, 0, townIds, name, pageable);
     }
 
     public Page<WaterConservationEntity> getConservations(List<Integer> townIds, Integer page, Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
         Pageable pageable = new PageRequest(page - 1, size, sort);
-        return waterConservationRepository.findByTownIdIn(townIds, pageable);
+        return waterConservationRepository.findByIsDeleteAndTownIdIn(0, townIds, pageable);
     }
 }

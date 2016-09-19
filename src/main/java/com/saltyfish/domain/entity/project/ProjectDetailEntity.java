@@ -33,15 +33,15 @@ public class ProjectDetailEntity extends BaseBean {
     private String others;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "project_detail_id", referencedColumnName = "id", nullable = false)
     private List<ApprovalEntity> approvals;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "project_detail_id", referencedColumnName = "id", nullable = false)
     private List<CheckEntity> checks;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "project_detail_id", referencedColumnName = "id", nullable = false)
     private List<InvestmentEntity> investments;
 
     public static Long getSerialVersionUID() {
