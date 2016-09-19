@@ -846,7 +846,7 @@ public class ProjectController {
      * @param canalLiningMaterial1     沟渠衬砌材质
      * @return 操作结果
      */
-    @RequestMapping("/addConservation")
+    @RequestMapping("/modifyConservation")
     public Response modifyConservation(@RequestParam("userId") Integer userId,
                                        @RequestParam("token") String token,
                                        @RequestParam("projectId") Integer projectId,
