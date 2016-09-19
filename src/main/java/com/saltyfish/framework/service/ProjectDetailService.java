@@ -102,4 +102,59 @@ public class ProjectDetailService {
         projectDetail.setUpdateTime(time);
         projectDetailRepository.save(projectDetail);
     }
+
+    public void deleteProjectDetail(Integer projectDetailId, Long timeStamp) {
+        ProjectDetailEntity projectDetail = projectDetailRepository.findById(projectDetailId);
+        Timestamp time = new Timestamp(timeStamp);
+        projectDetail.setIsDelete(0);
+        if (projectDetail.getApprovals() != null) {
+            approvalRepository.delete(projectDetail.getApprovals());
+        }
+        if (projectDetail.getInvestments() != null) {
+            investmentRepository.delete(projectDetail.getInvestments());
+        }
+        if (projectDetail.getChecks() != null) {
+            checkRepository.delete(projectDetail.getChecks());
+        }
+        projectDetail.setUpdateTime(time);
+        projectDetailRepository.save(projectDetail);
+    }
+
+    public void modifyProjectDetail(Integer projectDetailId, String projectName, String constructTime, String constructUnit,
+                                    String sumEstimateInvestment, String sumFactInvestment, Long timeStamp, String others) {
+        ProjectDetailEntity projectDetail = projectDetailRepository.findById(projectDetailId);
+        Timestamp time = new Timestamp(timeStamp);
+        projectDetail.setUpdateTime(time);
+        projectDetail.setOthers(others);
+        projectDetail.setSumFactInvestment(sumFactInvestment);
+        projectDetail.setConstructTime(constructTime);
+        projectDetail.setProjectName(projectName);
+        projectDetail.setSumEstimateInvestment(sumEstimateInvestment);
+        projectDetail.setConstructUnit(constructUnit);
+        projectDetailRepository.save(projectDetail);
+    }
+
+    public void deleteApproval(Integer projectDetailId, Integer approvalId, Long timeStamp) {
+        ProjectDetailEntity projectDetail = projectDetailRepository.findById(projectDetailId);
+        Timestamp time = new Timestamp(timeStamp);
+        projectDetail.setUpdateTime(time);
+        approvalRepository.delete(approvalId);
+        projectDetailRepository.save(projectDetail);
+    }
+
+    public void deleteCheck(Integer projectDetailId, Integer checkId, Long timeStamp) {
+        Timestamp time = new Timestamp(timeStamp);
+        ProjectDetailEntity projectDetail = projectDetailRepository.findById(projectDetailId);
+        projectDetail.setUpdateTime(time);
+        checkRepository.delete(checkId);
+        projectDetailRepository.save(projectDetail);
+    }
+
+    public void deleteInvestment(Integer projectDetailId, Integer investmentId, Long timeStamp) {
+        ProjectDetailEntity projectDetail = projectDetailRepository.findById(projectDetailId);
+        Timestamp time = new Timestamp(timeStamp);
+        investmentRepository.delete(investmentId);
+        projectDetail.setUpdateTime(time);
+        projectDetailRepository.save(projectDetail);
+    }
 }

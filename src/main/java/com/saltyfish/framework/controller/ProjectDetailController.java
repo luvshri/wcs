@@ -124,6 +124,69 @@ public class ProjectDetailController {
         }
     }
 
+    @RequestMapping("/deleteApproval")
+    public Response deleteApproval(@RequestParam("userId") Integer userId,
+                                   @RequestParam("token") String token,
+                                   @RequestParam("timeStamp") Long timeStamp,
+                                   @RequestParam("projectDetailId") Integer projectDetailId,
+                                   @RequestParam("approvalId") Integer approvalId) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkAdmin(userId)) {
+                return responseService.noAccess(response);
+            } else {
+                projectDetailService.deleteApproval(projectDetailId, approvalId, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    @RequestMapping("/deleteCheck")
+    public Response deleteCheck(@RequestParam("userId") Integer userId,
+                                @RequestParam("token") String token,
+                                @RequestParam("timeStamp") Long timeStamp,
+                                @RequestParam("projectDetailId") Integer projectDetailId,
+                                @RequestParam("checkId") Integer checkId) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkAdmin(userId)) {
+                return responseService.noAccess(response);
+            } else {
+                projectDetailService.deleteCheck(projectDetailId, checkId, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    @RequestMapping("/deleteInvestment")
+    public Response deleteInvestment(@RequestParam("userId") Integer userId,
+                                     @RequestParam("token") String token,
+                                     @RequestParam("timeStamp") Long timeStamp,
+                                     @RequestParam("projectDetailId") Integer projectDetailId,
+                                     @RequestParam("investmentId") Integer investmentId) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkAdmin(userId)) {
+                return responseService.noAccess(response);
+            } else {
+                projectDetailService.deleteInvestment(projectDetailId, investmentId, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
     /**
      * 添加工程明细验收文件
      *
@@ -194,6 +257,77 @@ public class ProjectDetailController {
                 return responseService.noAccess(response);
             } else {
                 projectDetailService.saveInvestment(projectDetailId, invest, investResource, category, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+
+    /**
+     * 删除工程明细
+     *
+     * @param userId          用户id
+     * @param token           登录token
+     * @param timeStamp       时间戳
+     * @param projectDetailId 目标id
+     * @return 操作结果
+     */
+    @RequestMapping("/deleteProjectDetail")
+    public Response deleteProjectDetail(@RequestParam("userId") Integer userId,
+                                        @RequestParam("token") String token,
+                                        @RequestParam("timeStamp") Long timeStamp,
+                                        @RequestParam("projectDetailId") Integer projectDetailId) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkAdmin(userId)) {
+                return responseService.noAccess(response);
+            } else {
+                projectDetailService.deleteProjectDetail(projectDetailId, timeStamp);
+                return responseService.success(response);
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    /**
+     * 修改工程明细基本信息
+     *
+     * @param userId                用户id
+     * @param token                 登录token
+     * @param timeStamp             时间戳
+     * @param projectName           工程名称
+     * @param constructTime         修建时间
+     * @param constructUnit         修建单位
+     * @param sumFactInvestment     实际到位总投资
+     * @param sumEstimateInvestment 概算总投资
+     * @param others                其他
+     * @param projectDetailId       目标id
+     * @return 操作结果
+     */
+    @RequestMapping("/modifyProjectDetail")
+    public Response modifyProjectDetail(@RequestParam("userId") Integer userId,
+                                        @RequestParam("token") String token,
+                                        @RequestParam("timeStamp") Long timeStamp,
+                                        @RequestParam("projectName") String projectName,
+                                        @RequestParam(value = "constructTime", required = false, defaultValue = "") String constructTime,
+                                        @RequestParam(value = "constructUnit", required = false, defaultValue = "") String constructUnit,
+                                        @RequestParam(value = "sumFactInvestment", required = false, defaultValue = "") String sumFactInvestment,
+                                        @RequestParam(value = "sumEstimateInvestment", required = false, defaultValue = "") String sumEstimateInvestment,
+                                        @RequestParam(value = "others", required = false, defaultValue = "") String others,
+                                        @RequestParam("projectDetailId") Integer projectDetailId) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkAdmin(userId)) {
+                return responseService.noAccess(response);
+            } else {
+                projectDetailService.modifyProjectDetail(projectDetailId, projectName, constructTime, constructUnit, sumEstimateInvestment, sumFactInvestment, timeStamp, others);
                 return responseService.success(response);
             }
         } catch (Exception e) {
