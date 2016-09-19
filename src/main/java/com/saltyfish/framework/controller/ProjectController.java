@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -715,6 +716,8 @@ public class ProjectController {
             waterConservationEntity.setProjectMark(projectMark);
             waterConservationRepository.save(waterConservationEntity);
             return responseService.success(response);
+        } catch (IOException e) {
+            return responseService.saveFileError(response);
         } catch (Exception e) {
             return responseService.serverError(response);
         }
@@ -1227,6 +1230,8 @@ public class ProjectController {
                     break;
             }
             return responseService.success(response);
+        } catch (IOException e) {
+            return responseService.saveFileError(response);
         } catch (Exception e) {
             return responseService.serverError(response);
         }
