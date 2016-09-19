@@ -3,10 +3,12 @@ package com.saltyfish.framework.service;
 import com.saltyfish.common.utils.PasswordEncode;
 import com.saltyfish.domain.entity.auth.UserEntity;
 import com.saltyfish.domain.entity.other.NotificationEntity;
+import com.saltyfish.domain.entity.project.WaterConservationEntity;
 import com.saltyfish.domain.entity.unit.TownEntity;
 import com.saltyfish.domain.repository.auth.RoleRepository;
 import com.saltyfish.domain.repository.auth.UserRepository;
 import com.saltyfish.domain.repository.other.NotificationRepository;
+import com.saltyfish.domain.repository.project.WaterConservationRepository;
 import com.saltyfish.domain.repository.unit.GroupRepository;
 import com.saltyfish.domain.repository.unit.TownRepository;
 import com.saltyfish.domain.repository.unit.VillageRepository;
@@ -41,6 +43,9 @@ public class AuthService {
 
     @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    private WaterConservationRepository waterConservationRepository;
 
 
     /**
@@ -148,6 +153,25 @@ public class AuthService {
      * @return bool
      */
     public Boolean unitContainingCheck(Integer townId, Integer villageId, Integer groupId) {
-        return villageRepository.findById(villageId).getTown().getId().equals(townId) && groupRepository.findById(groupId).getVillage().getId().equals(villageId);
+        if (groupId != null) {
+            return villageRepository.findById(villageId).getTown().getId().equals(townId) && groupRepository.findById(groupId).getVillage().getId().equals(villageId);
+        }
+        return villageRepository.findById(villageId).getTown().getId().equals(townId);
+    }
+
+    /**
+     * 检测工程所在乡镇用户是否有权限
+     *
+     * @param userId
+     * @param projectId
+     * @return
+     */
+    public boolean checkUserProjectTownAccess(Integer userId, Integer projectId) {
+        UserEntity user = userRepository.findById(userId);
+        WaterConservationEntity project = waterConservationRepository.findById(projectId);
+        if (checkAdmin(userId)) {
+            return user.getCounty().getId().equals(project.getTown().getCounty().getId());
+        }
+        return user.getTowns().contains(project.getTown());
     }
 }
