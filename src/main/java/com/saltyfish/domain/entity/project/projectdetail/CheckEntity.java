@@ -20,7 +20,7 @@ public class CheckEntity extends BaseBean {
 
     private String file;
 
-    private Integer grade;          //等级,1国家级,2省级,3市级,4县级
+    private String grade;          //等级,1国家级,2省级,3市级,4县级
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
@@ -42,11 +42,11 @@ public class CheckEntity extends BaseBean {
         this.file = file;
     }
 
-    public Integer getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 }

@@ -101,4 +101,10 @@ public class ResponseService {
         response.setError("请求url错误");
         return response;
     }
+
+    public Response saveFileError(Response response) {
+        response.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.setError("保存文件出错");
+        return response;
+    }
 }

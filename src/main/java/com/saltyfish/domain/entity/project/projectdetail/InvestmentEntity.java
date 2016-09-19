@@ -16,68 +16,37 @@ public class InvestmentEntity extends BaseBean {
 
     private static final Long serialVersionUID = 954892794278590424L;
 
-    private String countryInvest; //国家投资
+    private String invest;          //投资金额
 
-    private String provinceInvest;        //省级投资
+    private String category;           //1 概算投资,2实际到位投资
 
-    private String cityInvest;          //市级投资
-
-    private String countyInvest;          //县级投资
-
-    private String otherInvest;           //其他
-
-    private Integer category;           //1 概算投资,2实际到位投资
+    private String investResource;      //投资来源，国家、省、市、县、其他
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public String getCountryInvest() {
-        return countryInvest;
+    public String getInvest() {
+        return invest;
     }
 
-    public void setCountryInvest(String countryInvest) {
-        this.countryInvest = countryInvest;
+    public void setInvest(String invest) {
+        this.invest = invest;
     }
 
-    public String getProvinceInvest() {
-        return provinceInvest;
+    public String getInvestResource() {
+        return investResource;
     }
 
-    public void setProvinceInvest(String provinceInvest) {
-        this.provinceInvest = provinceInvest;
+    public void setInvestResource(String investResource) {
+        this.investResource = investResource;
     }
 
-    public String getCityInvest() {
-        return cityInvest;
-    }
-
-    public void setCityInvest(String cityInvest) {
-        this.cityInvest = cityInvest;
-    }
-
-    public String getCountyInvest() {
-        return countyInvest;
-    }
-
-    public void setCountyInvest(String countyInvest) {
-        this.countyInvest = countyInvest;
-    }
-
-    public String getOtherInvest() {
-        return otherInvest;
-    }
-
-    public void setOtherInvest(String otherInvest) {
-        this.otherInvest = otherInvest;
-    }
-
-    public Integer getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
-
 }

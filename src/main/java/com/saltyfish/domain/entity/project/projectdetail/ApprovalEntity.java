@@ -22,7 +22,7 @@ public class ApprovalEntity extends BaseBean {
 
     private String file;            //文件路径
 
-    private Integer grade;       //1国家级,2省级,3市级,4县级
+    private String grade;       //1国家级,2省级,3市级,4县级
 
     public static Long getSerialVersionUID() {
         return serialVersionUID;
@@ -52,11 +52,11 @@ public class ApprovalEntity extends BaseBean {
         this.file = file;
     }
 
-    public Integer getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 }
