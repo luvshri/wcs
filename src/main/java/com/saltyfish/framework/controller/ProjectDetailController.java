@@ -124,6 +124,16 @@ public class ProjectDetailController {
         }
     }
 
+    /**
+     * 删除批复文件
+     *
+     * @param userId          用户id
+     * @param token           登录token
+     * @param timeStamp       时间戳
+     * @param projectDetailId 目标工程明细id
+     * @param approvalId      要删除的批复id
+     * @return 操作结果
+     */
     @RequestMapping("/deleteApproval")
     public Response deleteApproval(@RequestParam("userId") Integer userId,
                                    @RequestParam("token") String token,
@@ -145,6 +155,16 @@ public class ProjectDetailController {
         }
     }
 
+    /**
+     * 删除验收文件
+     *
+     * @param userId          用户id
+     * @param token           登录token
+     * @param timeStamp       时间戳
+     * @param projectDetailId 目标工程明细id
+     * @param checkId         要删除的验收文件id
+     * @return 操作结果
+     */
     @RequestMapping("/deleteCheck")
     public Response deleteCheck(@RequestParam("userId") Integer userId,
                                 @RequestParam("token") String token,
@@ -166,6 +186,16 @@ public class ProjectDetailController {
         }
     }
 
+    /**
+     * 删除投资
+     *
+     * @param userId          用户id
+     * @param token           登录token
+     * @param timeStamp       时间戳
+     * @param projectDetailId 目标工程明细id
+     * @param investmentId    要删除的投资id
+     * @return 操作结果
+     */
     @RequestMapping("/deleteInvestment")
     public Response deleteInvestment(@RequestParam("userId") Integer userId,
                                      @RequestParam("token") String token,
