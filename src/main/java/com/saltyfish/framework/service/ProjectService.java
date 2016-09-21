@@ -184,24 +184,7 @@ public class ProjectService {
     /**
      * 保存渠道及其分渠
      */
-    public void saveChannel(ChannelEntity channel, String headOrPumpStation, String buildingMatchRate, String length,
-                            String goodConditionRate, String imagePath, String sectionSize, String seepageCanalLength,
-                            String liningSectionSize, String sumLength, String planeSketchPath, String canalLength1,
-                            String canalLength2, String canalLength3, String canalLength4, String canalLength5,
-                            String canalLength6, String canalLength7, String canalLength8, String canalLiningMaterial1,
-                            String canalLiningMaterial2, String canalLiningMaterial3, String canalLiningMaterial4,
-                            String canalLiningMaterial5, String canalLiningMaterial6, String canalLiningMaterial7,
-                            String canalLiningMaterial8, String canalLiningSectionSize1, String canalLiningSectionSize2,
-                            String canalLiningSectionSize3, String canalLiningSectionSize4, String canalLiningSectionSize5,
-                            String canalLiningSectionSize6, String canalLiningSectionSize7, String canalLiningSectionSize8,
-                            String canalModel1, String canalModel2, String canalModel3, String canalModel4,
-                            String canalModel5, String canalModel6, String canalModel7, String canalModel8,
-                            String canalSectionSize1, String canalSectionSize2, String canalSectionSize3,
-                            String canalSectionSize4, String canalSectionSize5, String canalSectionSize6,
-                            String canalSectionSize7, String canalSectionSize8, String canalSeepageLength1,
-                            String canalSeepageLength2, String canalSeepageLength3, String canalSeepageLength4,
-                            String canalSeepageLength5, String canalSeepageLength6, String canalSeepageLength7,
-                            String canalSeepageLength8) {
+    public void saveChannel(ChannelEntity channel, String headOrPumpStation, String buildingMatchRate, String length, String goodConditionRate, String imagePath, String sectionSize, String seepageCanalLength, String liningSectionSize, String sumLength, String planeSketchPath, String canalLength1, String canalLength2, String canalLength3, String canalLength4, String canalLength5, String canalLength6, String canalLength7, String canalLength8, String canalLiningMaterial1, String canalLiningMaterial2, String canalLiningMaterial3, String canalLiningMaterial4, String canalLiningMaterial5, String canalLiningMaterial6, String canalLiningMaterial7, String canalLiningMaterial8, String canalLiningSectionSize1, String canalLiningSectionSize2, String canalLiningSectionSize3, String canalLiningSectionSize4, String canalLiningSectionSize5, String canalLiningSectionSize6, String canalLiningSectionSize7, String canalLiningSectionSize8, String canalModel1, String canalModel2, String canalModel3, String canalModel4, String canalModel5, String canalModel6, String canalModel7, String canalModel8, String canalSectionSize1, String canalSectionSize2, String canalSectionSize3, String canalSectionSize4, String canalSectionSize5, String canalSectionSize6, String canalSectionSize7, String canalSectionSize8, String canalSeepageLength1, String canalSeepageLength2, String canalSeepageLength3, String canalSeepageLength4, String canalSeepageLength5, String canalSeepageLength6, String canalSeepageLength7, String canalSeepageLength8, String sumSectionSize, String sumLiningSectionSize, String sumSeepageCanalLength) {
         channel.setHeadOrPumpStation(headOrPumpStation);
         channel.setBuildingMatchRate(buildingMatchRate);
         channel.setLength(length);
@@ -212,6 +195,9 @@ public class ProjectService {
         channel.setSeepageCanalLength(seepageCanalLength);
         channel.setLiningSectionSize(liningSectionSize);
         channel.setPlaneSketch(planeSketchPath);
+        channel.setSumSeepageCanalLength(sumSeepageCanalLength);
+        channel.setSumSectionSize(sumSectionSize);
+        channel.setSumLiningSectionSize(sumLiningSectionSize);
         CanalEntity canal1 = new CanalEntity();
         CanalEntity canal2 = new CanalEntity();
         CanalEntity canal3 = new CanalEntity();
@@ -881,24 +867,7 @@ public class ProjectService {
     /**
      * 修改渠道
      */
-    public void modifyChannel(ChannelEntity channelEntity, String headOrPumpStation, String buildingMatchRate,
-                              String length, String goodConditionRate, String imagePath, String sectionSize,
-                              String seepageCanalLength, String liningSectionSize, String sumLength,
-                              String planeSketchPath, String canalLength1, String canalLength2, String canalLength3,
-                              String canalLength4, String canalLength5, String canalLength6, String canalLength7,
-                              String canalLength8, String canalLiningMaterial1, String canalLiningMaterial2,
-                              String canalLiningMaterial3, String canalLiningMaterial4, String canalLiningMaterial5,
-                              String canalLiningMaterial6, String canalLiningMaterial7, String canalLiningMaterial8,
-                              String canalLiningSectionSize1, String canalLiningSectionSize2, String canalLiningSectionSize3,
-                              String canalLiningSectionSize4, String canalLiningSectionSize5, String canalLiningSectionSize6,
-                              String canalLiningSectionSize7, String canalLiningSectionSize8, String canalModel1,
-                              String canalModel2, String canalModel3, String canalModel4, String canalModel5,
-                              String canalModel6, String canalModel7, String canalModel8, String canalSectionSize1,
-                              String canalSectionSize2, String canalSectionSize3, String canalSectionSize4,
-                              String canalSectionSize5, String canalSectionSize6, String canalSectionSize7,
-                              String canalSectionSize8, String canalSeepageLength1, String canalSeepageLength2,
-                              String canalSeepageLength3, String canalSeepageLength4, String canalSeepageLength5,
-                              String canalSeepageLength6, String canalSeepageLength7, String canalSeepageLength8) {
+    public void modifyChannel(ChannelEntity channelEntity, String headOrPumpStation, String buildingMatchRate, String length, String goodConditionRate, String imagePath, String sectionSize, String seepageCanalLength, String liningSectionSize, String sumLength, String planeSketchPath, String canalLength1, String canalLength2, String canalLength3, String canalLength4, String canalLength5, String canalLength6, String canalLength7, String canalLength8, String canalLiningMaterial1, String canalLiningMaterial2, String canalLiningMaterial3, String canalLiningMaterial4, String canalLiningMaterial5, String canalLiningMaterial6, String canalLiningMaterial7, String canalLiningMaterial8, String canalLiningSectionSize1, String canalLiningSectionSize2, String canalLiningSectionSize3, String canalLiningSectionSize4, String canalLiningSectionSize5, String canalLiningSectionSize6, String canalLiningSectionSize7, String canalLiningSectionSize8, String canalModel1, String canalModel2, String canalModel3, String canalModel4, String canalModel5, String canalModel6, String canalModel7, String canalModel8, String canalSectionSize1, String canalSectionSize2, String canalSectionSize3, String canalSectionSize4, String canalSectionSize5, String canalSectionSize6, String canalSectionSize7, String canalSectionSize8, String canalSeepageLength1, String canalSeepageLength2, String canalSeepageLength3, String canalSeepageLength4, String canalSeepageLength5, String canalSeepageLength6, String canalSeepageLength7, String canalSeepageLength8, String sumSectionSize, String sumLiningSectionSize, String sumSeepageCanalLength) {
         channelEntity.setHeadOrPumpStation(headOrPumpStation);
         channelEntity.setBuildingMatchRate(buildingMatchRate);
         channelEntity.setLength(length);
@@ -909,6 +878,9 @@ public class ProjectService {
         channelEntity.setSeepageCanalLength(seepageCanalLength);
         channelEntity.setSumLength(sumLength);
         channelEntity.setPlaneSketch(planeSketchPath);
+        channelEntity.setSumLiningSectionSize(sumLiningSectionSize);
+        channelEntity.setSumSectionSize(sumSectionSize);
+        channelEntity.setSumSeepageCanalLength(sumSeepageCanalLength);
         List<CanalEntity> canals = channelEntity.getCanals();
         CanalEntity canal1 = canals.get(0);
         CanalEntity canal2 = canals.get(1);
@@ -1361,5 +1333,15 @@ public class ProjectService {
         waterWorksEntity.setImage(imagePath);
         waterWorksEntity.setHaveProtectArea(haveProtectArea);
         waterWorksRepository.save(waterWorksEntity);
+    }
+
+    /**
+     * 根据id获取工程
+     *
+     * @param projectId 工程id
+     * @return 工程
+     */
+    public WaterConservationEntity getConservation(Integer projectId) {
+        return waterConservationRepository.findById(projectId);
     }
 }

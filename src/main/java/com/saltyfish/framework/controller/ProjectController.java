@@ -45,6 +45,36 @@ public class ProjectController {
     private UnitService unitService;
 
     /**
+     * 查询单个工程
+     *
+     * @param userId    用户id
+     * @param token     登录token
+     * @param projectId 工程id
+     * @return 工程
+     */
+    @RequestMapping("/getProject")
+    public Response getProject(@RequestParam("userId") Integer userId,
+                               @RequestParam("token") String token,
+                               @RequestParam("projectId") Integer projectId) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else if (!authService.checkUserProjectTownAccess(userId, projectId)) {
+                return responseService.noAccess(response);
+            } else {
+                Map<String, Object> data = new HashMap<>();
+                data.put("project", projectService.getConservation(projectId));
+                response.setCode(HttpStatus.OK.value());
+                response.setData(data);
+                return response;
+            }
+        } catch (Exception e) {
+            return responseService.serverError(response);
+        }
+    }
+
+    /**
      * 删除工程
      *
      * @param userId    用户id
@@ -352,6 +382,9 @@ public class ProjectController {
                                     @RequestParam(value = "seepageCanalLength", required = false, defaultValue = "") String seepageCanalLength,
                                     @RequestParam(value = "liningSectionSize", required = false, defaultValue = "") String liningSectionSize,
                                     @RequestParam(value = "sumLength", required = false, defaultValue = "") String sumLength,
+                                    @RequestParam(value = "sumLiningSectionSize", required = false, defaultValue = "") String sumLiningSectionSize,
+                                    @RequestParam(value = "sumSeepageCanalLength", required = false, defaultValue = "") String sumSeepageCanalLength,
+                                    @RequestParam(value = "sumSectionSize", required = false, defaultValue = "") String sumSectionSize,
                                     @RequestParam(value = "planeSketch", required = false) MultipartFile planeSketch,
                                     @RequestParam(value = "culvertModel", required = false, defaultValue = "") String culvertModel,
                                     @RequestParam(value = "holeModel", required = false, defaultValue = "") String holeModel,
@@ -631,7 +664,7 @@ public class ProjectController {
                             canalModel4, canalModel5, canalModel6, canalModel7, canalModel8, canalSectionSize1, canalSectionSize2, canalSectionSize3,
                             canalSectionSize4, canalSectionSize5, canalSectionSize6, canalSectionSize7, canalSectionSize8, canalSeepageLength1,
                             canalSeepageLength2, canalSeepageLength3, canalSeepageLength4, canalSeepageLength5, canalSeepageLength6, canalSeepageLength7,
-                            canalSeepageLength8);
+                            canalSeepageLength8, sumSectionSize, sumLiningSectionSize, sumSeepageCanalLength);
                     projectMark.setChannel(channelEntity);
                     break;
                 case "涵洞":
@@ -881,6 +914,9 @@ public class ProjectController {
                                        @RequestParam(value = "seepageCanalLength", required = false, defaultValue = "") String seepageCanalLength,
                                        @RequestParam(value = "liningSectionSize", required = false, defaultValue = "") String liningSectionSize,
                                        @RequestParam(value = "sumLength", required = false, defaultValue = "") String sumLength,
+                                       @RequestParam(value = "sumLiningSectionSize", required = false, defaultValue = "") String sumLiningSectionSize,
+                                       @RequestParam(value = "sumSeepageCanalLength", required = false, defaultValue = "") String sumSeepageCanalLength,
+                                       @RequestParam(value = "sumSectionSize", required = false, defaultValue = "") String sumSectionSize,
                                        @RequestParam(value = "planeSketch", required = false) MultipartFile planeSketch,
                                        @RequestParam(value = "culvertModel", required = false, defaultValue = "") String culvertModel,
                                        @RequestParam(value = "holeModel", required = false, defaultValue = "") String holeModel,
@@ -1159,7 +1195,7 @@ public class ProjectController {
                             canalModel4, canalModel5, canalModel6, canalModel7, canalModel8, canalSectionSize1, canalSectionSize2, canalSectionSize3,
                             canalSectionSize4, canalSectionSize5, canalSectionSize6, canalSectionSize7, canalSectionSize8, canalSeepageLength1,
                             canalSeepageLength2, canalSeepageLength3, canalSeepageLength4, canalSeepageLength5, canalSeepageLength6, canalSeepageLength7,
-                            canalSeepageLength8);
+                            canalSeepageLength8, sumSectionSize, sumLiningSectionSize, sumSeepageCanalLength);
                     break;
                 case "涵洞":
                     CulvertEntity culvertEntity = projectMark.getCulvert();
