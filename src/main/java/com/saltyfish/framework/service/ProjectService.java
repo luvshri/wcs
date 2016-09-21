@@ -336,7 +336,7 @@ public class ProjectService {
                                        String pipeLength2, String pipeLength3, String pipeLength4, String pipeLength5,
                                        String pipeLength6, String pipeMaterial1, String pipeMaterial2, String pipeMaterial3,
                                        String pipeMaterial4, String pipeMaterial5, String pipeMaterial6, String pipeModel1,
-                                       String pipeModel2, String pipeModel3, String pipeModel4, String pipeModel5, String pipeModel6) {
+                                       String pipeModel2, String pipeModel3, String pipeModel4, String pipeModel5, String pipeModel6, String length) {
         dripIrrigationPipeEntity.setImage(imagePath);
         dripIrrigationPipeEntity.setIrrigateArea(irrigateArea);
         dripIrrigationPipeEntity.setIntakeWay(intakeWay);
@@ -344,6 +344,7 @@ public class ProjectService {
         dripIrrigationPipeEntity.setSumLength(sumLength);
         dripIrrigationPipeEntity.setSumDiameter(sumDiameter);
         dripIrrigationPipeEntity.setSketch(planeSketchPath);
+        dripIrrigationPipeEntity.setLength(length);
         PipeEntity pipe1 = new PipeEntity();
         PipeEntity pipe2 = new PipeEntity();
         PipeEntity pipe3 = new PipeEntity();
@@ -1017,7 +1018,7 @@ public class ProjectService {
                                          String pipeLength2, String pipeLength3, String pipeLength4, String pipeLength5, String pipeLength6,
                                          String pipeMaterial1, String pipeMaterial2, String pipeMaterial3, String pipeMaterial4,
                                          String pipeMaterial5, String pipeMaterial6, String pipeModel1, String pipeModel2, String pipeModel3,
-                                         String pipeModel4, String pipeModel5, String pipeModel6) {
+                                         String pipeModel4, String pipeModel5, String pipeModel6, String length) {
         dripIrrigationPipeEntity.setIrrigateArea(irrigateArea);
         dripIrrigationPipeEntity.setIntakeWay(intakeWay);
         dripIrrigationPipeEntity.setWaterResource(waterResource);
@@ -1025,6 +1026,7 @@ public class ProjectService {
         dripIrrigationPipeEntity.setSumDiameter(sumDiameter);
         dripIrrigationPipeEntity.setImage(imagePath);
         dripIrrigationPipeEntity.setSketch(planeSketchPath);
+        dripIrrigationPipeEntity.setLength(length);
         List<PipeEntity> pipes = dripIrrigationPipeEntity.getPipes();
         PipeEntity pipe1 = pipes.get(0);
         PipeEntity pipe2 = pipes.get(1);

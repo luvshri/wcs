@@ -689,7 +689,7 @@ public class ProjectController {
                     projectService.saveDripIrrigationPipe(dripIrrigationPipeEntity, irrigateArea, intakeWay, waterResource, sumLength, sumDiameter,
                             imagePath, planeSketchPath, pipeDiameter1, pipeDiameter2, pipeDiameter3, pipeDiameter4, pipeDiameter5, pipeDiameter6,
                             pipeLength1, pipeLength2, pipeLength3, pipeLength4, pipeLength5, pipeLength6, pipeMaterial1, pipeMaterial2, pipeMaterial3,
-                            pipeMaterial4, pipeMaterial5, pipeMaterial6, pipeModel1, pipeModel2, pipeModel3, pipeModel4, pipeModel5, pipeModel6);
+                            pipeMaterial4, pipeMaterial5, pipeMaterial6, pipeModel1, pipeModel2, pipeModel3, pipeModel4, pipeModel5, pipeModel6, length);
                     projectMark.setDripIrrigationPipe(dripIrrigationPipeEntity);
                     break;
                 case "大口井":
@@ -1216,7 +1216,7 @@ public class ProjectController {
                     projectService.modifyDripIrrigationPipe(dripIrrigationPipeEntity, irrigateArea, intakeWay, waterResource, sumLength, sumDiameter,
                             imagePath, planeSketchPath, pipeDiameter1, pipeDiameter2, pipeDiameter3, pipeDiameter4, pipeDiameter5, pipeDiameter6,
                             pipeLength1, pipeLength2, pipeLength3, pipeLength4, pipeLength5, pipeLength6, pipeMaterial1, pipeMaterial2, pipeMaterial3,
-                            pipeMaterial4, pipeMaterial5, pipeMaterial6, pipeModel1, pipeModel2, pipeModel3, pipeModel4, pipeModel5, pipeModel6);
+                            pipeMaterial4, pipeMaterial5, pipeMaterial6, pipeModel1, pipeModel2, pipeModel3, pipeModel4, pipeModel5, pipeModel6, length);
                     break;
                 case "大口井":
                     GreatWellsEntity greatWellsEntity = projectMark.getGreatWells();

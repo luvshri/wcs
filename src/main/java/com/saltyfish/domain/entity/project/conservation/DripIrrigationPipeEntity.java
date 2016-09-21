@@ -21,6 +21,8 @@ public class DripIrrigationPipeEntity extends SuperBean {
 
     private String intakeWay;       //取水方式
 
+    private String length;
+
     private String waterResource;       //水源
 
     private String sumLength;            //管道总长
@@ -104,5 +106,13 @@ public class DripIrrigationPipeEntity extends SuperBean {
 
     public void setSketch(String sketch) {
         this.sketch = sketch;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
     }
 }

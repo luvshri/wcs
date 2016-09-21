@@ -37,7 +37,7 @@ public class TestMain {
         try {
             String begin = "";
             String end = "";
-            String path = "file/渡槽基本情况表.xls";
+            String path = "file/水电站基本情况表.xls";
             InputStream in = new FileInputStream(new File(path));
             SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //为了转时间
             HSSFWorkbook work = new HSSFWorkbook(in);
@@ -54,8 +54,11 @@ public class TestMain {
             HSSFCell cell1 = row1.getCell(0);
             HSSFRow row3 = sheet.getRow(2);
             HSSFCell cell = row3.getCell(0);
-            System.out.println(cell.getRichStringCellValue());
-            System.out.println(cell1.getRichStringCellValue());
+            HSSFRow row12 = sheet.getRow(11);
+//            System.out.println(cell.getRichStringCellValue());
+//            System.out.println(cell1.getRichStringCellValue());
+            System.out.println(row3.getCell(7).getRichStringCellValue());
+            System.out.println(row12.getCell(6).getRichStringCellValue());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
