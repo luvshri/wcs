@@ -2175,7 +2175,7 @@ public class ExcelService {
     /**
      * 导出泵站汇总
      */
-    public void exportPumpStationSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+    public void exprotPumpStationSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
         InputStream inputStream = new FileInputStream(new File(pumpStationSummaryModelFilePath));
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
         HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
@@ -2308,9 +2308,6 @@ public class ExcelService {
         writeOut(response, hssfWorkbook, "bengzhanhuizong");
     }
 
-    /**
-     * 导出水闸汇总
-     */
     public void exportSluiceSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
         InputStream inputStream = new FileInputStream(new File(sluiceSummaryModelFilePath));
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
