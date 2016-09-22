@@ -82,7 +82,7 @@ public class ExcelController {
                         excelService.exportPondSummary(httpServletResponse, projects);
                         break;
                     case "泵站":
-                        excelService.exportPumpStationSummary(httpServletResponse, projects);
+                        excelService.exprotPumpStationSummary(httpServletResponse, projects);
                         break;
                     case "水闸":
                         excelService.exportSluiceSummary(httpServletResponse, projects);
