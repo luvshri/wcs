@@ -36,6 +36,21 @@ public class ExcelService {
     private static String watercourseModelFilePath = "file/河道基本情况表.xls";
     private static String waterWorksModelFilePath = "file/水厂基本情况表(饮水).xls";
 
+    private static String aqueductSummaryModelFilePath = "file/渡槽汇总表.xls";
+    private static String bridgeSummaryModelFilePath = "file/桥梁汇总表.xls";
+    private static String channelSummaryModelFilePath = "file/渠道汇总表.xls";
+    private static String culvertSummaryModelFilePath = "file/涵洞汇总表.xls";
+    private static String damSummaryModelFilePath = "file/塘坝汇总表.xls";
+    private static String deepWellsSummaryModelFilePath = "file/深水井汇总表.xls";
+    private static String dripIrrigationPipeSummaryModelFilePath = "file/管滴灌汇总表.xls";
+    private static String greatWellsSummaryModelFilePath = "file/大口井汇总表.xls";
+    private static String hydropowerSummaryModelFilePath = "file/水电站汇总表.xls";
+    private static String pondSummaryModelFilePath = "file/水塘汇总表.xls";
+    private static String pumpStationSummaryModelFilePath = "file/泵站汇总表.xls";
+    private static String sluiceSummaryModelFilePath = "file/水闸汇总表.xls";
+    private static String watercourseSummaryModelFilePath = "file/河道汇总表.xls";
+    private static String waterWorksSummaryModelFilePath = "file/水厂汇总表.xls";
+
 
     /**
      * 导出水厂
@@ -104,7 +119,7 @@ public class ExcelService {
                     break;
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "shuichang");
     }
 
     /**
@@ -173,7 +188,7 @@ public class ExcelService {
                     break;
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "hedao");
     }
 
 
@@ -252,7 +267,7 @@ public class ExcelService {
                     break;
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "shuizha");
     }
 
     /**
@@ -306,7 +321,7 @@ public class ExcelService {
                     break;
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "shuitang");
     }
 
     /**
@@ -425,7 +440,7 @@ public class ExcelService {
                 cell2.setCellValue(electricMotor.getPower());
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "bengzhan");
     }
 
     /**
@@ -544,7 +559,7 @@ public class ExcelService {
                 cell3.setCellValue(generator.getFactoryDate());
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "shuidianzhan");
     }
 
     /**
@@ -604,7 +619,7 @@ public class ExcelService {
         HSSFRow row7 = sheet1.getRow(6);
         HSSFCell cell7_2 = row7.getCell(1);
         cell7_2.setCellValue(waterConservationEntity.getRemark());
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "dakoujin");
     }
 
     /**
@@ -703,7 +718,7 @@ public class ExcelService {
         HSSFRow row16 = sheet1.getRow(15);
         HSSFCell cell16_2 = row16.getCell(1);
         cell16_2.setCellValue(waterConservationEntity.getRemark());
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "guandiguan");
     }
 
     /**
@@ -765,7 +780,7 @@ public class ExcelService {
                     break;
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "shenshuijin");
     }
 
 
@@ -850,7 +865,7 @@ public class ExcelService {
                     break;
             }
         }
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "tangba");
     }
 
 
@@ -909,7 +924,7 @@ public class ExcelService {
         cell8_2.setCellValue(waterConservationEntity.getSituation());
         HSSFCell cell8_4 = row8.getCell(3);
         cell8_4.setCellValue(waterConservationEntity.getRemark());
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "handong");
     }
 
     /**
@@ -998,7 +1013,7 @@ public class ExcelService {
         HSSFRow row20 = sheet1.getRow(19);
         HSSFCell cell20_2 = row20.getCell(1);
         cell20_2.setCellValue(waterConservationEntity.getRemark());
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "qudao");
     }
 
     /**
@@ -1054,7 +1069,7 @@ public class ExcelService {
         HSSFRow row8 = sheet1.getRow(7);
         HSSFCell cell8_2 = row8.getCell(1);
         cell8_2.setCellValue(waterConservationEntity.getRemark());
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "qiaoliang");
     }
 
     /**
@@ -1103,15 +1118,15 @@ public class ExcelService {
         HSSFRow row7 = sheet1.getRow(6);
         HSSFCell cell7_2 = row7.getCell(1);
         cell7_2.setCellValue(waterConservationEntity.getRemark());
-        writeOut(httpServletResponse, hssfWorkbook);
+        writeOut(httpServletResponse, hssfWorkbook, "project");
     }
 
-    private void writeOut(HttpServletResponse httpServletResponse, HSSFWorkbook hssfWorkbook) {
+    private void writeOut(HttpServletResponse httpServletResponse, HSSFWorkbook hssfWorkbook, String category) {
         try {
             OutputStream outputStream = httpServletResponse.getOutputStream();
             httpServletResponse.setContentType("application/vnd.ms-excel");
             httpServletResponse.setHeader("Content-disposition",
-                    "attachment;filename=project_" + System.currentTimeMillis() + ".xls");
+                    "attachment;filename=" + category + "_" + System.currentTimeMillis() + ".xls");
             httpServletResponse.setHeader("Cache-Control", "public");//HTTP 1.1
             httpServletResponse.setDateHeader("Expires", System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000000);   //在代理服务器端防止缓冲, nanoseconds
             httpServletResponse.setDateHeader("max-age", System.currentTimeMillis() + 10 * 24 * 60 * 60 * 1000000);
@@ -1120,6 +1135,1479 @@ public class ExcelService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * 导出渡槽汇总
+     */
+    public void exportAqueductSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(aqueductSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            AqueductEntity aqueduct = project.getProjectMark().getAqueduct();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 21; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(aqueduct.getCrossWatercourseLocation());
+                            break;
+                        case 5:
+                            cell.setCellValue(aqueduct.getCrossCount());
+                            break;
+                        case 6:
+                            cell.setCellValue(aqueduct.getCrossLength());
+                            break;
+                        case 7:
+                            cell.setCellValue(aqueduct.getSectionSize());
+                            break;
+                        case 8:
+                            cell.setCellValue(aqueduct.getStructureAndMaterial());
+                            break;
+                        case 9:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 10:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 11:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 12:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 13:
+//                        cell.setCellValue(project.getPropertyOwner().split("#")[0]);
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 14:
+//                        cell.setCellValue(project.getPropertyOwner().split("#")[1]);
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 15:
+//                        cell.setCellValue(project.getPropertyOwner().split("#")[2]);
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 17:
+//                        cell.setCellValue(project.getManager().split("#")[0]);
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 18:
+//                        cell.setCellValue(project.getManager().split("#")[1]);
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 19:
+//                        cell.setCellValue(project.getManager().split("#")[2]);
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+        }
+        writeOut(response, hssfWorkbook, "ducaohuizong");
+    }
+
+    /**
+     * 导出桥梁汇总
+     */
+    public void exportBridgeSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(bridgeSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            BridgeEntity bridge = project.getProjectMark().getBridge();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 25; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(bridge.getWatercourseLocation());
+                            break;
+                        case 5:
+                            cell.setCellValue(bridge.getCrossCount());
+                            break;
+                        case 6:
+                            cell.setCellValue(bridge.getCrossLength());
+                            break;
+                        case 7:
+                            cell.setCellValue(bridge.getStructureAndMaterial());
+                            break;
+                        case 8:
+                            cell.setCellValue(bridge.getStructureAndMaterial());
+                            break;
+                        case 9:
+                            cell.setCellValue(bridge.getLoadStandard());
+                            break;
+                        case 10:
+                            cell.setCellValue(bridge.getWidth());
+                            break;
+                        case 11:
+                            cell.setCellValue(bridge.getLength());
+                            break;
+                        case 12:
+                            cell.setCellValue(project.getSituation());
+                            break;
+                        case 13:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 17:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                    }
+                }
+            }
+            writeOut(response, hssfWorkbook, "qiaolianghuizong");
+        }
+    }
+
+    /**
+     * 导出渠道汇总
+     */
+    public void exportChannelSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(channelSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            ChannelEntity channel = project.getProjectMark().getChannel();
+            List<CanalEntity> canals = channel.getCanals();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 37; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(channel.getHeadOrPumpStation());
+                            break;
+                        case 4:
+                            cell.setCellValue(channel.getBuildingMatchRate());
+                            break;
+                        case 5:
+                            cell.setCellValue(channel.getLength());
+                            break;
+                        case 6:
+                            cell.setCellValue(channel.getGoodConditionRate());
+                            break;
+                        case 7:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 8:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 9:
+                            cell.setCellValue(canals.get(0).getLength());
+                            HSSFCell cell3_10 = sheet1.getRow(2).getCell(9);
+                            cell3_10.setCellValue(canals.get(0).getModel());
+                            break;
+                        case 10:
+                            cell.setCellValue(canals.get(0).getSectionSize());
+                            break;
+                        case 11:
+                            cell.setCellValue(canals.get(0).getSeepageCanalLength());
+                            break;
+                        case 12:
+                            cell.setCellValue(canals.get(0).getLiningSectionSize());
+                            break;
+                        case 13:
+                            cell.setCellValue(canals.get(0).getLiningMaterial());
+                            break;
+                        case 14:
+                            cell.setCellValue(canals.get(1).getLength());
+                            HSSFCell cell3_15 = sheet1.getRow(2).getCell(14);
+                            cell3_15.setCellValue(canals.get(1).getModel());
+                            break;
+                        case 15:
+                            cell.setCellValue(canals.get(1).getSectionSize());
+                            break;
+                        case 16:
+                            cell.setCellValue(canals.get(1).getSeepageCanalLength());
+                            break;
+                        case 17:
+                            cell.setCellValue(canals.get(1).getLiningSectionSize());
+                            break;
+                        case 18:
+                            cell.setCellValue(canals.get(1).getLiningMaterial());
+                            break;
+                        case 19:
+                            cell.setCellValue(canals.get(2).getLength());
+                            HSSFCell cell3_20 = sheet1.getRow(2).getCell(19);
+                            cell3_20.setCellValue(canals.get(2).getModel());
+                            break;
+                        case 20:
+                            cell.setCellValue(canals.get(2).getSectionSize());
+                            break;
+                        case 21:
+                            cell.setCellValue(canals.get(2).getSeepageCanalLength());
+                            break;
+                        case 22:
+                            cell.setCellValue(canals.get(2).getLiningSectionSize());
+                            break;
+                        case 23:
+                            cell.setCellValue(canals.get(2).getLiningMaterial());
+                            break;
+                        case 24:
+                            cell.setCellValue(canals.get(3).getLength());
+                            HSSFCell cell3_25 = sheet1.getRow(2).getCell(24);
+                            cell3_25.setCellValue(canals.get(3).getModel());
+                            break;
+                        case 25:
+                            cell.setCellValue(canals.get(3).getSectionSize());
+                            break;
+                        case 26:
+                            cell.setCellValue(canals.get(3).getSeepageCanalLength());
+                            break;
+                        case 27:
+                            cell.setCellValue(canals.get(3).getLiningSectionSize());
+                            break;
+                        case 28:
+                            cell.setCellValue(canals.get(2).getLiningMaterial());
+                            break;
+                        case 29:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 30:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 31:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 32:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 33:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 34:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 35:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 36:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "qudaohuizong");
+    }
+
+    /**
+     * 导出涵洞汇总
+     */
+    public void exportCulvertSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(culvertSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            CulvertEntity culvert = project.getProjectMark().getCulvert();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 26; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(culvert.getWatercourseLocation());
+                            break;
+                        case 5:
+                            cell.setCellValue(culvert.getCulvertModel());
+                            break;
+                        case 6:
+                            cell.setCellValue(culvert.getSectionSize());
+                            break;
+                        case 7:
+                            cell.setCellValue(culvert.getSectionSize());
+                            break;
+                        case 8:
+                            cell.setCellValue(culvert.getLength());
+                            break;
+                        case 9:
+                            cell.setCellValue(culvert.getHoleModel());
+                            break;
+                        case 10:
+                            cell.setCellValue(culvert.getDoorMaterial());
+                            break;
+                        case 11:
+                            cell.setCellValue(culvert.getHoistModel());
+                            break;
+                        case 12:
+                            cell.setCellValue(culvert.getHoleMaterial());
+                            break;
+                        case 13:
+                            cell.setCellValue(project.getSituation());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 17:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "handonghuizong");
+    }
+
+    /**
+     * 导出塘坝汇总
+     */
+    public void exportDamSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(damSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            DamEntity dam = project.getProjectMark().getDam();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 29; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(dam.getIsRegistered());
+                            break;
+                        case 5:
+                            cell.setCellValue(dam.getFeatures());
+                            break;
+                        case 6:
+                            cell.setCellValue(dam.getMainFunctions());
+                            break;
+                        case 7:
+                            cell.setCellValue(dam.getIsAccountability());
+                            break;
+                        case 8:
+                            cell.setCellValue(dam.getFeeResources());
+                            break;
+                        case 9:
+                            cell.setCellValue(dam.getMaintainPersonFee());
+                            break;
+                        case 10:
+                            cell.setCellValue(dam.getIsCertificated());
+                            break;
+                        case 11:
+                            cell.setCellValue(project.getSituation());
+                            break;
+                        case 12:
+                            cell.setCellValue(dam.getDevelopment());
+                            break;
+                        case 13:
+                            cell.setCellValue(dam.getManageRageLine());
+                            break;
+                        case 14:
+                            cell.setCellValue(dam.getPondDamManageRageLine());
+                            break;
+                        case 15:
+                            cell.setCellValue(dam.getProtectRageManagement());
+                            break;
+                        case 16:
+                            cell.setCellValue(dam.getProtectGround());
+                            break;
+                        case 17:
+                            cell.setCellValue(dam.getTwoLinesBuilding());
+                            break;
+                        case 18:
+                            cell.setCellValue(dam.getSpecifiedMange());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 26:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 27:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 28:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "tangbahuizong");
+    }
+
+    /**
+     * 导出深水井汇总
+     */
+    public void exportDeepWellsSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(deepWellsSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            DeepWellsEntity deepWells = project.getProjectMark().getDeepWells();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 21; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(deepWells.getIrrigateArea());
+                            break;
+                        case 5:
+                            cell.setCellValue(deepWells.getDeepPump());
+                            break;
+                        case 6:
+                            cell.setCellValue(deepWells.getDiameter());
+                            break;
+                        case 7:
+                            cell.setCellValue(deepWells.getDepth());
+                            break;
+                        case 8:
+                            cell.setCellValue(deepWells.getMaterial());
+                            break;
+                        case 9:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 10:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 11:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 12:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 13:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 17:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "shenshuijinhuizong");
+    }
+
+    /**
+     * 导出管滴灌汇总
+     */
+    public void exportDripIrrigationPipeSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(dripIrrigationPipeSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            DripIrrigationPipeEntity dripIrrigationPipe = project.getProjectMark().getDripIrrigationPipe();
+            List<PipeEntity> pipes = dripIrrigationPipe.getPipes();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 29; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(dripIrrigationPipe.getIntakeWay());
+                            break;
+                        case 4:
+                            cell.setCellValue(dripIrrigationPipe.getWaterResource());
+                            break;
+                        case 5:
+                            cell.setCellValue(dripIrrigationPipe.getLength());
+                            break;
+                        case 6:
+                            cell.setCellValue(dripIrrigationPipe.getIrrigateArea());
+                            break;
+                        case 7:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 8:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 9:
+                            HSSFCell cell3_10 = sheet1.getRow(2).getCell(9);
+                            cell3_10.setCellValue(pipes.get(0).getModel());
+                            cell.setCellValue(pipes.get(0).getLength());
+                            break;
+                        case 10:
+                            cell.setCellValue(pipes.get(0).getDiameter());
+                            break;
+                        case 11:
+                            cell.setCellValue(pipes.get(0).getMaterial());
+                            break;
+                        case 12:
+                            HSSFCell cell3_13 = sheet1.getRow(2).getCell(12);
+                            cell3_13.setCellValue(pipes.get(1).getModel());
+                            cell.setCellValue(pipes.get(1).getLength());
+                            break;
+                        case 13:
+                            cell.setCellValue(pipes.get(1).getDiameter());
+                            break;
+                        case 14:
+                            cell.setCellValue(pipes.get(1).getMaterial());
+                            break;
+                        case 15:
+                            HSSFCell cell3_16 = sheet1.getRow(2).getCell(15);
+                            cell3_16.setCellValue(pipes.get(2).getModel());
+                            cell.setCellValue(pipes.get(2).getLength());
+                            break;
+                        case 16:
+                            cell.setCellValue(pipes.get(2).getDiameter());
+                            break;
+                        case 17:
+                            cell.setCellValue(pipes.get(2).getMaterial());
+                            break;
+                        case 18:
+                            HSSFCell cell3_19 = sheet1.getRow(2).getCell(18);
+                            cell3_19.setCellValue(pipes.get(3).getModel());
+                            cell.setCellValue(pipes.get(3).getLength());
+                            break;
+                        case 19:
+                            cell.setCellValue(pipes.get(3).getDiameter());
+                            break;
+                        case 20:
+                            cell.setCellValue(pipes.get(3).getMaterial());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 26:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 27:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 28:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "guandiguanhuizong");
+    }
+
+    /**
+     * 导出大口井汇总
+     */
+    public void exportGreatWellsSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(greatWellsSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            GreatWellsEntity greatWells = project.getProjectMark().getGreatWells();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 21; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(greatWells.getIrrigateArea());
+                            break;
+                        case 5:
+                            cell.setCellValue(greatWells.getWaterCapacity());
+                            break;
+                        case 6:
+                            cell.setCellValue(greatWells.getSize());
+                            break;
+                        case 7:
+                            cell.setCellValue(greatWells.getDepth());
+                            break;
+                        case 8:
+                            cell.setCellValue(greatWells.getModelAndMaterial());
+                            break;
+                        case 9:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 10:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 11:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 12:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 13:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 17:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "dakoujinhuizong");
+    }
+
+    /**
+     * 导出水电站
+     */
+    public void exportHydropowerSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(hydropowerSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            HydropowerEntity hydropower = project.getProjectMark().getHydropower();
+            List<TransformerEntity> transformers = hydropower.getTransformers();
+            List<TurbineEntity> turbines = hydropower.getTurbines();
+            List<GeneratorEntity> generators = hydropower.getGenerators();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 36; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(hydropower.getRiverLocation());
+                            break;
+                        case 5:
+                            cell.setCellValue(hydropower.getAffiliation());
+                            break;
+                        case 6:
+                            cell.setCellValue(hydropower.getMachineArea());
+                            break;
+                        case 7:
+                            cell.setCellValue(hydropower.getSumElectricCapacity());
+                            break;
+                        case 8:
+                            cell.setCellValue(hydropower.getAverageCapacity());
+                            break;
+                        case 9:
+                            cell.setCellValue(transformers.get(0).getModel());
+                            break;
+                        case 10:
+                            cell.setCellValue(transformers.get(0).getCapacity());
+                            break;
+                        case 11:
+                            cell.setCellValue(turbines.get(0).getModel());
+                            break;
+                        case 12:
+                            cell.setCellValue(turbines.get(0).getCount());
+                            break;
+                        case 13:
+                            cell.setCellValue(turbines.get(0).getTurnsOrFlow());
+                            break;
+                        case 14:
+                            cell.setCellValue(turbines.get(0).getFactoryDate());
+                            break;
+                        case 15:
+                            cell.setCellValue(generators.get(0).getModel());
+                            break;
+                        case 16:
+                            cell.setCellValue(generators.get(0).getPower());
+                            break;
+                        case 17:
+                            cell.setCellValue(generators.get(0).getFactoryDate());
+                            break;
+                        case 18:
+                            cell.setCellValue(hydropower.getIrrigateArea());
+                            break;
+                        case 19:
+                            cell.setCellValue(hydropower.getPaddyFieldArea());
+                            break;
+                        case 20:
+                            cell.setCellValue(hydropower.getDrainageArea());
+                            break;
+                        case 21:
+                            cell.setCellValue(hydropower.getIrrigateFee());
+                            break;
+                        case 22:
+                            cell.setCellValue(hydropower.getDrainageFee());
+                            break;
+                        case 23:
+                            cell.setCellValue(hydropower.getAnnualFee());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 26:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 27:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 28:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 29:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 30:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 31:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 32:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 33:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 34:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 35:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "shuidianzhanhuizong");
+    }
+
+    /**
+     * 导出水塘汇总
+     */
+    public void exportPondSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(pondSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            PondEntity pond = project.getProjectMark().getPond();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 18; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(pond.getMainFunction());
+                            break;
+                        case 5:
+                            cell.setCellValue(pond.getLastDredgingTime());
+                            break;
+                        case 6:
+                            cell.setCellValue(pond.getWaterArea());
+                            break;
+                        case 7:
+                            cell.setCellValue(pond.getWaterCapacity());
+                            break;
+                        case 8:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 9:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 10:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 11:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 12:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 13:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 17:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "shuitanghuizong");
+    }
+
+    /**
+     * 导出泵站汇总
+     */
+    public void exprotPumpStationSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(pumpStationSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            PumpStationEntity pumpStation = project.getProjectMark().getPumpStation();
+            List<TransformerEntity> transformers = pumpStation.getTransformers();
+            List<PumpEntity> pumps = pumpStation.getPumps();
+            List<ElectricMotorEntity> electricMotors = pumpStation.getElectricMotors();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 37; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(pumpStation.getRiverLocation());
+                            break;
+                        case 5:
+                            cell.setCellValue(pumpStation.getNature());
+                            break;
+                        case 6:
+                            cell.setCellValue(pumpStation.getMachineArea());
+                            break;
+                        case 7:
+                            cell.setCellValue(pumpStation.getTotalInstalledCapacity());
+                            break;
+                        case 8:
+                            cell.setCellValue(pumpStation.getRiverElevation());
+                            break;
+                        case 9:
+                            cell.setCellValue(pumpStation.getPoolHeight());
+                            break;
+                        case 10:
+                            cell.setCellValue(transformers.get(0).getModel());
+                            break;
+                        case 11:
+                            cell.setCellValue(transformers.get(0).getCapacity());
+                            break;
+                        case 12:
+                            cell.setCellValue(pumps.get(0).getModel());
+                            break;
+                        case 13:
+                            cell.setCellValue(pumps.get(0).getCount());
+                            break;
+                        case 14:
+                            cell.setCellValue(pumps.get(0).getLiftOrFlow());
+                            break;
+                        case 15:
+                            cell.setCellValue(pumps.get(0).getFactoryDate());
+                            break;
+                        case 16:
+                            cell.setCellValue(electricMotors.get(0).getModel());
+                            break;
+                        case 17:
+                            cell.setCellValue(electricMotors.get(0).getPower());
+                            break;
+                        case 18:
+                            cell.setCellValue(electricMotors.get(0).getFactoryDate());
+                            break;
+                        case 19:
+                            cell.setCellValue(pumpStation.getIrrigateArea());
+                            break;
+                        case 20:
+                            cell.setCellValue(pumpStation.getPaddyFieldArea());
+                            break;
+                        case 21:
+                            cell.setCellValue(pumpStation.getDrainageArea());
+                            break;
+                        case 22:
+                            cell.setCellValue(pumpStation.getIrrigateFee());
+                            break;
+                        case 23:
+                            cell.setCellValue(pumpStation.getDrainageFee());
+                            break;
+                        case 24:
+                            cell.setCellValue(pumpStation.getAnnualFee());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 26:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 27:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 28:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 29:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 30:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 31:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 32:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 33:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 34:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 35:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 36:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "bengzhanhuizong");
+    }
+
+    public void exportSluiceSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(sluiceSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            SluiceEntity sluice = project.getProjectMark().getSluice();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 30; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(sluice.getWatercourseLocation());
+                            break;
+                        case 5:
+                            cell.setCellValue(sluice.getModel());
+                            break;
+                        case 6:
+                            cell.setCellValue(sluice.getHoleCount());
+                            break;
+                        case 7:
+                            cell.setCellValue(sluice.getHoleWidth());
+                            break;
+                        case 8:
+                            cell.setCellValue(sluice.getHoleHeight());
+                            break;
+                        case 9:
+                            cell.setCellValue(sluice.getDoor());
+                            break;
+                        case 10:
+                            cell.setCellValue(sluice.getDoor());
+                            break;
+                        case 11:
+                            cell.setCellValue(sluice.getDoorWidth());
+                            break;
+                        case 12:
+                            cell.setCellValue(sluice.getDoorHeight());
+                            break;
+                        case 13:
+                            cell.setCellValue(sluice.getHoistTonnage());
+                            break;
+                        case 14:
+                            cell.setCellValue(sluice.getHoistModel());
+                            break;
+                        case 15:
+                            cell.setCellValue(sluice.getBuildingSituation());
+                            break;
+                        case 16:
+                            cell.setCellValue(sluice.getDoorSituation());
+                            break;
+                        case 17:
+                            cell.setCellValue(sluice.getHoistSituation());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 26:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 27:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 28:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 29:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "shuizhahuizong");
+    }
+
+    /**
+     * 导出河道汇总
+     */
+    public void exportWatercourseSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(watercourseSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            WatercourseEntity watercourse = project.getProjectMark().getWatercourse();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 26; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(watercourse.getNature());
+                            break;
+                        case 5:
+                            cell.setCellValue(watercourse.getLength());
+                            break;
+                        case 6:
+                            cell.setCellValue(watercourse.getLastDredgingTime());
+                            break;
+                        case 7:
+                            cell.setCellValue(watercourse.getEstuaryWidth());
+                            break;
+                        case 8:
+                            cell.setCellValue(watercourse.getHediWidth());
+                            break;
+                        case 9:
+                            cell.setCellValue(watercourse.getLeftWidth());
+                            break;
+                        case 10:
+                            cell.setCellValue(watercourse.getRightWidth());
+                            break;
+                        case 11:
+                            cell.setCellValue(watercourse.getEstuaryHeight());
+                            break;
+                        case 12:
+                            cell.setCellValue(watercourse.getHediHeight());
+                            break;
+                        case 13:
+                            cell.setCellValue(watercourse.getFlowVillages());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 16:
+                            cell.setCellValue(watercourse.getEndpointLocation().getLongitude());
+                            break;
+                        case 17:
+                            cell.setCellValue(watercourse.getEndpointLocation().getLatitude());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 24:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 25:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "hedaohuizong");
+    }
+
+    /**
+     * 导出水厂汇总
+     */
+    public void exportWaterWorksSummary(HttpServletResponse response, List<WaterConservationEntity> projects) throws IOException {
+        InputStream inputStream = new FileInputStream(new File(waterWorksSummaryModelFilePath));
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(inputStream);
+        HSSFSheet sheet1 = hssfWorkbook.getSheetAt(0);
+        for (WaterConservationEntity project : projects) {
+            WaterWorksEntity waterWorks = project.getProjectMark().getWaterWorks();
+            for (int rowNum = 6; rowNum < projects.size() + 6; rowNum++) {
+                for (int column = 0; column < 24; column++) {
+                    HSSFCell cell = sheet1.getRow(rowNum).getCell(column);
+                    switch (column) {
+                        case 0:
+                            cell.setCellValue(rowNum - 5);
+                            break;
+                        case 1:
+                            cell.setCellValue(project.getTown().getName());
+                            break;
+                        case 2:
+                            cell.setCellValue(project.getVillage().getName() + " " + project.getGroup().getName());
+                            break;
+                        case 3:
+                            cell.setCellValue(project.getName());
+                            break;
+                        case 4:
+                            cell.setCellValue(waterWorks.getProvideAmount());
+                            break;
+                        case 5:
+                            cell.setCellValue(waterWorks.getWaterModel());
+                            break;
+                        case 6:
+                            cell.setCellValue(waterWorks.getHaveCleaner());
+                            break;
+                        case 7:
+                            cell.setCellValue(waterWorks.getIsRegularCheck());
+                            break;
+                        case 8:
+                            cell.setCellValue(waterWorks.getDayProvideAmount());
+                            break;
+                        case 9:
+                            cell.setCellValue(waterWorks.getProvideVillageCount());
+                            break;
+                        case 10:
+                            cell.setCellValue(waterWorks.getProvidePopulation());
+                            break;
+                        case 11:
+                            cell.setCellValue(waterWorks.getHaveProtectArea());
+                            break;
+                        case 12:
+                            cell.setCellValue(project.getConstructUnit());
+                            break;
+                        case 13:
+                            cell.setCellValue(project.getConstructTime());
+                            break;
+                        case 14:
+                            cell.setCellValue(project.getLocation().getLongitude());
+                            break;
+                        case 15:
+                            cell.setCellValue(project.getLocation().getLatitude());
+                            break;
+                        case 16:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 17:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 18:
+                            cell.setCellValue(project.getPropertyOwner());
+                            break;
+                        case 19:
+                            cell.setCellValue(project.getManageModel());
+                            break;
+                        case 20:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 21:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 22:
+                            cell.setCellValue(project.getManager());
+                            break;
+                        case 23:
+                            cell.setCellValue(project.getRemark());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        writeOut(response, hssfWorkbook, "shuichanghuizong");
     }
 }

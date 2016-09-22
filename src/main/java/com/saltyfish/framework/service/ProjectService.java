@@ -1346,4 +1346,15 @@ public class ProjectService {
     public WaterConservationEntity getConservation(Integer projectId) {
         return waterConservationRepository.findById(projectId);
     }
+
+    /**
+     * 获取工程汇总列表
+     *
+     * @param accessedTownIds 权限乡镇id
+     * @param category        种类
+     * @return list
+     */
+    public List<WaterConservationEntity> getConservationsByCategory(List<Integer> accessedTownIds, String category) {
+        return waterConservationRepository.findByCategoryAndIsDeleteAndTownIdIn(category, 0, accessedTownIds);
+    }
 }

@@ -3,15 +3,15 @@ package com.saltyfish.framework.controller;
 import com.saltyfish.common.bean.Response;
 import com.saltyfish.domain.entity.project.WaterConservationEntity;
 import com.saltyfish.domain.repository.project.WaterConservationRepository;
-import com.saltyfish.framework.service.AuthService;
-import com.saltyfish.framework.service.ExcelService;
-import com.saltyfish.framework.service.ResponseService;
+import com.saltyfish.framework.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by weck on 16/9/19.
@@ -31,6 +31,78 @@ public class ExcelController {
 
     @Autowired
     private WaterConservationRepository waterConservationRepository;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private UnitService unitService;
+
+
+    @RequestMapping("/exportSummary")
+    public Response exportSummary(@RequestParam("userId") Integer userId,
+                                  @RequestParam("token") String token,
+                                  @RequestParam("category") String category,
+                                  HttpServletResponse httpServletResponse) {
+        Response response = new Response();
+        try {
+            if (!authService.checkLogin(userId, token)) {
+                return responseService.notLogin(response);
+            } else {
+                List<WaterConservationEntity> projects = projectService.getConservationsByCategory(unitService.getAccessedTownIds(userId), category);
+                switch (category) {
+                    case "渡槽":
+                        excelService.exportAqueductSummary(httpServletResponse, projects);
+                        break;
+                    case "桥梁":
+                        excelService.exportBridgeSummary(httpServletResponse, projects);
+                        break;
+                    case "渠道":
+                        excelService.exportChannelSummary(httpServletResponse, projects);
+                        break;
+                    case "涵洞":
+                        excelService.exportCulvertSummary(httpServletResponse, projects);
+                        break;
+                    case "塘坝":
+                        excelService.exportDamSummary(httpServletResponse, projects);
+                        break;
+                    case "深水井":
+                        excelService.exportDeepWellsSummary(httpServletResponse, projects);
+                        break;
+                    case "管滴灌":
+                        excelService.exportDripIrrigationPipeSummary(httpServletResponse, projects);
+                        break;
+                    case "大口井":
+                        excelService.exportGreatWellsSummary(httpServletResponse, projects);
+                        break;
+                    case "水电站":
+                        excelService.exportHydropowerSummary(httpServletResponse, projects);
+                        break;
+                    case "水塘":
+                        excelService.exportPondSummary(httpServletResponse, projects);
+                        break;
+                    case "泵站":
+                        excelService.exprotPumpStationSummary(httpServletResponse, projects);
+                        break;
+                    case "水闸":
+                        excelService.exportSluiceSummary(httpServletResponse, projects);
+                        break;
+                    case "河道":
+                        excelService.exportWatercourseSummary(httpServletResponse, projects);
+                        break;
+                    case "水厂":
+                        excelService.exportWaterWorksSummary(httpServletResponse, projects);
+                        break;
+                    default:
+                        break;
+                }
+                return null;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return responseService.serverError(response);
+        }
+    }
 
     /**
      * 导出工程

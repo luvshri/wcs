@@ -135,4 +135,8 @@ public interface WaterConservationRepository extends JpaRepository<WaterConserva
                                                             Pageable pageable);
 
     WaterConservationEntity findById(@Param("id") Integer projectId);
+
+    List<WaterConservationEntity> findByCategoryAndIsDeleteAndTownIdIn(@Param("category") String category,
+                                                                       @Param("is_delete") Integer isDelete,
+                                                                       @Param("town_id") List<Integer> accessedTownIds);
 }
