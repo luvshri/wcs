@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 public class TestMain {
     public static void main(String args[]) {
         String salt = PasswordEncode.generateSalt();
-        String password = "40bd001563085fc35165329ea1ff5c5ecbdbbeef";
+        String password = "123";
         String encodedPassword = PasswordEncode.getHashedPassword(password, salt);
         boolean v = PasswordEncode.verify(encodedPassword, password, salt);
         System.out.println("salt:" + salt + "\n" + "password:" + password + "\n"
